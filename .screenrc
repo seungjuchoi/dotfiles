@@ -1,0 +1,5 @@
+vbell -$SHELL
+autodetach on
+defscrollback 10000
+hardstatus alwayslastline "%{ wk}%-w%{= kG}%n %t%{ kw}%+w %=%{ kB} %Y-%m-%d, %C %A "
+defutf8 on
