@@ -14,7 +14,7 @@ cp .screenrc ~
 
 
 ### Install vim plugins
-vim +PluginUpdate
+vim +PluginInstall
 
 
 ### Git setting
