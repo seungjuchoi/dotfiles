@@ -20,3 +20,4 @@ vim +PluginUpdate
 ### Git setting
 git config --global user.email "redreamer@gmail.com"
 git config --global user.name "seungjuchoi"
+git config --global push.default matching
