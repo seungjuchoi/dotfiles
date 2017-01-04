@@ -12,6 +12,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
