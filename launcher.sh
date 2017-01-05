@@ -1,6 +1,7 @@
 ### Update vim pakcage
-sudo apt-get update
-sudo apt-get install vim
+sudo apt update
+sudo apt install vim
+sudo apt install exuberant-ctags
 
 ### Install Vundle package
 VUNDLE_PATH="$HOME/.vim/bundle/Vundle.vim"
