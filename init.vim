@@ -74,13 +74,13 @@ if !exists('g:airline_symbols')
 endif
 
 " airline symbols
-let g:airline_left_sep = 'þó'
-let g:airline_left_alt_sep = 'þô'
-let g:airline_right_sep = 'þõ'
-let g:airline_right_alt_sep = 'þö'
-let g:airline_symbols.branch = 'þã'
-let g:airline_symbols.readonly = 'þå'
-let g:airline_symbols.linenr = 'þä'
+let g:airline_left_sep = 'î‚°'
+let g:airline_left_alt_sep = 'î‚±'
+let g:airline_right_sep = 'î‚²'
+let g:airline_right_alt_sep = 'î‚³'
+let g:airline_symbols.branch = 'î‚ '
+let g:airline_symbols.readonly = 'î‚¢'
+let g:airline_symbols.linenr = 'î‚¡'
 
 let g:coc_global_extentions = [
 	\ 'coc-python',
