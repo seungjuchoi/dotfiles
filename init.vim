@@ -33,6 +33,9 @@ call plug#end()
 
 colorscheme gruvbox
 
+autocmd FileType python map <buffer> <F5> :w<CR>:!python3 %<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:!python3 %<CR>
+
 " open NERDTree automatically
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * NERDTree
