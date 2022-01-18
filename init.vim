@@ -25,8 +25,12 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
+
+colorscheme gruvbox
 
 " open NERDTree automatically
 " autocmd StdinReadPre * let s:std_in=1
@@ -62,8 +66,6 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 set completeopt-=preview " For No Previews
-
-colorscheme jellybeans
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
