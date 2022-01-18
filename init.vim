@@ -34,6 +34,7 @@ let g:NERDTreeIgnore = ['^node_modules$']
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 vmap ++ <plug>NERDCommenterToggle
@@ -92,7 +93,6 @@ let g:coc_global_extentions = [
 	\]
 
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-
 " FROM NEO VIM README FILE
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
