@@ -41,6 +41,9 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 nnoremap <leader>rc :e $MYVIMRC<CR>
 
+let g:dashboard_default_executive = 'telescope'
+
+
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
