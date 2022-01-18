@@ -4,6 +4,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set mouse=a
+set ignorecase
 
 call plug#begin()
 
@@ -21,24 +22,32 @@ Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
+
 " open NERDTree automatically
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * NERDTree
 
 let g:NERDTreeIgnore = ['^node_modules$']
+
+nnoremap <leader>rc :e $MYVIMRC<CR>
 
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" NERDCommenter
+let g:NERDSpaceDelims=1
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
+
+nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nmap <F8> :TagbarToggle<CR>
+
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
