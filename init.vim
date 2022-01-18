@@ -27,6 +27,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 call plug#end()
 
