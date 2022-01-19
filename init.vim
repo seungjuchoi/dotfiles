@@ -34,6 +34,8 @@ colorscheme seoul256
 
 autocmd FileType python map <buffer> <F5> :w<CR>:!python3 %<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:!python3 %<CR>
+autocmd FileType python map <buffer> <F6> :w<CR>:!python3 %
+autocmd FileType python imap <buffer> <F6> <esc>:w<CR>:!python3 %
 
 " open NERDTree automatically
 " autocmd StdinReadPre * let s:std_in=1
@@ -42,6 +44,9 @@ autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:!python3 %<CR>
 let g:NERDTreeIgnore = ['^node_modules$']
 
 nnoremap <leader>rc :e $MYVIMRC<CR>
+nnoremap <silent> <C-s> :w<CR>
+inoremap <silent> <C-s> :w<CR>
+vnoremap <silent> <C-s> :w<CR>
 
 let g:dashboard_default_executive = 'telescope'
 
@@ -64,6 +69,9 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+nnoremap <silent> H <C-w>h
+nnoremap <silent> L <C-w>l
 
 " NERDTree
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -259,8 +267,8 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+" nmap <silent> <C-s> <Plug>(coc-range-select)
+" xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
