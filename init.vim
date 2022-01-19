@@ -30,7 +30,7 @@ Plug 'BurntSushi/ripgrep'
 
 call plug#end()
 
-colorscheme gruvbox
+colorscheme seoul256
 
 autocmd FileType python map <buffer> <F5> :w<CR>:!python3 %<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:!python3 %<CR>
