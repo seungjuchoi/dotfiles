@@ -11,7 +11,6 @@ call plug#begin()
 Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'preservim/nerdtree' " NerdTree
 Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'ap/vim-css-color' " CSS Color Preview
