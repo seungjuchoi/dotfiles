@@ -66,10 +66,13 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" NERDTree
+nnoremap <C-t> :NERDTreeToggle<CR>
 
 " NERDCommenter
 let g:NERDSpaceDelims=1
-nnoremap <C-t> :NERDTreeToggle<CR>
+let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
+
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
