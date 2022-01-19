@@ -10,7 +10,7 @@ call plug#begin()
 
 Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'preservim/nerdtree' " NerdTree
-Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'ap/vim-css-color' " CSS Color Preview
@@ -80,8 +80,8 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 let g:NERDSpaceDelims=1
 let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
 
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+autocmd FileType c setlocal commentstring=//\ %s
+autocmd FileType cpp setlocal commentstring=//\ %s
 
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 nmap <F8> :TagbarToggle<CR>
