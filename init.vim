@@ -27,6 +27,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'BurntSushi/ripgrep'
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
