@@ -13,6 +13,7 @@ Plug 'preservim/nerdtree' " NerdTree
 Plug 'tpope/vim-commentary'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ap/vim-css-color' " CSS Color Preview
 Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
 Plug 'neoclide/coc.nvim'  " Auto Completion
@@ -46,8 +47,7 @@ inoremap <silent> <C-s> :update<CR>
 vnoremap <silent> <C-s> :update<CR>
 nmap <silent> [b :bp<CR>
 nmap <silent> ]b :bn<CR>
-nmap <silent> H <C-w>h<CR>
-nmap <silent> L <C-w>l<CR>
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
