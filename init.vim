@@ -17,7 +17,6 @@ Plug 'ap/vim-css-color' " CSS Color Preview
 Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
 Plug 'neoclide/coc.nvim'  " Auto Completion
 Plug 'ryanoasis/vim-devicons' " Developer Icons
-Plug 'tc50cal/vim-terminal' " Vim Terminal
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'ctrlpvim/ctrlp.vim'
@@ -52,6 +51,9 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 
 " Dashboard-nvim
 let g:dashboard_default_executive = 'telescope'
+
+" Floaterm
+let g:floaterm_keymap_toggle = '<F3>'
 
 " Ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
