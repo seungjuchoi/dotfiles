@@ -105,25 +105,6 @@ let g:airline_symbols.linenr = ''
 
 
 " Coc-nvim
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
-autocmd CursorHold * silent call CocActionAsync('highlight') " Highlight symbol under cursor on CursorHold
-let g:coc_global_extentions = [
-	\ 'coc-python',
-	\ 'coc-json',
-	\ 'coc-eslint',
-	\ 'coc-prettier',
-	\ 'coc-clangd',
-	\ 'coc-pairs'
-	\]
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-" FROM NEO VIM README FILE
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
