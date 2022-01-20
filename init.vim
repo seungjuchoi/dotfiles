@@ -31,30 +31,32 @@ Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
+set completeopt-=preview " For No Previews
+
+" Color
 colorscheme seoul256
 
-autocmd FileType python map <buffer> <F5> :w<CR>:!python3 %<CR>
-autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:!python3 %<CR>
-autocmd FileType python map <buffer> <F6> :w<CR>:!python3 %
-autocmd FileType python imap <buffer> <F6> <esc>:w<CR>:!python3 %
-
-" open NERDTree automatically
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * NERDTree
-
-let g:NERDTreeIgnore = ['^node_modules$']
-
+" Basic Keymapping
+autocmd FileType python map <buffer> <F5> :update<CR>:!python3 %<CR>
+autocmd FileType python imap <buffer> <F5> <esc>:update<CR>:!python3 %<CR>
+autocmd FileType python map <buffer> <F6> :update<CR>:!python3 %
+autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:!python3 %
 nnoremap <leader>rc :e $MYVIMRC<CR>
-nnoremap <silent> <C-s> :w<CR>
-inoremap <silent> <C-s> :w<CR>
-vnoremap <silent> <C-s> :w<CR>
+nnoremap <silent> <C-s> :update<CR>
+inoremap <silent> <C-s> :update<CR>
+vnoremap <silent> <C-s> :update<CR>
 
+" NERDTree
+let g:NERDTreeIgnore = ['^node_modules$']
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" Dashboard-nvim
 let g:dashboard_default_executive = 'telescope'
 
-
-" ctrlp
+" Ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" Nvim-treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -71,49 +73,21 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-nnoremap <silent> H <C-w>h
-nnoremap <silent> L <C-w>l
-
-" NERDTree
-nnoremap <C-t> :NERDTreeToggle<CR>
-
-" NERDCommenter
-let g:NERDSpaceDelims=1
-let g:NERDCustomDelimiters = { 'c': { 'left': '//' } }
-
-autocmd FileType c setlocal commentstring=//\ %s
-autocmd FileType cpp setlocal commentstring=//\ %s
-
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
+" Tagbar
 nmap <F8> :TagbarToggle<CR>
 
-" Using Lua functions
+" Telescope
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-set completeopt-=preview " For No Previews
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" air-line
+" Air-line
 let g:airline_powerline_fonts = 1
-
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-
-" airline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -122,6 +96,17 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+
+" Coc-nvim
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
+autocmd CursorHold * silent call CocActionAsync('highlight') " Highlight symbol under cursor on CursorHold
 let g:coc_global_extentions = [
 	\ 'coc-python',
 	\ 'coc-json',
@@ -130,7 +115,6 @@ let g:coc_global_extentions = [
 	\ 'coc-clangd',
 	\ 'coc-pairs'
 	\]
-
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 " FROM NEO VIM README FILE
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -265,11 +249,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-" nmap <silent> <C-s> <Plug>(coc-range-select)
-" xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
