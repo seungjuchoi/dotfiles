@@ -44,6 +44,10 @@ nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> :update<CR>
 vnoremap <silent> <C-s> :update<CR>
+nmap <silent> [b :bp<CR>
+nmap <silent> ]b :bn<CR>
+nmap <silent> H <C-w>h<CR>
+nmap <silent> L <C-w>l<CR>
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
