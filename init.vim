@@ -33,21 +33,34 @@ call plug#end()
 
 set completeopt-=preview " For No Previews
 
-" Color
-colorscheme seoul256
-
 " Basic Keymapping
 autocmd FileType python map <buffer> <F5> :update<CR>:!python3 %<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:update<CR>:!python3 %<CR>
 autocmd FileType python map <buffer> <F6> :update<CR>:!python3 %
 autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:!python3 %
+autocmd FileType lua map <buffer> <F5> :update<CR>:!lua %<CR>
+autocmd FileType lua imap <buffer> <F5> <esc>:update<CR>:!lua %<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> :update<CR>
 vnoremap <silent> <C-s> :update<CR>
-nmap <silent> [b :bp<CR>
-nmap <silent> ]b :bn<CR>
+nnoremap <silent> [b :bp<CR>
+nnoremap <silent> ]b :bn<CR>
+nnoremap <silent> [t :tabp<CR>
+nnoremap <silent> ]t :tabn<CR>
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <C-k> :move-2<cr>
+nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-h> <<
+nnoremap <silent> <C-l> >>
+xnoremap <silent> <C-k> :move-2<cr>gv
+xnoremap <silent> <C-j> :move'>+<cr>gv
+xnoremap <silent> <C-l> >gv
+xnoremap < <gv
+xnoremap <silent> <C-h> <gv
+xnoremap > >gv
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
@@ -269,3 +282,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Color
+colorscheme seoul256
