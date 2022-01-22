@@ -40,6 +40,8 @@ autocmd FileType python map <buffer> <F6> :update<CR>:!python3 %
 autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:!python3 %
 autocmd FileType lua map <buffer> <F5> :update<CR>:!lua %<CR>
 autocmd FileType lua imap <buffer> <F5> <esc>:update<CR>:!lua %<CR>
+autocmd FileType lua map <buffer> <F6> :update<CR>:!lua %
+autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua %
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> :update<CR>
