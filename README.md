@@ -1,1 +1,2 @@
-# myrc
+# NeoVim
+# Zsh
