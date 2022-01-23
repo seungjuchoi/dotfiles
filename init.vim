@@ -28,6 +28,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'BurntSushi/ripgrep'
 Plug 'voldikss/vim-floaterm'
+Plug 'TimUntersberger/neogit'
+Plug 'sindrets/diffview.nvim'
 
 call plug#end()
 
