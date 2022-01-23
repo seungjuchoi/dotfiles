@@ -18,6 +18,7 @@ Plug 'ap/vim-css-color' " CSS Color Preview
 Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons' " Developer Icons
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'ctrlpvim/ctrlp.vim'
@@ -26,11 +27,13 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
 Plug 'BurntSushi/ripgrep'
 Plug 'voldikss/vim-floaterm'
 Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 call plug#end()
 
@@ -108,13 +111,37 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 lua << EOF
 require('telescope').setup {
     extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-        }
+		fzf = {
+		  fuzzy = true,                    -- false will only do exact matching
+		  override_generic_sorter = true,  -- override the generic sorter
+		  override_file_sorter = true,     -- override the file sorter
+		  case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+										   -- the default case_mode is "smart_case"
+		}
     }
 }
-require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('coc')
+EOF
+
+" Nvim-web-devicons
+lua << EOF
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- you can specify color or cterm_color instead of specifying both of them
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+    icon = "",
+    color = "#428850",
+    cterm_color = "65",
+    name = "Zsh"
+  }
+ };
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
 EOF
 
 " Air-line
