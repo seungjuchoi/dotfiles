@@ -101,6 +101,10 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" Diffview
+nnoremap <leader>df :DiffviewOpen<CR>
+nnoremap <leader>dx :DiffviewClose<CR>
+
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
