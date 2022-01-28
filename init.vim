@@ -35,6 +35,7 @@ Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
