@@ -36,6 +36,8 @@ Plug 'sindrets/diffview.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'justinmk/vim-sneak'
+Plug 'will133/vim-dirdiff'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -50,6 +52,8 @@ autocmd FileType lua map <buffer> <F5> :update<CR>:!lua %<CR>
 autocmd FileType lua imap <buffer> <F5> <esc>:update<CR>:!lua %<CR>
 autocmd FileType lua map <buffer> <F6> :update<CR>:!lua %
 autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua %
+autocmd FileType vim map <buffer> <F5> :update<CR>:source %<CR>
+autocmd FileType vim map <buffer> <F5> <esc>:update<CR>:source %<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> :update<CR>
@@ -89,7 +93,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "" }, -- List of parsers to ignore installing
+  ignore_install = { "erlang", "norg" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
     disable = { "" },  -- list of language that will be disabled
