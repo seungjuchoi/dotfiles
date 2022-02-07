@@ -56,8 +56,8 @@ autocmd FileType vim map <buffer> <F5> :update<CR>:source %<CR>
 autocmd FileType vim map <buffer> <F5> <esc>:update<CR>:source %<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
 nnoremap <silent> <C-s> :update<CR>
-inoremap <silent> <C-s> :update<CR>
-vnoremap <silent> <C-s> :update<CR>
+inoremap <silent> <C-s> <esc>:update<CR>
+vnoremap <silent> <C-s> <esc>:update<CR>
 nnoremap <silent> [b :bp<CR>
 nnoremap <silent> ]b :bn<CR>
 nnoremap <silent> [t :tabp<CR>
