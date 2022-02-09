@@ -61,8 +61,6 @@ nnoremap <silent> [b :bp<CR>
 nnoremap <silent> ]b :bn<CR>
 nnoremap <silent> [t :tabp<CR>
 nnoremap <silent> ]t :tabn<CR>
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
