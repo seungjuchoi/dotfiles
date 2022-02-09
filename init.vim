@@ -76,6 +76,10 @@ xnoremap < <gv
 xnoremap <silent> <C-h> <gv
 xnoremap > >gv
 
+" NERDCommentery
+vmap ++ <Plug>Commentary
+nmap ++ <Plug>Commentary
+
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
 nnoremap <C-t> :NERDTreeToggle<CR>
