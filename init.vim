@@ -34,7 +34,6 @@ Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'justinmk/vim-sneak'
 Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 
@@ -74,6 +73,16 @@ xnoremap <silent> <C-l> >gv
 xnoremap < <gv
 xnoremap <silent> <C-h> <gv
 xnoremap > >gv
+nmap ss :split<CR><c-w>w
+nmap sv :vsplit<CR><c-w>w
+map s<left> <C-w>h
+map s<up> <C-w>k
+map s<down> <C-w>j
+map s<right> <C-w>l
+map sh <C-w>h
+map sj <C-w>j
+map sk <C-w>k
+map sl <C-w>l
 
 " NERDCommentery
 vmap ++ <Plug>Commentary
