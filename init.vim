@@ -21,7 +21,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons' " Developer Icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'preservim/tagbar' " Tagbar for code navigation
-Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+" Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-fugitive'
