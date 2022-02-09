@@ -46,12 +46,12 @@ set completeopt-=preview " For No Previews
 " Basic Keymapping
 autocmd FileType python map <buffer> <F5> :update<CR>:!python3 %<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:update<CR>:!python3 %<CR>
-autocmd FileType python map <buffer> <F6> :update<CR>:!python3 %
-autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:!python3 %
+autocmd FileType python map <buffer> <F6> :update<CR>:!python3 % 
+autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:!python3 % 
 autocmd FileType lua map <buffer> <F5> :update<CR>:!lua %<CR>
 autocmd FileType lua imap <buffer> <F5> <esc>:update<CR>:!lua %<CR>
-autocmd FileType lua map <buffer> <F6> :update<CR>:!lua %
-autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua %
+autocmd FileType lua map <buffer> <F6> :update<CR>:!lua % 
+autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua % 
 autocmd FileType vim map <buffer> <F5> :update<CR>:source %<CR>
 autocmd FileType vim map <buffer> <F5> <esc>:update<CR>:source %<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
