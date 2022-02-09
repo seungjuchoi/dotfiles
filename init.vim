@@ -23,7 +23,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'preservim/tagbar' " Tagbar for code navigation
 Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -83,9 +82,6 @@ nmap ++ <Plug>Commentary
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
 nnoremap <F3> :NERDTreeToggle<CR>
-
-" Dashboard-nvim
-let g:dashboard_default_executive = 'telescope'
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F4>'
