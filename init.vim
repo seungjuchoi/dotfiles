@@ -340,5 +340,5 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Color
-colorscheme seoul256
+colorscheme oceanic_material
 
