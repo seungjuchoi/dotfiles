@@ -82,13 +82,13 @@ nmap ++ <Plug>Commentary
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
 
 " Dashboard-nvim
 let g:dashboard_default_executive = 'telescope'
 
 " Floaterm
-let g:floaterm_keymap_toggle = '<F3>'
+let g:floaterm_keymap_toggle = '<F4>'
 
 " Ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
