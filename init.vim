@@ -55,8 +55,8 @@ autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua %
 autocmd FileType vim map <buffer> <F5> :update<CR>:source %<CR>
 autocmd FileType vim map <buffer> <F5> <esc>:update<CR>:source %<CR>
 nnoremap <leader>rc :e $MYVIMRC<CR>
-noremap <C-f> <C-d>
-noremap <C-b> <C-u>
+map <C-f> <C-d>
+map <C-b> <C-u>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> <esc>:update<CR>
 vnoremap <silent> <C-s> <esc>:update<CR>
