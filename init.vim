@@ -86,10 +86,6 @@ map sj <C-w>j
 map sk <C-w>k
 map sl <C-w>l
 
-" NERDCommentery
-vmap ++ <Plug>Commentary
-nmap ++ <Plug>Commentary
-
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
 nnoremap <F3> :NERDTreeToggle<CR>
