@@ -11,6 +11,7 @@ call plug#begin()
 
 Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'preservim/nerdtree' " NerdTree
+Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'tpope/vim-commentary'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline' " Status bar
@@ -38,6 +39,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 Plug 'psliwka/vim-smoothie'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
