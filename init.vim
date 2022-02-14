@@ -87,10 +87,12 @@ map sh <C-w>h
 map sj <C-w>j
 map sk <C-w>k
 map sl <C-w>l
+nnoremap <silent> <F9> :setlocal number relativenumber<CR>
+nnoremap <silent> <F10> :setlocal nonumber norelativenumber<CR>
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
-nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F4>'
