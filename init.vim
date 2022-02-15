@@ -67,18 +67,16 @@ nnoremap <silent> ]b :bn<CR>
 nnoremap <silent> [t :tabp<CR>
 nnoremap <silent> ]t :tabn<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-nnoremap <silent> <C-k> :move-2<cr>
-nnoremap <silent> <C-j> :move+<cr>
-nnoremap <silent> <C-h> <<
-nnoremap <silent> <C-l> >>
-xnoremap <silent> <C-k> :move-2<cr>gv
-xnoremap <silent> <C-j> :move'>+<cr>gv
-xnoremap <silent> <C-l> >gv
+" nnoremap <silent> <C-k> :move-2<cr>
+" nnoremap <silent> <C-j> :move+<cr>
+" nnoremap <silent> <C-h> <<
+" nnoremap <silent> <C-l> >>
+" xnoremap <silent> <C-k> :move-2<cr>gv
+" xnoremap <silent> <C-j> :move'>+<cr>gv
+" xnoremap <silent> <C-l> >gv
+" xnoremap <silent> <C-h> <gv
 xnoremap < <gv
-xnoremap <silent> <C-h> <gv
 xnoremap > >gv
-nmap ss :split<CR><c-w>w
-nmap sv :vsplit<CR><c-w>w
 map s<left> <C-w>h
 map s<up> <C-w>k
 map s<down> <C-w>j
@@ -89,6 +87,9 @@ map sk <C-w>k
 map sl <C-w>l
 nnoremap <silent> <F9> :setlocal number relativenumber<CR>
 nnoremap <silent> <F10> :setlocal nonumber norelativenumber<CR>
+
+" vim-commentary
+autocmd FileType c setlocal commentstring=//\ %s
 
 " NERDTree
 let g:NERDTreeIgnore = ['^node_modules$']
