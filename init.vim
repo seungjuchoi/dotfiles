@@ -56,9 +56,21 @@ autocmd FileType lua map <buffer> <F6> :update<CR>:!lua %
 autocmd FileType lua imap <buffer> <F6> <esc>:update<CR>:!lua % 
 autocmd FileType vim map <buffer> <F5> :update<CR>:source %<CR>
 autocmd FileType vim map <buffer> <F5> <esc>:update<CR>:source %<CR>
+augroup vimrc-auto-mkdir
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)
+  if !isdirectory(a:dir)
+  \ && (a:force
+  \ || input("'" . a:dir . "' does not exist. Create? [y/N]") =~? '^y\%[es]$')
+  call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+  endif
+  endfunction
+augroup END
 nnoremap <leader>rc :e $MYVIMRC<CR>
 map <C-f> <C-d>
 map <C-b> <C-u>
+inoremap jk <ESC>
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> <esc>:update<CR>
 vnoremap <silent> <C-s> <esc>:update<CR>
