@@ -6,6 +6,7 @@ set softtabstop=4
 set mouse=a
 set ignorecase
 set expandtab
+set clipboard=unnamed
 
 call plug#begin()
 
