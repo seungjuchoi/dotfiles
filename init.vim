@@ -22,7 +22,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons' " Developer Icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'preservim/tagbar' " Tagbar for code navigation
-" Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nvim-lua/plenary.nvim'
@@ -34,11 +33,9 @@ Plug 'BurntSushi/ripgrep'
 Plug 'voldikss/vim-floaterm'
 Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
-" Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
-" Plug 'psliwka/vim-smoothie'
 Plug 'rust-lang/rust.vim'
 
 call plug#end()
