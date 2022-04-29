@@ -13,6 +13,8 @@ call plug#begin()
 Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'preservim/nerdtree' " NerdTree
 Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline' " Status bar
