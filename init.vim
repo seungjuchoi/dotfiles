@@ -46,6 +46,8 @@ call plug#end()
 set completeopt-=preview " For No Previews
 
 " Basic Keymapping
+autocmd FileType python map <buffer> <F12> :!open .<CR>
+autocmd FileType python imap <buffer> <F12> <esc>:!open .<CR>
 autocmd FileType python map <buffer> <F5> :update<CR>:!python3 %<CR>
 autocmd FileType python imap <buffer> <F5> <esc>:update<CR>:!python3 %<CR>
 autocmd FileType python map <buffer> <F6> :update<CR>:!python3 % 
