@@ -73,6 +73,8 @@ nnoremap <leader>rc :e $MYVIMRC<CR>
 map <C-f> <C-d>
 map <C-b> <C-u>
 inoremap jk <ESC>
+nnoremap dw vb"_d
+nnoremap <C-a> gg<S-v>G
 nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> <esc>:update<CR>
 vnoremap <silent> <C-s> <esc>:update<CR>
