@@ -115,6 +115,7 @@ let g:floaterm_keymap_toggle = '<F4>'
 " Nvim-treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+    -- ensure_installed = "all",
     ensure_installed = {
         "fish",
         "json",
@@ -143,10 +144,6 @@ require'nvim-treesitter.configs'.setup {
     },
     autotag = {
         enable = true,
-    },
-    indent = {
-        enable = true,
-        disable = {},
     },
 }
 EOF
