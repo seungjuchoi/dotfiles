@@ -8,6 +8,9 @@ if status is-interactive
     function lla
         command exa --group-directories-first -l --icons -a
     end
+    function lg
+        command lazygit
+    end
 
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
 end
