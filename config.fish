@@ -1,7 +1,12 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set fish_greeting ""
-    command -qs nvim && alias vi nvim
+    if command -qs nvim
+        alias vi nvim
+        alias vim nvim
+        set -gx EDITOR nvim
+    end
+
     if command -qs exa
         alias ll "exa --group-directories-first -l --icons $argv"
         alias lla "exa --group-directories-first -l --icons -a $argv"
