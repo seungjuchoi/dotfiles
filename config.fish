@@ -12,3 +12,7 @@ if status is-interactive
     alias min "open -a min"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
 end
+if test -d /opt/homebrew/opt/llvm
+    set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
+    set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
+end
