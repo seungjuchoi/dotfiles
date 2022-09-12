@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
     use 'ap/vim-css-color'
     use 'rafi/awesome-vim-colorschemes'
     use {'neoclide/coc.nvim', branch = 'release'}
