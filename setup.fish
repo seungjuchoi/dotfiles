@@ -1,7 +1,14 @@
 #!/usr/local/bin/fish
-command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf 
-echo tmux.conf loaded
-command sudo ln -s -f $PWD/tmux.statusline.conf ~/.tmux.statusline.conf 
-echo tmux.statusline.conf loaded
-command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
-echo config.fish loaded
+# command sudo ln -s -f $PWD/init.vim ~/.config/nvim/init.vim
+# echo init.vim loaded
+command mkdir -p ~/.config/nvim
+command mkdir -p ~/.config/nvim/lua/seungju
+command mkdir -p ~/.config/nvim/after/plugin
+command mkdir -p ~/.config/nvim/plugin
+set xdg_path ~/.config/nvim/
+for f in **/*.lua
+    command sudo ln -s -f $PWD/$f $xdg_path$f
+end
+for f in **/*.vim
+    command sudo ln -s -f $PWD/$f $xdg_path$f
+end
