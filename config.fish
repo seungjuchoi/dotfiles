@@ -6,9 +6,6 @@ if status is-interactive
         alias vim nvim
         set -gx EDITOR nvim
     end
-    function lg
-        command lazygit
-    end
 
     if command -qs exa
         alias ll "exa --group-directories-first -l --icons $argv"
