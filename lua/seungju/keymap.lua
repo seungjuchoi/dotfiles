@@ -1,8 +1,6 @@
 local k = vim.keymap
 k.set('n', '<leader>rc', ':e $MYVIMRC<CR>', {noremap = true})
 k.set('n', 'x', '"_x', {noremap = true})
-k.set('n', '<C-A>', 'gg<S-v>G', {noremap = true})
-k.set('n', '<C-S>', ':update<CR>', {silent = true, noremap = true})
 k.set({'i','v'}, '<C-S>', '<ESC>:update<CR>', {silent = true, noremap = true})
 k.set('n', '[b', ':bp<CR>', {silent = true, noremap = true})
 k.set('n', ']b', ':bn<CR>', {silent = true, noremap = true})
