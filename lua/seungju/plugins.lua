@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     use 'TimUntersberger/neogit'
     use 'sindrets/diffview.nvim'
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use 'nvim-telescope/telescope-file-browser.nvim'
     use 'will133/vim-dirdiff'
     use 'Yggdroot/indentLine'
     use 'rust-lang/rust.vim'

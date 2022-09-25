@@ -12,7 +12,7 @@ k.set('n', 'sj', '<C-W>j')
 k.set('n', 'sk', '<C-W>k')
 k.set('n', 'sl', '<C-W>l')
 
-k.set('n', '<F3>', ":NERDTreeToggle<CR>", {silent = true, noremap = true})
+k.set('n', '<F3>', ":Telescope file_browser<CR>", {noremap = true})
 vim.cmd("let g:floaterm_keymap_toggle    = '<F4>'")
 k.set('n', "<F8>", ":TagbarToggle<CR>")
 
@@ -22,5 +22,3 @@ k.set('n', "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>
 k.set('n', "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 k.set('n', "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 k.set('n', "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
-
-
