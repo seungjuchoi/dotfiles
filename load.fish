@@ -24,3 +24,5 @@ for f in $xdg_path/lua/seungju/*.vim
     echo copy $f to here
     cp $f $PWD/lua/seungju
 end
+echo copy alacritty.yml to here
+cp ~/.config/alacritty/alacritty.yml $PWD/alacritty.yml
