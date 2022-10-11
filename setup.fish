@@ -12,3 +12,5 @@ end
 for f in **/*.vim
     command sudo ln -s -f $PWD/$f $xdg_path$f
 end
+command mkdir -p ~/.config/alacritty
+command sudo ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
