@@ -11,7 +11,6 @@ return require('packer').startup(function(use)
     }
     use 'PhilRunninger/nerdtree-visual-selection'
     use 'godlygeek/tabular'
-    use 'preservim/vim-markdown'
     use 'tpope/vim-commentary'
     use 'tpope/vim-repeat'
     use 'Xuyuanp/nerdtree-git-plugin'
