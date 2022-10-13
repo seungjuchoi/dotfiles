@@ -14,6 +14,9 @@ if status is-interactive
     if command -qs lazygit
         alias lg lazygit $argv
     end
+    if command -qs convmv
+        alias convmv "convmv -r -f utf8 -t utf8 --notest --nfc $argv"
+    end
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
     if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
         set -gx LIBRARY_PATH "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
