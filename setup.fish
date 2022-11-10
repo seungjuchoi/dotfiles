@@ -14,3 +14,4 @@ for f in **/*.vim
 end
 command mkdir -p ~/.config/alacritty
 command sudo ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
+command sudo ln -s -f $PWD/starship.toml ~/.config/starship.toml

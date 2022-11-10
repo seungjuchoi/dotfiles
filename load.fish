@@ -25,4 +25,6 @@ for f in $xdg_path/lua/seungju/*.vim
     cp $f $PWD/lua/seungju
 end
 echo copy alacritty.yml to here
-cp ~/.config/alacritty/alacritty.yml $PWD/alacritty.yml
+cp ~/.config/alacritty/alacritty.yml alacritty.yml
+echo copy starship.toml to here
+cp ~/.config/starship.toml starship.toml
