@@ -37,3 +37,7 @@ if test -d /opt/homebrew/opt/libpq
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/libpq/lib"
    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/libpq/include"
 end
+if test -d /opt/homebrew/opt/opencv@3
+   set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/opencv@3/lib"
+   set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/opencv@3/include"
+end
