@@ -15,7 +15,8 @@ local is_win = has "win32"
 
 if is_mac then
   require('seungju.macos')
-end
-if is_win then
+elseif is_win then
   require('seungju.windows')
+else
+  require('seungju.other_os')
 end
