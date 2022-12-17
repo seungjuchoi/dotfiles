@@ -8,8 +8,9 @@ require('telescope').setup {
 										   -- the default case_mode is "smart_case"
 		},
         file_browser = {
-            theme = "dropdown",
-            hijack_netrw = true
+            theme = "ivy",
+            hijack_netrw = true,
+            respect_gitignore = false
         }
     }
 }

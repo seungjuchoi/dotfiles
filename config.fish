@@ -26,7 +26,7 @@ if status is-interactive
     end
     set LOCAL_CONFIG (dirname (status --current-filename))/config_local.fish
     if test -f $LOCAL_CONFIG
-      source $LOCAL_CONFIG
+        source $LOCAL_CONFIG
     end
 end
 if test -d /opt/homebrew/opt/llvm
