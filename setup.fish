@@ -5,6 +5,7 @@ command mkdir -p ~/.config/nvim
 command mkdir -p ~/.config/nvim/lua/seungju
 command mkdir -p ~/.config/nvim/after/plugin
 command mkdir -p ~/.config/nvim/plugin
+command mkdir -p ~/.config/wezterm
 set xdg_path ~/.config/nvim/
 for f in **/*.lua
     command sudo ln -s -f $PWD/$f $xdg_path$f
@@ -18,3 +19,4 @@ command sudo ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command sudo ln -s -f $PWD/tmux.statusline.conf ~/.tmux.statusline.conf
+command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
