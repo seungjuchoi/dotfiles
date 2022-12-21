@@ -40,4 +40,5 @@ return require('packer').startup(function(use)
     use 'will133/vim-dirdiff'
     use 'Yggdroot/indentLine'
     use 'rust-lang/rust.vim'
+    use 'jbyuki/venn.nvim'
 end)
