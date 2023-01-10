@@ -17,6 +17,26 @@ return {
       mods = 'ALT',
       action = wezterm.action.DisableDefaultAssignment,
     },
+    {
+      key = 'LeftArrow',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'RightArrow',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'DownArrow',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'UpArrow',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    }
   },
   color_scheme = "OceanicMaterial",
   -- hyperlink_rules = {
