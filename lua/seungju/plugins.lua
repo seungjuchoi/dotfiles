@@ -101,4 +101,11 @@ return require('packer').startup(function(use)
             require("todo-comments").setup {}
         end
     }
+    use({
+      "folke/noice.nvim",
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+        }
+    })
 end)
