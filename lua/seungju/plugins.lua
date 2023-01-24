@@ -74,4 +74,20 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     use 'rust-lang/rust.vim'
     use 'jbyuki/venn.nvim'
+    use {
+        'rmagatti/alternate-toggler',
+        config = function()
+            require("alternate-toggler").setup {
+                alternates = {
+                    ["=="] = "!="
+                }
+            }
+            vim.keymap.set(
+            "n",
+            "<leader>ta",
+            "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>"
+            )
+        end,
+        event = { "BufReadPost" }, -- lazy load after reading a buffer
+    }
 end)
