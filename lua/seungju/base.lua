@@ -20,3 +20,18 @@ vim.opt.wrap = false -- No Wrap lines
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.termguicolors=true
+vim.o.undofile = true
+vim.o.updatetime = 250
+vim.wo.signcolumn = 'yes'
+vim.o.completeopt = 'menuone,noselect'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})

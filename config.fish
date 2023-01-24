@@ -41,3 +41,7 @@ if test -d /opt/homebrew/opt/opencv@3
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/opencv@3/lib"
    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/opencv@3/include"
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
