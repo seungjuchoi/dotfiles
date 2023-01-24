@@ -90,4 +90,8 @@ return require('packer').startup(function(use)
         end,
         event = { "BufReadPost" }, -- lazy load after reading a buffer
     }
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
 end)
