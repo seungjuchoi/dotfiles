@@ -24,6 +24,7 @@ vim.o.undofile = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 vim.o.completeopt = 'menuone,noselect'
+vim.o.list = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
