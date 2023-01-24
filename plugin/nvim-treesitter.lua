@@ -1,33 +1,62 @@
-require'nvim-treesitter.configs'.setup {
-    -- ensure_installed = "all",
-    ensure_installed = {
-        "fish",
-        "json",
-        "yaml",
-        "swift",
-        "css",
-        "rust",
-        "ruby",
-        "vim",
-        "html",
-        "c",
-        "cpp",
-        "python",
-        "r",
-        "lua"
-    }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ignore_install = { "phpdoc" },  -- list of language that will be disabled
-    highlight = {
-        enable = true,              -- false will disable the whole extension
-        disable = { "" },  -- list of language that will be disabled
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
+require('nvim-treesitter.configs').setup {
+    ensure_installed = { 'fish', 'html', 'yaml', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'json' },
+
+    highlight = { enable = true },
+    indent = { enable = true, disable = { 'python' } },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = '<c-space>',
+            node_incremental = '<c-space>',
+            scope_incremental = '<c-s>',
+            node_decremental = '<backspace>',
+        },
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ['aa'] = '@parameter.outer',
+                ['ia'] = '@parameter.inner',
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+                ['ac'] = '@class.outer',
+                ['ic'] = '@class.inner',
+            },
+        },
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                [']m'] = '@function.outer',
+                [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+                [']M'] = '@function.outer',
+                [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+                ['[m'] = '@function.outer',
+                ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+                ['[M'] = '@function.outer',
+                ['[]'] = '@class.outer',
+            },
+        },
+        swap = {
+            enable = true,
+            swap_next = {
+                ['<leader>a'] = '@parameter.inner',
+            },
+            swap_previous = {
+                ['<leader>A'] = '@parameter.inner',
+            },
+        },
     },
     autotag = {
         enable = true,
     },
 }
-
