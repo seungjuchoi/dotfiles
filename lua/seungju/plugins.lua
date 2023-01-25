@@ -1,4 +1,5 @@
 vim.cmd [[packadd packer.nvim]]
+
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
@@ -6,9 +7,7 @@ return require('packer').startup(function(use)
         requires = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-            -- Useful status updates for LSP
             'j-hui/fidget.nvim',
-            -- Additional lua configuration, makes nvim stuff amazing
             'folke/neodev.nvim',
         }
     }
@@ -17,9 +16,9 @@ return require('packer').startup(function(use)
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+            'nvim-tree/nvim-web-devicons',
         },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+        tag = 'nightly'
     }
     use {
         "iamcco/markdown-preview.nvim",
@@ -58,7 +57,7 @@ return require('packer').startup(function(use)
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end,
     }
-    use { -- Additional text objects via treesitter
+    use {
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
     }
@@ -88,7 +87,7 @@ return require('packer').startup(function(use)
             "<cmd>lua require('alternate-toggler').toggleAlternate()<CR>"
             )
         end,
-        event = { "BufReadPost" }, -- lazy load after reading a buffer
+        event = { "BufReadPost" },
     }
     use {
         "windwp/nvim-autopairs",
