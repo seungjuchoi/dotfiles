@@ -41,3 +41,7 @@ k.set('n', '[d', vim.diagnostic.goto_prev)
 k.set('n', ']d', vim.diagnostic.goto_next)
 k.set('n', '<leader>e', vim.diagnostic.open_float)
 k.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+k.set('c', '<C-B>', "<LEFT>")
+k.set('c', '<C-F>', "<RIGHT>")
+k.set('c', '<C-K>', "<C-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>")
