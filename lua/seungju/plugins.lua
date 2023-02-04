@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end,
     }
+    use 'nvim-treesitter/playground'
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter',
