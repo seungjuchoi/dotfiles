@@ -22,9 +22,9 @@ command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 if command -qs espanso
     switch (uname)
         case Linux
-            command sudo ln -s -f $PWD/espanso ~/.config/espanso
+            command sudo ln -s -f $PWD/espanso/ ~/.config/espanso
         case Darwin
-            command sudo ln -s -f $PWD/espanso $HOME/Library/Application\ Support/espanso
+            command sudo ln -s -f $PWD/espanso/ $HOME/Library/Application\ Support/espanso
         case '*'
             echo Skip Espanso Config
     end
