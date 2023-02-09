@@ -1,0 +1,26 @@
+matches:
+  - trigger: ";date"
+    replace: "{{d}}"
+    vars:
+      - name: d
+        type: date
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";_date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y_%m_%d"
+  - trigger: ";pts"
+    replace: 'datetime.datetime.now().strftime("%Y_%m_%dT%H%M%S")'
+  - trigger: ";pdb"
+    replace: "import ipdb;ipdb.set_trace()"
+  - trigger: ";ip"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "curl ifconfig.so"
