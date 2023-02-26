@@ -1,14 +1,19 @@
 #!/usr/local/bin/fish
-command mkdir -p ~/.config/nvim
-command mkdir -p ~/.config/nvim/lua/seungju
-command mkdir -p ~/.config/nvim/plugin
+set xdg_path ~/.config/nvim
+if test -d $xdg_path/lua/seungju
+    command rm -rf $xdg_path/lua/seungju
+end
+command mkdir -p $xdg_path/lua/seungju
+if test -d $xdg_path/plugin
+    command rm -rf $xdg_path/plugin
+end
+command mkdir -p $xdg_path/plugin
 command mkdir -p ~/.config/wezterm
-set xdg_path ~/.config/nvim/
 for f in **/*.lua
-    command sudo ln -s -f $PWD/$f $xdg_path$f
+    command sudo ln -s -f $PWD/$f $xdg_path/$f
 end
 for f in **/*.vim
-    command sudo ln -s -f $PWD/$f $xdg_path$f
+    command sudo ln -s -f $PWD/$f $xdg_path/$f
 end
 command mkdir -p ~/.config/alacritty
 command sudo ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
