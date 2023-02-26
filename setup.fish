@@ -1,7 +1,6 @@
 #!/usr/local/bin/fish
 command mkdir -p ~/.config/nvim
 command mkdir -p ~/.config/nvim/lua/seungju
-command mkdir -p ~/.config/nvim/after/plugin
 command mkdir -p ~/.config/nvim/plugin
 command mkdir -p ~/.config/wezterm
 set xdg_path ~/.config/nvim/

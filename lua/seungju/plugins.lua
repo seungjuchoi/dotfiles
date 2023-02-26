@@ -38,7 +38,7 @@ require('lazy').setup({
     'tpope/vim-repeat',
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     },
     {
         'hrsh7th/nvim-cmp',
@@ -51,9 +51,19 @@ require('lazy').setup({
         end
     },
     'tpope/vim-sleuth',
-    {'akinsho/bufferline.nvim', version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    {
+        'akinsho/bufferline.nvim',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        opts = {},
+    },
     'ap/vim-css-color',
-    'rafi/awesome-vim-colorschemes',
+    {
+        'rafi/awesome-vim-colorschemes',
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme 'oceanic_material'
+        end,
+    },
     'ryanoasis/vim-devicons',
     'nvim-tree/nvim-web-devicons',
     'preservim/tagbar',
@@ -70,7 +80,18 @@ require('lazy').setup({
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = 'nvim-treesitter',
     },
-    'lewis6991/gitsigns.nvim',
+    {
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
+            }
+        }
+    },
     {'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim'},
     'BurntSushi/ripgrep',
     {'akinsho/toggleterm.nvim', version = "*", config = true},
@@ -79,7 +100,13 @@ require('lazy').setup({
     {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-telescope/telescope-file-browser.nvim',
     'will133/vim-dirdiff',
-    'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        opts = {
+            char = '┊',
+            show_trailing_blankline_indent = false,
+        }
+    },
     'rust-lang/rust.vim',
     'jbyuki/venn.nvim',
     {
@@ -108,5 +135,13 @@ require('lazy').setup({
         config = function()
             require("todo-comments").setup {}
         end
+    },
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {}
+        end,
     }
 })
