@@ -1,80 +1,88 @@
-vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use {
+require('lazy').setup({
+    {
         'neovim/nvim-lspconfig',
-        requires = {
+        dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
             'j-hui/fidget.nvim',
             'folke/neodev.nvim',
         }
-    }
-    use 'tpope/vim-surround'
-    use 'tpope/vim-fugitive'
-    use {
+    },
+    'tpope/vim-surround',
+    'tpope/vim-fugitive',
+    {
         'nvim-tree/nvim-tree.lua',
-        requires = {
+        dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
-        tag = 'nightly'
-    }
-    use {
+        version = 'nightly'
+    },
+    {
         "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    }
-    use 'godlygeek/tabular'
-    use 'tpope/vim-repeat'
-    use {
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
+    'godlygeek/tabular',
+    'tpope/vim-repeat',
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-    use {
+        dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+    },
+    {
         'hrsh7th/nvim-cmp',
-        requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-    }
-    use {
+        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    },
+    {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
-    }
-    use 'tpope/vim-sleuth'
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons', config=function ()
-        require("bufferline").setup{}
-    end}
-    use 'ap/vim-css-color'
-    use 'rafi/awesome-vim-colorschemes'
-    use 'ryanoasis/vim-devicons'
-    use 'kyazdani42/nvim-web-devicons'
-    use 'preservim/tagbar'
-    use {'mg979/vim-visual-multi', branch = 'master'}
-    use 'nvim-lua/plenary.nvim'
-    use {
+    },
+    'tpope/vim-sleuth',
+    {'akinsho/bufferline.nvim', version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons'},
+    'ap/vim-css-color',
+    'rafi/awesome-vim-colorschemes',
+    'ryanoasis/vim-devicons',
+    'nvim-tree/nvim-web-devicons',
+    'preservim/tagbar',
+    {'mg979/vim-visual-multi', branch = 'master'},
+    'nvim-lua/plenary.nvim',
+    {
         'nvim-treesitter/nvim-treesitter',
-        run = function()
+        build = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end,
-    }
-    use 'nvim-treesitter/playground'
-    use {
+    },
+    'nvim-treesitter/playground',
+    {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter',
-    }
-    use 'lewis6991/gitsigns.nvim'
-    use {'nvim-telescope/telescope.nvim', require = {{'nvim-lua/plenary.nvim'}}}
-    use 'BurntSushi/ripgrep'
-    use {"akinsho/toggleterm.nvim", tag = '*'}
-    use 'TimUntersberger/neogit'
-    use 'sindrets/diffview.nvim'
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use 'nvim-telescope/telescope-file-browser.nvim'
-    use 'will133/vim-dirdiff'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use 'rust-lang/rust.vim'
-    use 'jbyuki/venn.nvim'
-    use {
+        dependencies = 'nvim-treesitter',
+    },
+    'lewis6991/gitsigns.nvim',
+    {'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim'},
+    'BurntSushi/ripgrep',
+    {'akinsho/toggleterm.nvim', version = "*", config = true},
+    'TimUntersberger/neogit',
+    'sindrets/diffview.nvim',
+    {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    'nvim-telescope/telescope-file-browser.nvim',
+    'will133/vim-dirdiff',
+    'lukas-reineke/indent-blankline.nvim',
+    'rust-lang/rust.vim',
+    'jbyuki/venn.nvim',
+    {
         'rmagatti/alternate-toggler',
         config = function()
             require("alternate-toggler").setup {
@@ -89,16 +97,16 @@ return require('packer').startup(function(use)
             )
         end,
         event = { "BufReadPost" },
-    }
-    use {
+    },
+    {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
-    }
-    use {
+    },
+    {
         "folke/todo-comments.nvim",
-        requires = "nvim-lua/plenary.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
         config = function()
             require("todo-comments").setup {}
         end
     }
-end)
+})
