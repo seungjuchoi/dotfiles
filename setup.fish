@@ -28,6 +28,7 @@ if command -qs espanso
         case Linux
             command sudo ln -s -f $PWD/espanso/ ~/.config/espanso
         case Darwin
+            command rm -rf $HOME/Library/Application\ Support/espanso
             command sudo ln -s -f $PWD/espanso/ $HOME/Library/Application\ Support/espanso
         case '*'
             echo Skip Espanso Config
