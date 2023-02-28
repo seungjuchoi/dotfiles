@@ -22,8 +22,6 @@ matches:
           format: "%Y_%m_%d"
   - trigger: ";pts"
     replace: 'datetime.datetime.now().strftime("%Y_%m_%dT%H%M%S")'
-  - trigger: ";pdb"
-    replace: "import ipdb;ipdb.set_trace()"
   - trigger: ";ip"
     replace: "{{output}}"
     vars:
