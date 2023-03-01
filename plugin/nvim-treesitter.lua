@@ -1,5 +1,5 @@
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'fish', 'html', 'yaml', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'json' },
+    ensure_installed = { 'fish', 'html', 'yaml', 'markdown', 'markdown_inline', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'json' },
     sync_install = false,
     auto_install = true,
     highlight = {
