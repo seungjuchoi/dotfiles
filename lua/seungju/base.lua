@@ -27,6 +27,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.list = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.o.clipboard = 'unnamedplus'
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
