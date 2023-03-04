@@ -36,6 +36,8 @@ k.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
+-- Toggleterm
+k.set('n', '<C-`>', ":ToggleTerm direction=horizontal<CR>")
 -- Diagnostic keymaps
 k.set('n', '[d', vim.diagnostic.goto_prev)
 k.set('n', ']d', vim.diagnostic.goto_next)
