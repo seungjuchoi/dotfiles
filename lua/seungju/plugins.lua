@@ -94,7 +94,16 @@ require('lazy').setup({
     },
     {'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim'},
     'BurntSushi/ripgrep',
-    {'akinsho/toggleterm.nvim', version = "*", config = true},
+    {
+        'akinsho/toggleterm.nvim', version = "*",
+        opts = {
+            open_mapping = [[<c-\>]],
+            direction = 'float',
+            close_on_exit = true, -- close the terminal window when the process exits
+            shell = vim.o.shell, -- change the default shell
+            auto_scroll = true, -- automatically scroll to the bottom on terminal output
+        }
+    },
     'TimUntersberger/neogit',
     'sindrets/diffview.nvim',
     {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
