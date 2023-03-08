@@ -29,3 +29,5 @@ matches:
         type: shell
         params:
           cmd: "curl ifconfig.so"
+  - trigger: ";pb"
+    replace: '<div style="page-break-after: always;"></div>'
