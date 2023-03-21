@@ -38,7 +38,7 @@ return {
       action = wezterm.action.DisableDefaultAssignment,
     }
   },
-  color_scheme = "OceanicMaterial",
+  color_scheme = "ayu",
   -- hyperlink_rules = {
   --   {
   --     regex = '\\b[\\w.-]+\\.[a-z]{2,15}\\S*\\b',

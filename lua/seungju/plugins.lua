@@ -61,7 +61,7 @@ require('lazy').setup({
         'rafi/awesome-vim-colorschemes',
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme 'oceanic_material'
+            vim.cmd.colorscheme 'ayu'
         end,
     },
     'ryanoasis/vim-devicons',
