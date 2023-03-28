@@ -6,7 +6,9 @@ if status is-interactive
         alias vim nvim
         set -gx EDITOR nvim
     end
-
+    if command -qs ipython
+        alias ipy ipython
+    end
     if command -qs exa
         alias ll "exa --group-directories-first -l --icons $argv"
         alias lla "exa --group-directories-first -l --icons -a $argv"
