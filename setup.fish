@@ -22,15 +22,3 @@ command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command sudo ln -s -f $PWD/tmux.statusline.conf ~/.tmux.statusline.conf
 command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
-
-if command -qs espanso
-    switch (uname)
-        case Linux
-            command sudo ln -s -f $PWD/espanso/ ~/.config/espanso
-        case Darwin
-            command rm -rf $HOME/Library/Application\ Support/espanso
-            command sudo ln -s -f $PWD/espanso/ $HOME/Library/Application\ Support/espanso
-        case '*'
-            echo Skip Espanso Config
-    end
-end
