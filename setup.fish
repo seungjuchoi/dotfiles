@@ -21,3 +21,7 @@ command sudo ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
+if test -d ~/.config/karabiner
+    command cp ~/.config/karabiner/karabiner.json ~/.config/karabiner/karabiner_old.json
+    command sudo ln -s -f $PWD/karabiner.json ~/.config/karabiner/karabiner.json
+end
