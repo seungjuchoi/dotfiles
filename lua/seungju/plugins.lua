@@ -21,6 +21,10 @@ require('lazy').setup({
             'folke/neodev.nvim',
         }
     },
+    {
+        'j-hui/fidget.nvim',
+        tag = 'legacy'
+    },
     'tpope/vim-surround',
     'tpope/vim-fugitive',
     {
