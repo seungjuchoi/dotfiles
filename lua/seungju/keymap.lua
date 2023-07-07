@@ -47,3 +47,6 @@ k.set('n', '<leader>q', vim.diagnostic.setloclist)
 k.set('c', '<C-B>', "<LEFT>")
 k.set('c', '<C-F>', "<RIGHT>")
 k.set('c', '<C-K>', "<C-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>")
+
+k.set('i', '<C-B>', "<LEFT>")
+k.set('i', '<C-F>', "<RIGHT>")
