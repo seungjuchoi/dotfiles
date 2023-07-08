@@ -46,7 +46,8 @@ require('lazy').setup({
     },
     {
         'hrsh7th/nvim-cmp',
-        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+        dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip', 'rafamadriz/friendly-snippets'},
     },
     {
         'numToStr/Comment.nvim',
@@ -154,5 +155,6 @@ require('lazy').setup({
             vim.o.timeoutlen = 300
             require("which-key").setup {}
         end,
-    }
+    },
+    'luk400/vim-jukit'
 })
