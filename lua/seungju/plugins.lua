@@ -156,5 +156,15 @@ require('lazy').setup({
             require("which-key").setup {}
         end,
     },
-    'luk400/vim-jukit'
+    'luk400/vim-jukit',
+    {
+        'mbbill/undotree',
+        config = function ()
+            vim.keymap.set(
+            "n",
+            "<f4>",
+            "<cmd>UndotreeToggle<CR>"
+            )
+        end
+    }
 })
