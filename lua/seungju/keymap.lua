@@ -51,7 +51,7 @@ k.set('c', '<C-K>', "<C-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>")
 k.set('i', '<C-B>', "<LEFT>")
 k.set('i', '<C-F>', "<RIGHT>")
 
-k.set('t', '<C-\\>', "<C-\\><C-n><C-w>", {noremap = true})
+k.set('t', '<C-S>', "<C-\\><C-n><C-w>", {noremap = true})
 
 k.set('n', '<M-UP>', ":m .-2<CR>==", {silent = true, noremap = true})
 k.set('n', '<M-DOWN>', ":m .+1<CR>==", {silent = true, noremap = true})
