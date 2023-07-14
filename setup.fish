@@ -19,6 +19,7 @@ command mkdir -p ~/.config/alacritty
 command sudo ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
 command sudo ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
+command sudo ln -s -f $PWD/pipi.fish ~/.config/fish/functions/pipi.fish
 command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command sudo ln -s -f $PWD/ranger_rc.conf ~/.config/ranger/rc.conf
