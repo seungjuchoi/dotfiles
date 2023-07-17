@@ -109,7 +109,6 @@ require('lazy').setup({
             auto_scroll = true, -- automatically scroll to the bottom on terminal output
         }
     },
-    'TimUntersberger/neogit',
     'sindrets/diffview.nvim',
     {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-telescope/telescope-file-browser.nvim',
