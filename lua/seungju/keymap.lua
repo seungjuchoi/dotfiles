@@ -1,8 +1,7 @@
 local k = vim.keymap
 k.set({'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-k.set('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', {noremap = true})
-k.set('n', 'x', '"_x', {noremap = true})
+k.set('n', 'x', '"_x')
 
 k.set('n', '[b', ':bp<CR>', {silent = true, noremap = true})
 k.set('n', ']b', ':bn<CR>', {silent = true, noremap = true})
@@ -51,9 +50,11 @@ k.set('c', '<C-K>', "<C-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>")
 k.set('i', '<C-B>', "<LEFT>")
 k.set('i', '<C-F>', "<RIGHT>")
 
-k.set('t', '<C-S>', "<C-\\><C-n><C-w>", {noremap = true})
+k.set('t', '<C-S>', "<C-\\><C-n><C-w>")
 
-k.set('n', '<M-UP>', ":m .-2<CR>==", {silent = true, noremap = true})
-k.set('n', '<M-DOWN>', ":m .+1<CR>==", {silent = true, noremap = true})
-k.set('v', '<M-UP>', ":m '<-2<CR>gv=gv", {silent = true, noremap = true})
-k.set('v', '<M-DOWN>', ":m '>+1<CR>gv=gv", {silent = true, noremap = true})
+k.set('n', '<M-UP>', ":m .-2<CR>==", {silent = true})
+k.set('n', '<M-DOWN>', ":m .+1<CR>==", {silent = true})
+k.set('v', '<M-UP>', ":m '<-2<CR>gv=gv", {silent = true})
+k.set('v', '<M-DOWN>', ":m '>+1<CR>gv=gv", {silent = true})
+
+k.set('i', '<M-BS>', "<C-W>")
