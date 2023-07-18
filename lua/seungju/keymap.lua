@@ -2,6 +2,7 @@ local k = vim.keymap
 k.set({'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 k.set('n', 'x', '"_x')
+k.set('v', 'p', '"0p')
 
 k.set('n', '[b', ':bp<CR>', {silent = true, noremap = true})
 k.set('n', ']b', ':bn<CR>', {silent = true, noremap = true})
