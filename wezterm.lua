@@ -36,7 +36,12 @@ return {
       key = 'UpArrow',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.DisableDefaultAssignment,
-    }
+    },
+    {
+      key = 'Backspace',
+      mods = 'CMD',
+      action = wezterm.action.SendKey { key = 'u', mods = 'CTRL' }
+    },
   },
   color_scheme = "ayu",
   -- hyperlink_rules = {
