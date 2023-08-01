@@ -166,7 +166,6 @@ require('lazy').setup({
             )
         end
     },
-    'github/copilot.vim',
     {
         "jackMort/ChatGPT.nvim",
         event = "VeryLazy",
