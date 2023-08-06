@@ -16,5 +16,4 @@ disabled = true
 disabled = true
 
 [env_var.DISPLAY]
-style = 'bold blue'
 format = "[🖥️]($env_value) "
