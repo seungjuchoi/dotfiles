@@ -177,5 +177,12 @@ require('lazy').setup({
             "nvim-telescope/telescope.nvim"
         }
     },
-    'lambdalisue/suda.vim'
+    'lambdalisue/suda.vim',
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+    },
 })
