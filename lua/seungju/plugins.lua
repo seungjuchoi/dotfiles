@@ -68,7 +68,12 @@ require('lazy').setup({
     },
     'ryanoasis/vim-devicons',
     'nvim-tree/nvim-web-devicons',
-    'preservim/tagbar',
+    {
+        "simrat39/symbols-outline.nvim",
+        cmd = "SymbolsOutline",
+        keys = { { "<F8>", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+        config = true,
+    },
     {'mg979/vim-visual-multi', branch = 'master'},
     'nvim-lua/plenary.nvim',
     {

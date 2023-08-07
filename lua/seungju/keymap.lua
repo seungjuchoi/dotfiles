@@ -18,7 +18,6 @@ k.set('n', 'sk', '<C-W>k')
 k.set('n', 'sl', '<C-W>l')
 
 k.set('n', '<F3>', ":NvimTreeToggle<CR>", {noremap = true})
-k.set('n', "<F8>", ":TagbarToggle<CR>")
 
 k.set('n', "<leader>df", ":DiffviewOpen<CR>")
 k.set('n', "<leader>dx", ":DiffviewClose<CR>")
