@@ -71,7 +71,7 @@ require('lazy').setup({
     {
         "simrat39/symbols-outline.nvim",
         cmd = "SymbolsOutline",
-        keys = { { "<F8>", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+        keys = { { "<C-2>", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
         config = true,
     },
     {'mg979/vim-visual-multi', branch = 'master'},
