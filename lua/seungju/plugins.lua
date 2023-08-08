@@ -188,6 +188,12 @@ require('lazy').setup({
         event = "VeryLazy",
         ---@type Flash.Config
         opts = {},
-        -- stylua: ignore
+        config = {
+            highlight = {
+                groups = {
+                    label = "FlashBackdrop",
+                },
+            },
+        }
     },
 })
