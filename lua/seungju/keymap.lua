@@ -58,3 +58,6 @@ k.set('v', '<M-UP>', ":m '<-2<CR>gv=gv", {silent = true})
 k.set('v', '<M-DOWN>', ":m '>+1<CR>gv=gv", {silent = true})
 
 k.set('i', '<M-BS>', "<C-W>")
+
+k.set('n', '<C-RIGHT>', ":vertical resize +2<CR>", {silent = true})
+k.set('n', '<C-LEFT>', ":vertical resize -2<CR>", {silent = true})
