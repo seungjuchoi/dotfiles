@@ -21,6 +21,7 @@ if command -qs starship
     starship init fish | source
 end
 set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
+set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
 if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
     set -gx LIBRARY_PATH "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
 end
