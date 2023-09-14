@@ -11,6 +11,13 @@ if command -qs exa
     alias ll "exa --group-directories-first -l --icons $argv"
     alias lla "exa --group-directories-first -l --icons -a $argv"
 end
+if command -qs lsd
+    alias ll "lsd --group-directories-first -l --hyperlink auto -g"
+    alias lla "lsd --group-directories-first -l --hyperlink auto -g -a"
+else if command -qs exa
+        alias ll "exa --group-directories-first -l --icons $argv"
+        alias lla "exa --group-directories-first -l --icons -a $argv"
+end
 if command -qs lazygit
     alias lg lazygit $argv
 end
