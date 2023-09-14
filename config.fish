@@ -7,11 +7,10 @@ end
 if command -qs ipython
     alias ipy ipython
 end
-if command -qs exa
-    alias ll "exa --group-directories-first -l --icons $argv"
-    alias lla "exa --group-directories-first -l --icons -a $argv"
-end
-if command -qs lsd
+if command -qs eza
+    alias ll "eza -l --hyperlink --sort modified --icons --git"
+    alias lla "eza -l -a --hyperlink --sort modified --icons --git"
+else if command -qs lsd
     alias ll "lsd --group-directories-first -l --hyperlink auto -g"
     alias lla "lsd --group-directories-first -l --hyperlink auto -g -a"
 else if command -qs exa
