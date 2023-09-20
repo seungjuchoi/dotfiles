@@ -42,6 +42,10 @@ return {
       mods = 'CMD',
       action = wezterm.action.SendKey { key = 'u', mods = 'CTRL' }
     },
+    { key = '/',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.QuickSelect
+    },
   },
   color_scheme = "ayu",
   -- hyperlink_rules = {
