@@ -47,7 +47,7 @@ return {
       action = wezterm.action.QuickSelect
     },
   },
-  color_scheme = "ayu",
+  color_scheme = "tokyonight",
   -- hyperlink_rules = {
   --   {
   --     regex = '\\b[\\w.-]+\\.[a-z]{2,15}\\S*\\b',
