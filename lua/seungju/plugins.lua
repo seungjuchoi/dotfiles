@@ -203,8 +203,9 @@ require('lazy').setup({
         opts = {},
     },
     {
-	"stevearc/dressing.nvim",
-	opts = {},
+        "stevearc/dressing.nvim",
+        opts = {},
     },
     "RRethy/vim-illuminate",
+    "sbdchd/neoformat",
 })
