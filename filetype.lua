@@ -3,6 +3,7 @@ vim.cmd("autocmd FileType python imap <buffer> <F5> <esc>:update<CR>:TermExec cm
 vim.cmd("autocmd FileType python map <buffer> <F6> :update<CR>:TermExec cmd='python %'")
 vim.cmd("autocmd FileType python imap <buffer> <F6> <esc>:update<CR>:TermExec cmd='python % '")
 vim.cmd("autocmd FileType python vmap = :Neoformat<CR>")
+vim.cmd("autocmd FileType c vmap = :Neoformat<CR>")
 vim.cmd("autocmd FileType go map <buffer> <F5> :update<CR>:TermExec cmd='go run %'<CR>")
 vim.cmd("autocmd FileType go imap <buffer> <F5> <esc>:update<CR>:TermExec cmd='gorun % '<CR>")
 vim.cmd("autocmd FileType go map <buffer> <F6> :update<CR>:TermExec cmd='go run %'")
