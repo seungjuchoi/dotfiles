@@ -116,6 +116,7 @@ require('lazy').setup({
     'will133/vim-dirdiff',
     {
         'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
         opts = {
             char = '┊',
             show_trailing_blankline_indent = false,
