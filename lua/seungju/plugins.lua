@@ -208,4 +208,5 @@ require('lazy').setup({
     },
     "RRethy/vim-illuminate",
     "sbdchd/neoformat",
+    "farmergreg/vim-lastplace",
 })
