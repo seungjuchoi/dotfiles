@@ -1,4 +1,5 @@
 set fish_greeting ""
+set -gx MANPAGER "less -I"
 if command -qs nvim
     alias vi nvim
     alias vim nvim
