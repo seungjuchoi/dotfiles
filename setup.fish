@@ -25,3 +25,4 @@ command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command mkdir -p ~/.config/ranger
 command sudo ln -s -f $PWD/ranger_rc.conf ~/.config/ranger/rc.conf
 command sudo ln -s -f $PWD/clang-format ~/.clang-format
+command sudo ln -s -f $PWD/stylua.toml ~/.stylua.toml

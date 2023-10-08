@@ -40,6 +40,9 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+require('mason').setup()
+require('mason-lspconfig').setup()
+
 local servers = {
   clangd = {},
   gopls = {},
@@ -62,8 +65,6 @@ require('neodev').setup()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
--- Setup mason so it can manage external tooling
-require('mason').setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -82,6 +83,3 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
--- Turn on lsp status information
-require('fidget').setup()
