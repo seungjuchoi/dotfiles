@@ -93,5 +93,6 @@ mason_tool_installer.setup({
     "clang-format",
     "eslint_d",
     "isort",
+    "luacheck"
   },
 })

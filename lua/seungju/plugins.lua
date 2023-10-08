@@ -239,6 +239,7 @@ require("lazy").setup({
         python = { "pylint" },
         typescript = { "eslint_d" },
         javascript = { "eslint_d" },
+        lua = { "luacheck" },
       }
     },
     config = function(_, opts)
