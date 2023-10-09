@@ -94,5 +94,6 @@ mason_tool_installer.setup({
     "eslint_d",
     "isort",
     "luacheck",
+    "pylint",
   },
 })
