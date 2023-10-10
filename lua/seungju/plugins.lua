@@ -130,13 +130,18 @@ require("lazy").setup({
   },
   {
     "sindrets/diffview.nvim",
-    opts = {
-      keymaps = {
-        file_panel = {
-          ["s"] = false,
+    config = function()
+      local df = require("diffview")
+      local actions = require("diffview.actions")
+      df.setup({
+        keymaps = {
+          file_panel = {
+            ["s"] = false,
+            { "n", " ", actions.toggle_stage_entry, { desc = "Stage / unstage the selected entry" } },
+          },
         },
-      },
-    },
+      })
+    end,
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-telescope/telescope-file-browser.nvim",
