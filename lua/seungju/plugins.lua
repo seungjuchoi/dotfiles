@@ -128,7 +128,16 @@ require("lazy").setup({
       auto_scroll = true, -- automatically scroll to the bottom on terminal output
     },
   },
-  "sindrets/diffview.nvim",
+  {
+    "sindrets/diffview.nvim",
+    opts = {
+      keymaps = {
+        file_panel = {
+          ["s"] = false,
+        },
+      },
+    },
+  },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-telescope/telescope-file-browser.nvim",
   "will133/vim-dirdiff",
@@ -240,10 +249,10 @@ require("lazy").setup({
         typescript = { "eslint_d" },
         javascript = { "eslint_d" },
         lua = { "luacheck" },
-      }
+      },
     },
     config = function(_, opts)
-      local lint = require('lint')
+      local lint = require("lint")
       lint.linters_by_ft = opts.linters_by_ft
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -253,6 +262,6 @@ require("lazy").setup({
           lint.try_lint()
         end,
       })
-    end
-  }
+    end,
+  },
 })
