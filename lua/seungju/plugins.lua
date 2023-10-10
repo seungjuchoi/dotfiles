@@ -184,10 +184,7 @@ require("lazy").setup({
       require("which-key").setup({})
     end,
   },
-  {
-    "luk400/vim-jukit",
-    event = { "BufEnter *.{py, ipynb}" },
-  },
+  "luk400/vim-jukit",
   {
     "mbbill/undotree",
     config = function()
