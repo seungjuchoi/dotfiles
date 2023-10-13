@@ -8,6 +8,9 @@ end
 if command -qs ipython
     alias ipy ipython
 end
+if command -qs yazi
+    alias ya yazi
+end
 if command -qs eza
     alias ll "eza -l --hyperlink --sort modified --icons --git"
     alias lla "eza -l -a --hyperlink --sort modified --icons --git"
