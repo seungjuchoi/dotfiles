@@ -1,4 +1,4 @@
-# WARN: Install Fish before execution
+# WARN: Install Fish and Brew before execution
 
 set -l packages zoxide \
         fd \
