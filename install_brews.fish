@@ -12,6 +12,7 @@ set -l packages \
         exa \
         ranger \
         fisher \
+        go \
         rust \
         lua \
         luarocks \
@@ -22,13 +23,25 @@ set -l packages \
         eza \
         lazygit \
         npm \
+        gpg \
+        git \
+        ffmpeg \
+        ffmpegthumbnailer \
+        unar \
+        jq \
+        jc \
+        poppler \
+        tldr \
+        hyperfine \
+        httpie \
+        nmap \
 
 
 brew install $packages
 brew update
 brew upgrade
 
-pipx install virtualfish
+pipx install virtualfish yt-dlp
 vf install
 vf addplugins compat_aliases projects environment auto_activation
 
