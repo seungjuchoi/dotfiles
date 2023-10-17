@@ -1,5 +1,9 @@
 set fish_greeting ""
 set -gx MANPAGER "less -I"
+set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish # place first cuz linuxbrew
+if test -f $LOCAL_FISH_CONF
+    source $LOCAL_FISH_CONF
+end
 if command -qs nvim
     alias vi nvim
     alias vim nvim
@@ -37,10 +41,6 @@ set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDoc
 set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
 if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
     set -gx LIBRARY_PATH "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
-end
-set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish
-if test -f $LOCAL_FISH_CONF
-    source $LOCAL_FISH_CONF
 end
 if test -d /opt/homebrew/opt/llvm
     set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
