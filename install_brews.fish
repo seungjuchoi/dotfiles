@@ -21,6 +21,7 @@ set -l packages \
         mdcat \
         eza \
         lazygit \
+        npm \
 
 
 brew install $packages
@@ -41,5 +42,8 @@ set -l packages \
         jorgebucaran/autopair.fish \
         PatrickF1/fzf.fish \
         jorgebucaran/nvm.fish \
-
 fisher install $packages
+
+#pm2
+npm install pm2 -g
+
