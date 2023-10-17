@@ -41,7 +41,8 @@ brew install $packages
 brew update
 brew upgrade
 
-pipx install virtualfish yt-dlp
+pipx install --python python3.11 virtualfish # cuz python 3.12 not support torch
+pipx install yt-dlp
 vf install
 vf addplugins compat_aliases projects environment auto_activation
 
