@@ -35,6 +35,7 @@ set -l packages \
         hyperfine \
         httpie \
         nmap \
+        ncdu \
 
 
 brew install $packages
