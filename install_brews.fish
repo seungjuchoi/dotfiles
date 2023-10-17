@@ -30,6 +30,7 @@ brew upgrade
 
 pipx install virtualfish
 vf install
+vf addplugins compat_aliases projects environment auto_activation
 
 #tmux
 # INFO: Enter tmux and then Hit Ctrl+t, I to install tmux-packges
