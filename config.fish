@@ -91,3 +91,8 @@ function pipi
         end
     end
 end
+
+function _vf_install_essentials --on-event virtualenv_did_create
+    echo Install Essential Packages..
+    pip install pynvim ipython matplotlib
+end
