@@ -47,17 +47,7 @@ require("lazy").setup({
       vim.cmd.colorscheme("tokyonight-night")
     end,
   },
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = "tokyonight-night",
-        component_separators = "|",
-        section_separators = "",
-      },
-    },
-  },
+  "nvim-lualine/lualine.nvim",
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
