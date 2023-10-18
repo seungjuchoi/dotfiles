@@ -47,6 +47,10 @@ pipx install yt-dlp
 vf install
 vf addplugins compat_aliases projects environment auto_activation
 
+if test -f /usr/bin/python3
+        /usr/bin/python3 -m pip install debugpy
+end
+
 #tmux
 # INFO: Enter tmux and then Hit Ctrl+t, I to install tmux-packges
 if not test -d ~/.tmux/plugins/tpm
