@@ -174,7 +174,13 @@ require("lazy").setup({
       require("which-key").setup({})
     end,
   },
-  "luk400/vim-jukit",
+  {
+    "luk400/vim-jukit",
+    config = function()
+      -- Set dummy key to disable
+      vim.keymap.set("n", "<f13>", "call jukit#send#line()<cr>")
+    end
+  },
   {
     "mbbill/undotree",
     config = function()
