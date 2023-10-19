@@ -100,3 +100,10 @@ function _vf_install_essentials --on-event virtualenv_did_create
     pip install -U pip
     pip install pynvim ipython matplotlib
 end
+
+if status is-login
+    if not set -q TMUX
+        tmux attach || tmux new-session
+    end
+end
+
