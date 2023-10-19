@@ -110,7 +110,7 @@ require('mason-nvim-dap').setup {
 }
 
 -- Basic debugging keymaps, feel free to change to your liking!
-vim.keymap.set('n', '<F6>', function()
+vim.keymap.set('n', '<F5>', function()
   vim.cmd("w")
   dap.continue()
 end, { desc = 'Debug: Start' })
@@ -126,6 +126,7 @@ vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle 
 vim.keymap.set('n', '<leader>B', function()
   dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
 end, { desc = 'Debug: Set Breakpoint' })
+vim.keymap.set('n', '<S-F5>', dap.terminate, { desc = 'Debug: Exit' })
 
 dapui.setup {
   icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
