@@ -257,16 +257,12 @@ require("lazy").setup({
   },
   "nanotee/zoxide.vim",
   {
-    "rcarriga/nvim-dap-ui",
+    "jay-babu/mason-nvim-dap.nvim",
     dependencies = {
-      {
-        "mfussenegger/nvim-dap",
-      },
-      "jay-babu/mason-nvim-dap.nvim",
-      {
-        'theHamsta/nvim-dap-virtual-text',
-        opts = {},
-      }
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+      'theHamsta/nvim-dap-virtual-text',
     },
   },
+  "rcarriga/nvim-dap-ui",
 })
