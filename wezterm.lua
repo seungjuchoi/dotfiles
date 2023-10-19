@@ -46,14 +46,16 @@ return {
       mods = 'SHIFT|CTRL',
       action = wezterm.action.QuickSelect
     },
+    { key = '[',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.MoveTabRelative(-1),
+    },
+    { key = ']',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.MoveTabRelative(1),
+    },
   },
   color_scheme = "tokyonight",
-  -- hyperlink_rules = {
-  --   {
-  --     regex = '\\b[\\w.-]+\\.[a-z]{2,15}\\S*\\b',
-  --     format = '$0',
-  --   }
-  -- }
 }
 
 
