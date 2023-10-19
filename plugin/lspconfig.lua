@@ -110,7 +110,14 @@ require('mason-nvim-dap').setup {
 }
 
 -- Basic debugging keymaps, feel free to change to your liking!
-vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
+vim.keymap.set('n', '<F6>', function()
+  vim.cmd("w")
+  dap.continue()
+end, { desc = 'Debug: Start' })
+vim.keymap.set('n', '<leader>dc', function()
+  vim.cmd("w")
+  dap.continue()
+end, { desc = 'Debug: Start/Continue' })
 vim.keymap.set('n', '<leader>dC', dap.run_to_cursor, { desc = 'Debug: Run to Cursor' })
 vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
 vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: Step Into' })
