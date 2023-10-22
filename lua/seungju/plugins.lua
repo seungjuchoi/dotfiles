@@ -22,7 +22,12 @@ require("lazy").setup({
       "folke/neodev.nvim",
     },
   },
-  "tpope/vim-surround",
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {}
+  },
   "tpope/vim-fugitive",
   {
     "nvim-tree/nvim-tree.lua",
@@ -38,7 +43,6 @@ require("lazy").setup({
     end,
   },
   "godlygeek/tabular",
-  "tpope/vim-repeat",
   "nvim-tree/nvim-web-devicons",
   {
     "rafi/awesome-vim-colorschemes",
@@ -271,4 +275,10 @@ require("lazy").setup({
     },
   },
   "rcarriga/nvim-dap-ui",
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = { { "-", "<cmd>Oil<cr>", desc = "Oil" } },
+  }
 })
