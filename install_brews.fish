@@ -59,6 +59,7 @@ set -l packages \
         PatrickF1/fzf.fish \
         jorgebucaran/nvm.fish \
 fisher install $packages
+fisher update
 
 #pm2
 npm install pm2 -g
