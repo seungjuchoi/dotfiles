@@ -51,6 +51,8 @@ vf addplugins compat_aliases projects environment auto_activation
 # INFO: Enter tmux and then Hit Ctrl+t, I to install tmux-packges
 if not test -d ~/.tmux/plugins/tpm
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+        command ~/.tmux/plugins/tpm/bin/update_plugins all
 end
 
 #fisher
