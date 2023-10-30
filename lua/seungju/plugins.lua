@@ -26,7 +26,7 @@ require("lazy").setup({
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
-    opts = {}
+    opts = {},
   },
   "tpope/vim-fugitive",
   {
@@ -48,7 +48,7 @@ require("lazy").setup({
     "rafi/awesome-vim-colorschemes",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme("tokyonight-night")
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
   "nvim-lualine/lualine.nvim",
@@ -183,7 +183,7 @@ require("lazy").setup({
     config = function()
       -- Set dummy key to disable
       vim.keymap.set("n", "<f13>", "call jukit#send#line()<cr>")
-    end
+    end,
   },
   {
     "mbbill/undotree",
@@ -271,14 +271,27 @@ require("lazy").setup({
     dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
-      'theHamsta/nvim-dap-virtual-text',
+      "theHamsta/nvim-dap-virtual-text",
     },
   },
   "rcarriga/nvim-dap-ui",
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     opts = {},
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = { { "-", "<cmd>Oil<cr>", desc = "Oil" } },
-  }
+  },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      theme = "catppuccin-latte",
+    },
+  },
 })
