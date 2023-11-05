@@ -28,8 +28,11 @@ set -l packages \
         ffmpeg \
         ffmpegthumbnailer \
         unar \
+        gnu-sed \
         jq \
+        yq \
         jc \
+        noahgorstein/tap/jqp \
         poppler \
         tldr \
         hyperfine \
