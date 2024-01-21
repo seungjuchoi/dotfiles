@@ -202,6 +202,11 @@ require("lazy").setup({
           label = "FlashBackdrop",
         },
       },
+      modes = {
+        char = {
+          enabled = false
+        }
+      }
     },
   },
   {
