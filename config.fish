@@ -95,6 +95,53 @@ function pipi
     end
 end
 
+function you_down -d "Download videos using yt-dlp"
+    function on_sigint --on-signal SIGINT
+        echo "다운로드 중단..."
+        # 현재 실행 중인 모든 배경 작업을 종료
+        for job in (jobs -p)
+            kill $job
+        end
+        exit 1
+    end
+    if not type -q yt-dlp
+        echo "yt-dlp가 설치되어 있지 않습니다. 설치 후 다시 시도해주세요."
+        return 1
+    end
+
+    function print_usage
+        echo "Usage:"
+        echo "  download_ytdlp [URL or FILE]"
+        echo "  URL: 다운로드할 YouTube URL"
+        echo "  FILE: URL 목록이 담긴 파일 경로"
+    end
+
+    if test (count $argv) -eq 0
+        print_usage
+        return 1
+    end
+
+    if string match -qr 'https?://.*' $argv[1]
+        yt-dlp --write-thumbnail --embed-thumbnail -o '%(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' $argv[1]
+        for file in (find . -name "*.webp")
+            rm $file
+        end
+    else if test -f $argv[1]
+        set urls (cat $argv[1])
+        for url in $urls
+            yt-dlp --write-thumbnail --embed-thumbnail -o '%(title)s.%(ext)s' -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' $url &
+        end
+        wait
+        for file in (find . -name "*.webp")
+            rm $file
+        end
+    else
+        echo "Invalid argument: $argv[1]"
+        print_usage
+        return 1
+    end
+end
+
 function _vf_install_essentials --on-event virtualenv_did_create
     echo Install Essential Packages..
     pip install -U pip
