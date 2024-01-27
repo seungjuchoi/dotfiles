@@ -55,7 +55,10 @@ return {
       action = wezterm.action.MoveTabRelative(1),
     },
   },
+  quick_select_patterns = {
+    "\\bcroc\\s+\\S*",
+    "[a-zA-Z0-9_-]+\\.[a-zA-Z0-9]+"
+  },
   color_scheme = "tokyonight",
 }
-
 
