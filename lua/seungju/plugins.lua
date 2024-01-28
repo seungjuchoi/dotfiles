@@ -34,7 +34,6 @@ require("lazy").setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    version = "nightly",
   },
   {
     "iamcco/markdown-preview.nvim",
