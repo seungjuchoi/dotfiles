@@ -39,7 +39,9 @@ set -l packages \
         httpie \
         nmap \
         ncdu \
-
+        miller \
+        glow \
+        hexyl \
 
 brew install $packages
 brew update
