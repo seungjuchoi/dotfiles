@@ -13,7 +13,7 @@ if command -qs ipython
     alias ipy ipython
 end
 if command -qs yazi
-    alias ya yazi
+    alias ya "WEZTERM_EXECUTABLE=1 yazi"
 end
 if command -qs ranger
     alias ra ranger
