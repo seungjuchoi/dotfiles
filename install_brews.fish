@@ -42,6 +42,7 @@ set -l packages \
         miller \
         glow \
         hexyl \
+        exiftool \
 
 brew install $packages
 brew update
