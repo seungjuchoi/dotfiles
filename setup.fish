@@ -27,8 +27,24 @@ command sudo ln -s -f $PWD/ranger_rc.conf ~/.config/ranger/rc.conf
 command sudo ln -s -f $PWD/clang-format ~/.clang-format
 command sudo ln -s -f $PWD/stylua.toml ~/.stylua.toml
 command sudo ln -s -f $PWD/luacheckrc ~/.luacheckrc
-command mkdir -p ~/.config/yazi/plugins
+set yazi_plugins ~/.config/yazi/plugins
+command mkdir -p $yazi_plugins
 command sudo ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
-command git clone git@github.com:Reledia/glow.yazi.git ~/.config/yazi/plugins/glow.yazi
-command git clone git@github.com:Reledia/miller.yazi.git ~/.config/yazi/plugins/miller_csv.yazi
-command git clone git@github.com:Reledia/hexyl.yazi ~/.config/yazi/plugins/hexyl.yazi
+if test -d $yazi_plugins/glow.yazi
+    cd $yazi_plugins/glow.yazi
+    git pull
+else
+    command git clone git@github.com:Reledia/glow.yazi.git $yazi_plugins/glow.yazi
+end
+if test -d $yazi_plugins/miller_csv.yazi
+    cd $yazi_plugins/miller_csv.yazi
+    git pull
+else
+    command git clone git@github.com:Reledia/miller.yazi.git $yazi_plugins/miller_csv.yazi
+end
+if test -d $yazi_plugins/hexyl.yazi
+    cd $yazi_plugins/hexyl.yazi
+    git pull
+else
+    command git clone git@github.com:Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
+end
