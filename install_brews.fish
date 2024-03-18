@@ -9,7 +9,6 @@ set -l packages \
         tmux \
         pipx \
         yazi \
-        exa \
         ranger \
         fisher \
         go \
@@ -48,7 +47,7 @@ brew install $packages
 brew update
 brew upgrade
 
-pipx install --python python3.11 virtualfish # cuz python 3.12 not support torch
+pipx install --python python3.10 virtualfish # cuz python 3.12 not support torch
 pipx install yt-dlp
 vf install
 vf addplugins compat_aliases projects environment auto_activation
