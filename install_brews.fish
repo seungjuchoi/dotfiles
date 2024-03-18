@@ -47,7 +47,7 @@ brew install $packages
 brew update
 brew upgrade
 
-python -m pip install virtualfish
+python3 -m pip install virtualfish
 pipx install yt-dlp
 vf install
 exec fish
