@@ -1,4 +1,4 @@
-# WARN: Install Fish and Brew before execution
+# WARN: Install Fish and Brew, Git, Curl before execution
 
 set -l packages \
         zoxide \
@@ -61,6 +61,7 @@ if not test -d ~/.tmux/plugins/tpm
 else
         command ~/.tmux/plugins/tpm/bin/update_plugins all
 end
+tmux source ~/.tmux.conf && tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
 
 #fisher
 set -l packages \
@@ -73,3 +74,7 @@ fisher update
 #pm2
 npm install pm2 -g
 
+#starship
+if not command -qs starship
+        curl -sS https://starship.rs/install.sh | sh
+end
