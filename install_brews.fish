@@ -47,10 +47,12 @@ brew install $packages
 brew update
 brew upgrade
 
-pipx install --python python3.10 virtualfish # cuz python 3.12 not support torch
+python -m pip install virtualfish
 pipx install yt-dlp
 vf install
+exec fish
 vf addplugins compat_aliases projects environment auto_activation
+exec fish
 
 #tmux
 # INFO: Enter tmux and then Hit Ctrl+t, I to install tmux-packges
