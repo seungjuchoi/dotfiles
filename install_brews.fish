@@ -1,4 +1,4 @@
-# WARN: Install Fish and Brew, Git, Curl before execution
+# INFO: Install Fish and Brew, Git, Curl before execution
 
 ulimit -n 2048
 
