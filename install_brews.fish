@@ -1,6 +1,6 @@
 # WARN: Install Fish and Brew, Git, Curl before execution
 
-ulimit -n 4096
+ulimit -n 2048
 
 set -l packages \
         zoxide \
