@@ -1,6 +1,6 @@
 # INFO: Install Fish and Brew, Git, Curl before execution
 
-ulimit -n 2048
+ulimit -n 2048 # Prevent Error: Too many open files
 
 set -l packages \
         zoxide \
