@@ -30,23 +30,14 @@ command ln -s -f $PWD/luacheckrc ~/.luacheckrc
 set yazi_plugins ~/.config/yazi/plugins
 command mkdir -p $yazi_plugins
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
-if test -d $yazi_plugins/glow.yazi
-    cd $yazi_plugins/glow.yazi
-    git pull
-else
-    command git clone git@github.com:Reledia/glow.yazi.git $yazi_plugins/glow.yazi
+if not test -d $yazi_plugins/glow.yazi
+    command git clone https://github.com/Reledia/glow.yazi.git $yazi_plugins/glow.yazi
 end
-if test -d $yazi_plugins/miller_csv.yazi
-    cd $yazi_plugins/miller_csv.yazi
-    git pull
-else
-    command git clone git@github.com:Reledia/miller.yazi.git $yazi_plugins/miller_csv.yazi
+if not test -d $yazi_plugins/miller_csv.yazi
+    command git clone https://github.com/Reledia/miller.yazi.git $yazi_plugins/miller_csv.yazi
 end
-if test -d $yazi_plugins/hexyl.yazi
-    cd $yazi_plugins/hexyl.yazi
-    git pull
-else
-    command git clone git@github.com:Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
+if not test -d $yazi_plugins/hexyl.yazi
+    command git clone https://github.com/Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
 end
 
 tmux new-session -d -s init_config
