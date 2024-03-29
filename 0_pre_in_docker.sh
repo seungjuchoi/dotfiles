@@ -1,5 +1,5 @@
 apt update
-apt install -y git curl python3-pip build-essential
+apt install -y git curl python3-pip build-essential nvim
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 brew install fish
