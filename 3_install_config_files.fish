@@ -10,26 +10,26 @@ end
 command mkdir -p $xdg_path/plugin
 command mkdir -p ~/.config/wezterm
 for f in **/*.lua
-    command sudo ln -s -f $PWD/$f $xdg_path/$f
+    command ln -s -f $PWD/$f $xdg_path/$f
 end
 for f in **/*.vim
-    command sudo ln -s -f $PWD/$f $xdg_path/$f
+    command ln -s -f $PWD/$f $xdg_path/$f
 end
 command mkdir -p ~/.config/alacritty
-command sudo ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
-command sudo ln -s -f $PWD/starship.toml ~/.config/starship.toml
-command sudo ln -s -f $PWD/config.fish ~/.config/fish/config.fish
-command sudo ln -s -f $PWD/pipi.fish ~/.config/fish/functions/pipi.fish
-command sudo ln -s -f $PWD/tmux.conf ~/.tmux.conf
-command sudo ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
+command ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
+command ln -s -f $PWD/starship.toml ~/.config/starship.toml
+command ln -s -f $PWD/config.fish ~/.config/fish/config.fish
+command ln -s -f $PWD/pipi.fish ~/.config/fish/functions/pipi.fish
+command ln -s -f $PWD/tmux.conf ~/.tmux.conf
+command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command mkdir -p ~/.config/ranger
-command sudo ln -s -f $PWD/ranger_rc.conf ~/.config/ranger/rc.conf
-command sudo ln -s -f $PWD/clang-format ~/.clang-format
-command sudo ln -s -f $PWD/stylua.toml ~/.stylua.toml
-command sudo ln -s -f $PWD/luacheckrc ~/.luacheckrc
+command ln -s -f $PWD/ranger_rc.conf ~/.config/ranger/rc.conf
+command ln -s -f $PWD/clang-format ~/.clang-format
+command ln -s -f $PWD/stylua.toml ~/.stylua.toml
+command ln -s -f $PWD/luacheckrc ~/.luacheckrc
 set yazi_plugins ~/.config/yazi/plugins
 command mkdir -p $yazi_plugins
-command sudo ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
+command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
 if test -d $yazi_plugins/glow.yazi
     cd $yazi_plugins/glow.yazi
     git pull
