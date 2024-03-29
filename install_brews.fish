@@ -1,4 +1,10 @@
-# INFO: Install Fish and Brew, Git, Curl, GCC before execution
+# INFO: Install Fish and Brew before execution
+
+switch (uname)
+        case Linux
+                command sudo apt update; sudo apt upgrade
+                command sudo apt install git gcc curl python3-pip -y
+end
 
 ulimit -n 2048 # Prevent Error: Too many open files
 
@@ -44,6 +50,7 @@ set -l packages \
         glow \
         hexyl \
         exiftool \
+        starship \
 
 brew install $packages
 brew update
@@ -75,8 +82,3 @@ fisher update
 
 #pm2
 npm install pm2 -g
-
-#starship
-if not command -qs starship
-        curl -sS https://starship.rs/install.sh | sh
-end
