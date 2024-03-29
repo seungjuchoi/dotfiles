@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 # INFO: Install Fish and Brew before execution
 
 switch (uname)
@@ -56,29 +58,12 @@ brew install $packages
 brew update
 brew upgrade
 
-pip install virtualfish
 pipx install yt-dlp
-vf install
-exec fish
-vf addplugins compat_aliases projects environment auto_activation
-exec fish
-
-#tmux
-# INFO: Enter tmux and then Hit Ctrl+t, I to install tmux-packges
-if not test -d ~/.tmux/plugins/tpm
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-else
-        command ~/.tmux/plugins/tpm/bin/update_plugins all
-end
-
-#fisher
-set -l packages \
-        jorgebucaran/autopair.fish \
-        PatrickF1/fzf.fish \
-        jorgebucaran/nvm.fish \
-
-fisher install $packages
-fisher update
 
 #pm2
 npm install pm2 -g
+
+#virtualfish
+pip install virtualfish
+vf install
+exec fish -C vf

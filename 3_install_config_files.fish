@@ -48,3 +48,8 @@ if test -d $yazi_plugins/hexyl.yazi
 else
     command git clone git@github.com:Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
 end
+
+tmux new-session -d -s init_config
+tmux source ~/.tmux.conf
+tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
+tmux kill-session
