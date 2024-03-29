@@ -70,7 +70,6 @@ if not test -d ~/.tmux/plugins/tpm
 else
         command ~/.tmux/plugins/tpm/bin/update_plugins all
 end
-tmux source ~/.tmux.conf && tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
 
 #fisher
 set -l packages \
