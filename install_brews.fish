@@ -1,4 +1,4 @@
-# WARN: Install Fish and Brew, Git, Curl before execution
+# WARN: Install Fish and Brew, Git, Curl, GCC before execution
 
 set -l packages \
         zoxide \
