@@ -1,4 +1,6 @@
-# WARN: Install Fish and Brew, Git, Curl, GCC before execution
+# INFO: Install Fish and Brew, Git, Curl, GCC before execution
+
+ulimit -n 2048 # Prevent Error: Too many open files
 
 set -l packages \
         zoxide \
