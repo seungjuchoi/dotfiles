@@ -76,6 +76,7 @@ set -l packages \
         jorgebucaran/autopair.fish \
         PatrickF1/fzf.fish \
         jorgebucaran/nvm.fish \
+
 fisher install $packages
 fisher update
 
