@@ -1,7 +1,11 @@
 #!/usr/bin/env fish
-command brew update; brew upgrade
+if type -q brew
+    command brew update; brew upgrade
+end
 fisher update
-command ~/.tmux/plugins/tpm/bin/update_plugins all
+if type -q tmux
+    command ~/.tmux/plugins/tpm/bin/update_plugins all
+end
 
 set current_folder (pwd)
 set yazi_plugins ~/.config/yazi/plugins
