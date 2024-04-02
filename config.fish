@@ -148,9 +148,7 @@ function _vf_install_essentials --on-event virtualenv_did_create
     pip install pynvim ipython matplotlib
 end
 
-if status is-login
-    if not set -q TMUX
-        tmux attach || tmux new-session
-    end
+if status is-login; and not set -q TMUX; and type -q tmux
+    tmux attach || tmux new-session
 end
 
