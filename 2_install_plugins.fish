@@ -6,6 +6,7 @@ end
 
 #fisher
 set -l packages \
+        jorgebucaran/fisher \
         jorgebucaran/autopair.fish \
         PatrickF1/fzf.fish \
         jorgebucaran/nvm.fish \
