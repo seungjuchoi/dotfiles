@@ -11,48 +11,48 @@ end
 ulimit -n 2048 # Prevent Error: Too many open files
 
 set -l packages \
-        zoxide \
-        fd \
-        ripgrep \
-        nvim \
-        fzf \
-        tmux \
-        pipx \
-        yazi \
-        ranger \
-        fisher \
-        go \
-        rust \
-        lua \
-        luarocks \
-        llvm \
-        neofetch \
         bat \
-        mdcat \
+        exiftool \
         eza \
-        lazygit \
-        npm \
-        gpg \
-        git \
+        fd \
         ffmpeg \
         ffmpegthumbnailer \
-        unar \
-        gnu-sed \
-        jq \
-        yq \
-        jc \
-        noahgorstein/tap/jqp \
-        poppler \
-        tldr \
-        hyperfine \
-        httpie \
-        nmap \
-        ncdu \
-        miller \
+        fisher \
+        fzf \
+        git \
         glow \
+        gnu-sed \
+        go \
+        gpg \
         hexyl \
-        exiftool \
+        httpie \
+        hyperfine \
+        jc \
+        jq \
+        lazygit \
+        llvm \
+        lua \
+        luarocks \
+        mdcat \
+        miller \
+        ncdu \
+        neofetch \
+        nmap \
+        noahgorstein/tap/jqp \
+        npm \
+        nvim \
+        pipx \
+        poppler \
+        ranger \
+        ripgrep \
+        rust \
         starship \
+        tldr \
+        tmux \
+        unar \
+        yazi \
+        yq \
+        zoxide \
 
 brew install $packages
 brew update
