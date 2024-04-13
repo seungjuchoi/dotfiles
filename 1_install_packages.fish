@@ -24,6 +24,9 @@ set -l packages \
         gnu-sed \
         go \
         gpg \
+
+brew install $packages
+set -l packages \
         hexyl \
         httpie \
         hyperfine \
@@ -38,6 +41,9 @@ set -l packages \
         ncdu \
         neofetch \
         nmap \
+
+brew install $packages
+set -l packages \
         noahgorstein/tap/jqp \
         npm \
         nvim \
