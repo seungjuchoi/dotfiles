@@ -15,19 +15,6 @@ end
 if command -qs yazi
     alias ya "WEZTERM_EXECUTABLE=1 yazi"
 end
-if command -qs ranger
-    alias ra ranger
-end
-if command -qs eza
-    alias ll "eza -l --hyperlink --sort modified --icons --git"
-    alias lla "eza -l -a --hyperlink --sort modified --icons --git"
-else if command -qs lsd
-    alias ll "lsd --group-directories-first -l --hyperlink auto -g"
-    alias lla "lsd --group-directories-first -l --hyperlink auto -g -a"
-else if command -qs exa
-        alias ll "exa --group-directories-first -l --icons $argv"
-        alias lla "exa --group-directories-first -l --icons -a $argv"
-end
 if command -qs lazygit
     alias lg lazygit $argv
 end
@@ -40,6 +27,10 @@ end
 if command -qs zoxide
     zoxide init fish | source
 end
+if command -qs thefuck
+    thefuck --alias | source
+end
+
 set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
 set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
 if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib

@@ -32,6 +32,7 @@ set -l packages \
         httpie \
         hyperfine \
         jc \
+        jless \
         jq \
         lazygit \
         llvm \
