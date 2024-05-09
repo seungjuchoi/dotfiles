@@ -55,6 +55,7 @@ set -l packages \
         ripgrep \
         rust \
         starship \
+        thefuck \
         tldr \
         tmux \
         unar \
