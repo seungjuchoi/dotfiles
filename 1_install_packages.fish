@@ -13,6 +13,7 @@ ulimit -n 2048 # Prevent Error: Too many open files
 set -l packages \
         bat \
         btop \
+        difftastic \
         exiftool \
         eza \
         fd \
