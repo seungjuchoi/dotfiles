@@ -28,6 +28,20 @@ vim.o.list = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.o.clipboard = 'unnamedplus'
+if os.getenv("TMUX") then
+  vim.g.clipboard = {
+    name = 'tmux',
+    copy = {
+      ['+'] = 'tmux load-buffer -w -',
+      ['*'] = 'tmux load-buffer -w -',
+    },
+    paste = {
+      ['+'] = 'tmux save-buffer -',
+      ['*'] = 'tmux save-buffer -',
+    },
+    cache_enabled = 1,
+  }
+end
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
