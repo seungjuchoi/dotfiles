@@ -8,9 +8,9 @@ max_height      = 1600
 
 [plugin]
 prepend_previewers = [
-    { mime = "text/csv", exec = "miller_csv"},
-    { name = "*.md", exec = "glow" }
+    { mime = "text/csv", run = "miller_csv"},
+    { name = "*.md", run = "glow" }
 ]
 append_previewers = [
-    { mime = "*", exec = "hexyl"},
+    { mime = "*", run = "hexyl"},
 ]
