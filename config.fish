@@ -46,8 +46,9 @@ if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
     set -gx LIBRARY_PATH "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
 end
 if test -d /opt/homebrew/opt/llvm
-    set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
-    set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
+    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
+    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 end
 if test -d /opt/homebrew/opt/libpq
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/libpq/lib"

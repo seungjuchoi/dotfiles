@@ -2,14 +2,21 @@
 
 # INFO: Install Fish and Brew before execution
 
+if not type -q brew
+        echo Install Brew and insert bin folder to PATH
+        exit
+end
+fish_add_path ~/.local/bin
+
 switch (uname)
         case Linux
                 command sudo apt update; sudo apt upgrade
-                command sudo apt install git gcc curl python3-pip -y
+                command sudo apt install git gcc curl python3-pip xsel -y
 end
 
 ulimit -n 2048 # Prevent Error: Too many open files
 
+brew install gcc
 set -l packages \
         bat \
         exiftool \
