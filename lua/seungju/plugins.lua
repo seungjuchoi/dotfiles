@@ -179,6 +179,7 @@ require("lazy").setup({
   },
   {
     "luk400/vim-jukit",
+    ft = {'python', 'jupyter'},
     config = function()
       -- Set dummy key to disable
       vim.keymap.set("n", "<f13>", "call jukit#send#line()<cr>")
