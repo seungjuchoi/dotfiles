@@ -19,6 +19,8 @@ ulimit -n 2048 # Prevent Error: Too many open files
 brew install gcc
 set -l packages \
         bat \
+        btop \
+        difftastic \
         exiftool \
         eza \
         fd \
@@ -38,6 +40,7 @@ set -l packages \
         httpie \
         hyperfine \
         jc \
+        jless \
         jq \
         lazygit \
         llvm \
@@ -60,6 +63,7 @@ set -l packages \
         ripgrep \
         rust \
         starship \
+        thefuck \
         tldr \
         tmux \
         unar \

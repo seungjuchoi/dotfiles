@@ -192,23 +192,6 @@ require("lazy").setup({
   },
   "lambdalisue/suda.vim",
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {
-      highlight = {
-        groups = {
-          label = "FlashBackdrop",
-        },
-      },
-      modes = {
-        char = {
-          enabled = false
-        }
-      }
-    },
-  },
-  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
