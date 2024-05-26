@@ -28,7 +28,6 @@ k.set('n', "<leader>fh", require('telescope.builtin').help_tags)
 k.set('n', '<leader>fw', require('telescope.builtin').grep_string)
 k.set('n', '<leader>fd', require('telescope.builtin').diagnostics)
 k.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-k.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 k.set('n', '<leader>/', function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
