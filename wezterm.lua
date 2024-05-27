@@ -54,6 +54,14 @@ return {
       mods = 'SHIFT|CTRL',
       action = wezterm.action.MoveTabRelative(1),
     },
+    { key = 'c',
+      mods = 'ALT',
+      action = wezterm.action.CopyTo 'Clipboard'
+    },
+    { key = 'v',
+      mods = 'ALT',
+      action = wezterm.action.PasteFrom 'Clipboard'
+    },
   },
   quick_select_patterns = {
     "\\bcroc\\s+\\S*",
