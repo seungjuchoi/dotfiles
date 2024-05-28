@@ -61,6 +61,12 @@ require("lazy").setup({
       "rafamadriz/friendly-snippets",
     },
   },
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  },
   "tpope/vim-sleuth",
   {
     "akinsho/bufferline.nvim",
