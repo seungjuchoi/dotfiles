@@ -10,7 +10,8 @@ end
 set -x DISPLAY :1
 
 if command -qs i3lock
-        command i3lock &
+        command i3lock -c 000000
+
 else
         echo Not found i3lock
         exit
