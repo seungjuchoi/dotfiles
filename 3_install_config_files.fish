@@ -40,6 +40,10 @@ if not test -d $yazi_plugins/hexyl.yazi
     command git clone https://github.com/Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
 end
 
+if test (uname) = "Linux"
+    command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
+end
+
 tmux new-session -d -s init_config
 tmux source ~/.tmux.conf
 tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'

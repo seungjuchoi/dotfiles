@@ -10,9 +10,13 @@ fish_add_path ~/.local/bin
 
 switch (uname)
         case Linux
-                command sudo apt update; sudo apt upgrade
-                command sudo apt install git gcc curl python3-pip xsel -y
 end
+
+if test (uname) = "Linux"
+        command sudo apt update; sudo apt upgrade
+        command sudo apt install git gcc curl python3-pip xsel i3lock -y
+end
+
 
 ulimit -n 2048 # Prevent Error: Too many open files
 
