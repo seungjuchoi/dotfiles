@@ -35,6 +35,9 @@ end
 if command -qs thefuck
     thefuck --alias | source
 end
+if command -qs atuin
+    atuin init fish | source
+end
 
 set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
 set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
