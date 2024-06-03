@@ -36,7 +36,7 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs atuin
-    atuin init fish | source
+    atuin init fish --disable-ctrl-r | source
 end
 
 if test (uname) = "Darwin"
