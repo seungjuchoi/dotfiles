@@ -39,8 +39,10 @@ if command -qs atuin
     atuin init fish | source
 end
 
-set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
-set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
+if test (uname) = "Darwin"
+    set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
+    set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
+end
 if test -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
     set -gx LIBRARY_PATH "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
 end
@@ -56,6 +58,10 @@ end
 if test -d /opt/homebrew/opt/opencv@3
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/opencv@3/lib"
    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/opencv@3/include"
+end
+
+if type -q brew
+    eval "$(brew shellenv)"
 end
 
 # python
