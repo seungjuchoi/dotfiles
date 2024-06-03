@@ -39,6 +39,8 @@ end
 if not test -d $yazi_plugins/hexyl.yazi
     command git clone https://github.com/Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
 end
+command mkdir -p ~/.config/atuin
+command ln -s -f $PWD/atuin.toml ~/.config/atuin/config.toml
 
 if test (uname) = "Linux"
     command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
