@@ -44,6 +44,12 @@ if test (uname) = "Linux"
     command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
 end
 
+git config --global core.quotepath false
+git config --global core.autocrlf input
+git config --global core.editor nvim
+git config --global diff.tool nvimdiff
+git config --global difftool.nvimdiff.cmd 'nvim -d "$LOCAL" "$REMOTE"'
+
 tmux new-session -d -s init_config
 tmux source ~/.tmux.conf
 tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
