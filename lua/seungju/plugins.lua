@@ -178,6 +178,15 @@ require("lazy").setup({
     end,
   },
   {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {}
+  },
+  {
     "luk400/vim-jukit",
     ft = {'python', 'jupyter'},
     config = function()
@@ -286,5 +295,21 @@ require("lazy").setup({
     opts = {
       theme = "catppuccin-latte",
     },
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+      event = "VeryLazy",
+      config = function()
+        local home = vim.fn.expand("$HOME")
+        require("chatgpt").setup({
+          api_key_cmd = "gpg --decrypt " .. home .. "/secret.gpg"
+        })
+      end,
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "folke/trouble.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
   },
 })

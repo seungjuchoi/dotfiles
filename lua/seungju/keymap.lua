@@ -60,3 +60,7 @@ k.set('i', '<M-BS>', "<C-W>")
 
 k.set('n', '<C-RIGHT>', ":vertical resize +2<CR>", {silent = true})
 k.set('n', '<C-LEFT>', ":vertical resize -2<CR>", {silent = true})
+
+k.set({'n','v'}, '<leader>xe', ":ChatGPTEditWithInstruction<CR>", {silent = true})
+k.set('n', '<leader>xx', ":ChatGPT<CR>", {silent = true})
+k.set('n', '<leader>xc', ":ChatGPTCompleteCode<CR>", {silent = true})
