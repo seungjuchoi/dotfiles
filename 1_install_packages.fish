@@ -63,7 +63,6 @@ set -l packages \
         nvim \
         pipx \
         poppler \
-        ranger \
         ripgrep \
         rust \
         starship \
