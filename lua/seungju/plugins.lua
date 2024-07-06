@@ -184,11 +184,11 @@ require("lazy").setup({
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {}
+    opts = {},
   },
   {
     "luk400/vim-jukit",
-    ft = {'python', 'jupyter', 'json'},
+    ft = { "python", "jupyter", "json" },
     config = function()
       -- Set dummy key to disable
       vim.keymap.set("n", "<f13>", "call jukit#send#line()<cr>")
@@ -274,7 +274,8 @@ require("lazy").setup({
   {
     "rcarriga/nvim-dap-ui",
     dependencies = {
-      "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
     },
   },
   {
@@ -298,18 +299,25 @@ require("lazy").setup({
   },
   {
     "jackMort/ChatGPT.nvim",
-      event = "VeryLazy",
-      config = function()
-        local home = vim.fn.expand("$HOME")
-        require("chatgpt").setup({
-          api_key_cmd = "gpg --decrypt " .. home .. "/secret.gpg"
-        })
-      end,
-      dependencies = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "folke/trouble.nvim",
-        "nvim-telescope/telescope.nvim"
-      }
+    event = "VeryLazy",
+    config = function()
+      local home = vim.fn.expand("$HOME")
+      require("chatgpt").setup({
+        api_key_cmd = "gpg --decrypt " .. home .. "/secret.gpg",
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  {
+    "oysandvik94/curl.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {},
   },
 })
