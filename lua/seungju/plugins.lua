@@ -298,22 +298,6 @@ require("lazy").setup({
     },
   },
   {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      local home = vim.fn.expand("$HOME")
-      require("chatgpt").setup({
-        api_key_cmd = "gpg --decrypt " .. home .. "/secret.gpg",
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  {
     "oysandvik94/curl.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -353,5 +337,17 @@ require("lazy").setup({
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+        "onsails/lspkind.nvim"
+    },
+    config = function()
+        require("codeium").setup({
+        })
+    end
   },
 })
