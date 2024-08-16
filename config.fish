@@ -151,8 +151,12 @@ end
 function _vf_install_essentials --on-event virtualenv_did_create
     echo Install Essential Packages..
     pip install -U pip
-    pip install pynvim ipython matplotlib
+    # pip install pynvim ipython matplotlib
 end
+
+# set -gx DISPLAY :1
+alias playback 'python /usr/local/zed/samples/recording/playback/mono/python/svo_playback.py --input_svo_file'
+alias export_svo 'python /usr/local/zed/samples/recording/export/svo/python/svo_export.py'
 
 if status is-login; and not set -q TMUX; and type -q tmux
     tmux attach || tmux new-session

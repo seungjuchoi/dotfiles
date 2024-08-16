@@ -59,6 +59,7 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "onsails/lspkind.nvim",
     },
   },
   {
@@ -343,7 +344,6 @@ require("lazy").setup({
     dependencies = {
         "nvim-lua/plenary.nvim",
         "hrsh7th/nvim-cmp",
-        "onsails/lspkind.nvim"
     },
     config = function()
         require("codeium").setup({
