@@ -17,3 +17,6 @@ disabled = true
 
 [env_var.DISPLAY]
 format = "[🖥️]($env_value) "
+
+[env_var.https_proxy]
+format = "[🚪]($env_value) "

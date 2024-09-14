@@ -20,6 +20,7 @@ command ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
 command ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command ln -s -f $PWD/pipi.fish ~/.config/fish/functions/pipi.fish
+command ln -s -f $PWD/prx.fish ~/.config/fish/functions/prx.fish
 command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
