@@ -19,4 +19,7 @@ disabled = true
 format = "[🖥️]($env_value) "
 
 [env_var.https_proxy]
-format = "[🚪]($env_value) "
+format = "[🚪env]($env_value) "
+
+[env_var.PROXYCHAINS_CONF_FILE]
+format = "[🚪chain]($env_value) "
