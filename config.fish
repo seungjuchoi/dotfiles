@@ -1,6 +1,5 @@
 set fish_greeting ""
 set -gx MANPAGER "less -I"
-set -gx PROXYCHAINS_QUIET_MODE 1
 set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish # place first cuz linuxbrew
 if test -f $LOCAL_FISH_CONF
     source $LOCAL_FISH_CONF
