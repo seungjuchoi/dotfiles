@@ -1,0 +1,21 @@
+services:
+  ssh-tunnels:
+    image: alpine
+    restart: unless-stopped
+    container_name: ssh-tunnels
+    stop_grace_period: 1s
+    volumes:
+      - ./entrypoint.sh:/root/entrypoint.sh
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.ssh/known_hosts:/root/.ssh/known_hosts:ro
+    environment:
+      SSH_TUNNELS: |
+        # remote comment
+        # L:3001:localhost:3001:remote-hostname # comment usage
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        apk add --no-cache openssh autossh && /root/entrypoint.sh
+    command: []
+    network_mode: "host"
