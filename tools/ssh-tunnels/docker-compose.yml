@@ -10,8 +10,9 @@ services:
       - ~/.ssh/known_hosts:/root/.ssh/known_hosts:ro
     environment:
       SSH_TUNNELS: |
-        # remote comment
+        # Uncomment the below lines to use
         # L:3001:localhost:3001:remote-hostname # comment usage
+        # D:3213:remote-hostname # comment usage
     entrypoint:
       - /bin/sh
       - -c
