@@ -10,7 +10,6 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-  # 'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
   'exec-and-forget borders active_color=0xffffa500 inactive_color=0xff494d64 width=5.0'
 ]
 
@@ -131,7 +130,7 @@ alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 # alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
 # alt-b = 'workspace B'
-# alt-c = 'workspace C'
+alt-c = 'exec-and-forget open -n -a /Applications/Google\ Chrome.app'
 # alt-d = 'workspace D'
 # alt-e = 'workspace E'
 alt-f = 'fullscreen'
@@ -139,7 +138,7 @@ alt-f = 'fullscreen'
 # alt-i = 'workspace I'
 # alt-m = 'workspace M'
 # alt-n = 'workspace N'
-alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-o = 'exec-and-forget open -n -a /Applications/Obsidian.app'
 # alt-p = 'workspace P'
 alt-q = 'close'
 # alt-r = 'workspace R'
@@ -147,7 +146,7 @@ alt-q = 'close'
 # alt-t = 'workspace T'
 # alt-u = 'workspace U'
 # alt-v = 'workspace V'
-# alt-w = 'workspace W'
+alt-w = 'exec-and-forget open -n -a /Applications/WezTerm.app'
 # alt-x = 'workspace X'
 alt-shift-x = 'enable off'
 # alt-y = 'workspace Y'
@@ -223,3 +222,16 @@ alt-shift-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.MobileSMS'
+    run = ['layout floating', 'move-node-to-workspace 1']  # The callback itself
+[[on-window-detected]]
+    if.app-id = 'com.apple.iCal'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-name-regex-substring = 'PowerPoint'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Shottr'
+    run = 'layout floating'
