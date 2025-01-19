@@ -203,6 +203,13 @@ alt-shift-up = 'resize height -50'
 alt-shift-right = ' resize width +50'
 alt-shift-b = ' balance-sizes'
 
+alt-shift-f = 'layout floating tiling'
+
+ctrl-alt-shift-h = 'join-with left'
+ctrl-alt-shift-j = 'join-with down'
+ctrl-alt-shift-k = 'join-with up'
+ctrl-alt-shift-l = 'join-with right'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
@@ -234,4 +241,7 @@ shift-down = ['volume set 0', 'mode main']
     run = 'layout floating'
 [[on-window-detected]]
     if.app-name-regex-substring = 'Shottr'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.xiaomi.mihome'
     run = 'layout floating'
