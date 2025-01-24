@@ -155,7 +155,9 @@ end
 alias playback 'python /usr/local/zed/samples/recording/playback/mono/python/svo_playback.py --input_svo_file'
 alias export_svo 'python /usr/local/zed/samples/recording/export/svo/python/svo_export.py'
 
-if status is-login; and not set -q TMUX; and type -q tmux
-    tmux attach || tmux new-session
-end
+# if status is-login; and not set -q TMUX; and type -q tmux
+#     tmux attach || tmux new-session
+# end
 
+alias ta 'tmux attach || tmux new-session'
+alias tx 'tmux detach'
