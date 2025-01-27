@@ -197,12 +197,6 @@ cmd-alt-h = [] # Disable "hide others"
 alt-shift-semicolon = 'mode service'
 alt-shift-quote = 'mode service'
 
-alt-shift-left ='resize width -50'
-alt-shift-down = ' resize height +50'
-alt-shift-up = 'resize height -50'
-alt-shift-right = ' resize width +50'
-alt-shift-b = ' balance-sizes'
-
 alt-shift-f = 'layout floating tiling'
 
 ctrl-alt-shift-h = 'join-with left'
@@ -226,9 +220,11 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-down = 'volume down'
-up = 'volume up'
-shift-down = ['volume set 0', 'mode main']
+left ='resize width -50'
+down = ' resize height +50'
+up = 'resize height -50'
+right = ' resize width +50'
+b = ' balance-sizes'
 
 [[on-window-detected]]
     if.app-id = 'com.apple.MobileSMS'
