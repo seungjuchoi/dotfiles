@@ -43,12 +43,19 @@
   atab (multi alt tab)
   newtab (multi ctl t)
   close (multi ctl w)
+  n1 (multi ctl 1)
+  n2 (multi ctl 2)
+  n3 (multi ctl 3)
+  n4 (multi ctl 4)
+  n5 (multi ctl 5)
+  n6 (multi ctl 6)
+  n7 (multi ctl 7)
+  n8 (multi ctl 8)
+  n9 (multi ctl 9)
 )
 
-;; TODO: Alt 누른 상태에서 Tab 연타
-;; TODO: Meta 로 넘어가면 Meta 함께 눌리도록
 (deflayer meta
-  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 _ _ _ _
   @atab @newtab @close
   _ @all _ _ _ _
   @cpy @paste
