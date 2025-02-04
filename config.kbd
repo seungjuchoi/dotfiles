@@ -4,23 +4,53 @@
 
 (defsrc
   esc 1 2 3 4 5 6 7 8 9 0 - + bspc
-  caps h j k l
+  tab t w
+  caps a h j k l
+  c v
+  met
 )
 
-(defalias
+(defalias ;; base-layer
   goext (layer-while-held extend)
+  gometa (layer-while-held meta)
   tld (fork esc S-grv (sft rsft))
   bsp (fork h (unmod bspc) (ctl))
   layext (tap-hold-press 200 200 slck @goext)
   bspdel (fork bspc (unmod del) (ctl))
+  laymeta (tap-hold-press 200 200 met @gometa)
 )
 
 (deflayer base
   @tld 1 2 3 4 5 6 7 8 9 0 - + @bspdel
-  @layext @bsp _ _ _
+  _ _ _
+  @layext _ @bsp _ _ _
+  _ _
+  @laymeta
 )
 
 (deflayer extend
   _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
-  _ left down up right
+  _ _ _
+  _ _ left down up right
+  _ _
+  _
+)
+
+(defalias ;; meta-layer
+  cpy (multi ctl ins)
+  paste (multi sft ins)
+  all (multi ctl a)
+  atab (multi alt tab)
+  newtab (multi ctl t)
+  close (multi ctl w)
+)
+
+;; TODO: Alt 누른 상태에서 Tab 연타
+;; TODO: Meta 로 넘어가면 Meta 함께 눌리도록
+(deflayer meta
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  @atab @newtab @close
+  _ @all _ _ _ _
+  @cpy @paste
+  _
 )
