@@ -3,7 +3,7 @@
 )
 
 (defsrc
-  esc 1 2 3 4 5 6 7 8 9 0 - +
+  esc 1 2 3 4 5 6 7 8 9 0 - + bspc
   caps h j k l
 )
 
@@ -12,14 +12,15 @@
   tld (fork esc S-grv (sft rsft))
   bsp (fork h (unmod bspc) (ctl))
   layext (tap-hold-press 200 200 slck @goext)
+  bspdel (fork bspc (unmod del) (ctl))
 )
 
 (deflayer base
-  @tld 1 2 3 4 5 6 7 8 9 0 - +
+  @tld 1 2 3 4 5 6 7 8 9 0 - + @bspdel
   @layext @bsp _ _ _
 )
 
 (deflayer extend
-  _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
+  _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
   _ left down up right
 )
