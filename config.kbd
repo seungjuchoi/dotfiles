@@ -6,7 +6,7 @@
   esc 1 2 3 4 5 6 7 8 9 0 - + bspc
   tab q t w
   caps a h j k l
-  c v
+  z c v
   met
 )
 
@@ -24,7 +24,7 @@
   @tld 1 2 3 4 5 6 7 8 9 0 - + @bspdel
   _ _ _ _
   @layext _ @bsp _ _ _
-  _ _
+  _ _ _
   @laymeta
 )
 
@@ -32,13 +32,14 @@
   _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
   _ _ _ _
   _ _ left down up right
-  _ _
+  _ _ _
   _
 )
 
 (defalias ;; meta-layer
   cpy (multi ctl ins)
   paste (multi sft ins)
+  undo (multi ctl z)
   all (multi ctl a)
   atab (multi alt tab)
   newtab (multi ctl t)
@@ -59,6 +60,6 @@
   _ @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 _ _ _ @delfwd
   @atab _ @newtab @close
   _ @all _ _ _ _
-  @cpy @paste
+  @undo @cpy @paste
   _
 )
