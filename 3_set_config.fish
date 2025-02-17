@@ -29,7 +29,6 @@ command ln -s -f $PWD/luacheckrc ~/.luacheckrc
 set yazi_plugins ~/.config/yazi/plugins
 command mkdir -p $yazi_plugins
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
-command ln -s -f $PWD/aerospace.toml ~/.aerospace.toml
 if not test -d $yazi_plugins/glow.yazi
     command git clone https://github.com/Reledia/glow.yazi.git $yazi_plugins/glow.yazi
 end
@@ -42,6 +41,9 @@ end
 if test (uname) = "Linux"
     command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
 end
+command ln -s -f $PWD/aerospace.toml ~/.aerospace.toml
+command mkdir -p ~/.config/kanata
+command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
 
 git config --global core.quotepath false
 git config --global core.autocrlf input
