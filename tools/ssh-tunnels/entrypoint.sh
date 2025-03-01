@@ -1,6 +1,10 @@
 #!/bin/sh
 
-MONITOR_PORT=20000
+MONITOR_PORT=20100
+
+chmod 700 /root/.ssh
+chmod 600 /root/.ssh/*
+chmod 644 /root/.ssh/*.pub
 
 echo "$SSH_TUNNELS" | while IFS= read -r tunnel; do
   [[ -z "$tunnel" || "$tunnel" =~ ^[[:space:]]*# ]] && continue
@@ -17,6 +21,8 @@ echo "$SSH_TUNNELS" | while IFS= read -r tunnel; do
       SSH_HOST=$(echo "$tunnel" | cut -d':' -f5)
       ;;
     D)
+      DESTINATION_HOST=""
+      DESTINATION_PORT=""
       SSH_HOST=$(echo "$tunnel" | cut -d':' -f3)
       ;;
     *)
@@ -30,12 +36,15 @@ echo "$SSH_TUNNELS" | while IFS= read -r tunnel; do
   case "$TYPE" in
     L) # Local port forwarding
       autossh -M "$MONITOR_PORT" -N -L "${LOCAL_PORT}:${DESTINATION_HOST}:${DESTINATION_PORT}" "${SSH_HOST}" &
+      echo ">> Local port forwarding Done"
       ;;
     R) # Remote port forwarding
       autossh -M "$MONITOR_PORT" -N -R "${LOCAL_PORT}:${DESTINATION_HOST}:${DESTINATION_PORT}" "${SSH_HOST}" &
+      echo ">> Remote port forwarding Done"
       ;;
     D) # Dynamic port forwarding (SOCKS)
       autossh -M "$MONITOR_PORT" -N -D "${LOCAL_PORT}" "${SSH_HOST}" &
+      echo ">> Dynamic port forwarding Done"
       ;;
   esac
   MONITOR_PORT=$((MONITOR_PORT + 2))
