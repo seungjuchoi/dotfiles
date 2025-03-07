@@ -11,7 +11,7 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   'exec-and-forget borders active_color=0xffffa500 inactive_color=0xff494d64 width=5.0',
-  'exec-and-forget sketchybar'
+  'exec-and-forget sketchybar --reload',
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -258,4 +258,7 @@ b = ' balance-sizes'
     run = 'layout floating'
 [[on-window-detected]]
     if.app-id = 'com.eltima.elmedia6.mas'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.aone.keka'
     run = 'layout floating'
