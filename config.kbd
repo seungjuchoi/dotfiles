@@ -7,7 +7,7 @@
   tab q t w
   caps a h j k l
   z x c v m
-  met
+  met spc
 )
 
 (defalias ;; base-layer
@@ -25,15 +25,18 @@
   _ _ _ _
   @layext _ @bsp _ _ _
   _ _ _ _ _
-  @laymeta
+  @laymeta _
+)
+(defalias ;; extend-layer
+  clipboard (multi met v)
 )
 
 (deflayer extend
   _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
   _ _ _ _
   _ _ left down up right
-  _ _ _ _ _
-  _
+  _ _ _ @clipboard _
+  _ _
 )
 
 (defalias ;; meta-layer
@@ -46,6 +49,7 @@
   atab (multi alt tab)
   newtab (multi ctl t)
   close (multi ctl w)
+  keyspc (multi ctl spc)
   n1 (multi ctl 1)
   n2 (multi ctl 2)
   n3 (multi ctl 3)
@@ -64,5 +68,5 @@
   @atab _ @newtab @close
   _ @all _ _ _ @focloc
   @undo @cut @cpy @paste @keym
-  _
+  _ @keyspc
 )
