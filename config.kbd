@@ -40,8 +40,8 @@
 )
 
 (defalias ;; meta-layer
-  cpy (multi ctl ins)
-  paste (multi sft ins)
+  cpy (multi ctl c)
+  paste (multi ctl v)
   cut (multi ctl x)
   undo (multi ctl z)
   all (multi ctl a)

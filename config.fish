@@ -61,6 +61,8 @@ if type -q brew
     eval "$(brew shellenv)"
 end
 
+fzf_configure_bindings --variables=\e\cv
+
 # python
 set -gx PYTHONBREAKPOINT "ipdb.set_trace"
 
