@@ -161,5 +161,12 @@ alias export_svo 'python /usr/local/zed/samples/recording/export/svo/python/svo_
 #     tmux attach || tmux new-session
 # end
 
-alias ta 'tmux attach || tmux new-session'
+function ta
+  if test -z "$TMUX"
+    tmux attach || tmux new-session $argv
+  else
+    echo "Already inside a tmux session"
+  end
+end
+
 alias tx 'tmux detach'
