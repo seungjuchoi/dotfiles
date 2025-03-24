@@ -215,8 +215,8 @@ ctrl-alt-shift-l = 'join-with right'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-backspace = ['close-all-windows-but-current', 'mode main']
+# f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+# backspace = ['close-all-windows-but-current', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
@@ -226,10 +226,10 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-left ='resize width -50'
-down = ' resize height +50'
-up = 'resize height -50'
-right = ' resize width +50'
+h ='resize width -50'
+j = ' resize height +50'
+k = 'resize height -50'
+l = ' resize width +50'
 b = ' balance-sizes'
 
 [[on-window-detected]]
