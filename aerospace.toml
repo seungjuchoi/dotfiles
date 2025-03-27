@@ -245,6 +245,9 @@ b = ' balance-sizes'
     if.app-name-regex-substring = 'Shottr'
     run = 'layout floating'
 [[on-window-detected]]
+    if.app-id = 'com.anthropic.claudefordesktop'
+    run = 'layout floating'
+[[on-window-detected]]
     if.app-id = 'com.xiaomi.mihome'
     run = 'layout floating'
 [[on-window-detected]]
