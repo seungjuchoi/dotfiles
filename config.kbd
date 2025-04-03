@@ -50,7 +50,7 @@
   atab (multi alt tab)
   newtab (multi ctl t)
   close (multi ctl w)
-  keyspc (multi ctl spc)
+  keyspc (multi ctl alt spc)
   n1 (multi ctl 1)
   n2 (multi ctl 2)
   n3 (multi ctl 3)
