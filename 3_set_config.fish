@@ -44,6 +44,9 @@ end
 command ln -s -f $PWD/aerospace.toml ~/.aerospace.toml
 command mkdir -p ~/.config/kanata
 command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
+command mkdir -p ~/.config/mpv
+command ln -s -f $PWD/mpv.conf ~/.config/mpv/mpv.conf
+command ln -s -f $PWD/mpv_input.conf ~/.config/mpv/input.conf
 
 git config --global core.quotepath false
 git config --global core.autocrlf input
