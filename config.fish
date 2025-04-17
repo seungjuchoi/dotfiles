@@ -153,13 +153,46 @@ function _vf_install_essentials --on-event virtualenv_did_create
     pip install pynvim ipython matplotlib
 end
 
-# set -gx DISPLAY :1
-alias playback 'python /usr/local/zed/samples/recording/playback/mono/python/svo_playback.py --input_svo_file'
-alias export_svo 'python /usr/local/zed/samples/recording/export/svo/python/svo_export.py'
+function gifer --description 'Convert MP4 to high-quality GIF with customizable fps and scale'
+    # Default values
+    set -l fps 24
+    set -l scale 720
 
-# if status is-login; and not set -q TMUX; and type -q tmux
-#     tmux attach || tmux new-session
-# end
+    # Parse arguments
+    set -l options 'f/fps=' 's/scale='
+    argparse $options -- $argv
+
+    # Override defaults if options are provided
+    if set -q _flag_fps
+        set fps $_flag_fps
+    end
+
+    if set -q _flag_scale
+        set scale $_flag_scale
+    end
+
+    # Check if input file is provided
+    if test (count $argv) -lt 1
+        echo "Usage: gifer [options] input.mp4 [output.gif]"
+        echo "Options:"
+        echo "  -f/--fps=NUMBER    Set frames per second (default: 24)"
+        echo "  -s/--scale=NUMBER  Set width in pixels (default: 720)"
+        return 1
+    end
+
+    set -l input $argv[1]
+    set -l output
+
+    # If output filename is not provided, use input filename with .gif extension
+    if test (count $argv) -lt 2
+        set output (string replace -r '\.mp4$' '.gif' $input)
+    else
+        set output $argv[2]
+    end
+
+    echo "Converting $input to $output with fps=$fps and scale=$scale..."
+    ffmpeg -i $input -vf "fps=$fps,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" $output
+end
 
 function ta
   if test -z "$TMUX"
