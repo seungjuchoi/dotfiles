@@ -272,5 +272,8 @@ b = ' balance-sizes'
     if.app-name-regex-substring = 'mpv'
     run = 'layout floating'
 [[on-window-detected]]
+    if.app-id = 'com.apple.ActivityMonitor'
+    run = 'layout floating'
+[[on-window-detected]]
     if.app-id = 'com.carriez.rustdesk'
     run = 'layout floating'
