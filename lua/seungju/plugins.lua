@@ -234,7 +234,7 @@ require("lazy").setup({
       vim.keymap.set({ "n", "v" }, "<leader>mp", function()
         conform.format({
           lsp_fallback = true,
-          timeout_ms = 500,
+          timeout_ms = 1500,
         })
       end)
     end,
