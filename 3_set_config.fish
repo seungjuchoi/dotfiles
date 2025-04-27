@@ -24,8 +24,6 @@ command ln -s -f $PWD/prx.fish ~/.config/fish/functions/prx.fish
 command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
-command ln -s -f $PWD/stylua.toml ~/.stylua.toml
-command ln -s -f $PWD/luacheckrc ~/.luacheckrc
 set yazi_plugins ~/.config/yazi/plugins
 command mkdir -p $yazi_plugins
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
