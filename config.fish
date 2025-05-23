@@ -156,7 +156,7 @@ end
 function gifer --description 'Convert MP4 to high-quality GIF with customizable fps and scale'
     # Default values
     set -l fps 24
-    set -l scale 720
+    set -l scale 1080
 
     # Parse arguments
     set -l options 'f/fps=' 's/scale='
