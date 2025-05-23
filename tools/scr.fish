@@ -1,8 +1,8 @@
 #!/usr/bin/env fish
 
 # 필요한 패키지:
-# Linux: tesseract-ocr tesseract-ocr-kor scrot xclip libnotify-bin
-# macOS: brew install tesseract tesseract-lang
+# Linux: python3-pip scrot xclip libnotify-bin
+# macOS: uv tool install easyocr
 
 # 필요한 디렉토리 생성
 mkdir -p ~/screenshots
@@ -14,13 +14,6 @@ set OUTPUT_PATH ~/screenshots/$FILENAME.txt
 
 # OS 확인
 set OS (uname)
-
-# Tesseract 데이터 디렉토리 설정 (OS별)
-if test "$OS" = "Linux"
-    set -x TESSDATA_PREFIX /usr/share/tesseract-ocr/4.00/tessdata
-else if test "$OS" = "Darwin" # macOS
-    set -x TESSDATA_PREFIX /opt/homebrew/share/tessdata
-end
 
 # 스크린샷 촬영 (선택 영역) - OS별
 if test "$OS" = "Linux"
@@ -41,11 +34,11 @@ else if test "$OS" = "Darwin" # macOS
     end
 end
 
-# OCR 실행 (한국어와 영어 둘 다 인식)
-tesseract "$SCREENSHOT_PATH" (string replace .txt "" $OUTPUT_PATH) -l kor+eng
+# OCR 실행 (한국어와 영어 둘 다 인식) - EasyOCR 사용
+easyocr -f "$SCREENSHOT_PATH" -l en ko --detail 0 > "$OUTPUT_PATH"
 
 # OCR 결과를 클립보드에 복사 - OS별
-if test -f "$OUTPUT_PATH"
+if test -f "$OUTPUT_PATH" && test -s "$OUTPUT_PATH"
     # 추출된 텍스트 읽기
     set EXTRACTED_TEXT (cat "$OUTPUT_PATH")
     
