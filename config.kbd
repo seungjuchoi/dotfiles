@@ -37,7 +37,7 @@
   _ _ _ _
   _ _ @scr_odr left down up right _
   _ _ _ @clipboard _
-  _ ret
+  _ _
 )
 
 (defalias ;; meta-layer
