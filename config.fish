@@ -66,6 +66,12 @@ fzf_configure_bindings --variables=\e\cv
 # python
 set -gx PYTHONBREAKPOINT "ipdb.set_trace"
 
+if test -z "$VIRTUAL_ENV"; and begin; type -q python || type -q ipython || type -q ipython3; end
+    set_color yellow
+    echo "⚠️  Warning: Global Python executables detected outside of virtual environment"
+    set_color normal
+end
+
 function pipi
     if test (count $argv) -eq 0
         echo "Error: No package provided. Please provide at least one package to install."
