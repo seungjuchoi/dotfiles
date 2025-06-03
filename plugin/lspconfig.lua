@@ -39,8 +39,7 @@ local on_attach = function(_, bufnr)
   end, { desc = "Format current buffer with LSP" })
 end
 
-require("mason").setup()
-require("mason-lspconfig").setup()
+-- require("mason-lspconfig").setup()
 local mason_tool_installer = require("mason-tool-installer")
 
 local servers = {
@@ -48,6 +47,7 @@ local servers = {
   gopls = {},
   pyright = {},
   rust_analyzer = {},
+  ruff = {},
   ts_ls = {},
   marksman = {},
   lua_ls = {
@@ -68,14 +68,27 @@ require("neodev").setup({
   },
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
+  handlers = {
+    function(server_name)
+      local server = servers[server_name] or {}
+      -- This handles overriding only values explicitly passed
+      -- by the server configuration above. Useful when disabling
+      -- certain features of an LSP (for example, turning off formatting for ts_ls)
+      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      require('lspconfig')[server_name].setup(server)
+    end,
+  },
 })
 
 mason_tool_installer.setup({

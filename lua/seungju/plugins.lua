@@ -15,11 +15,12 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      {"mason-org/mason.nvim", opts = {}},
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "folke/neodev.nvim",
+      "saghen/blink.cmp"
     },
   },
   {
@@ -267,7 +268,7 @@ require("lazy").setup({
   {
     "jay-babu/mason-nvim-dap.nvim",
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "mfussenegger/nvim-dap",
       "theHamsta/nvim-dap-virtual-text",
     },
