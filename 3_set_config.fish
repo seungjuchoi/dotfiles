@@ -45,6 +45,9 @@ command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
 command mkdir -p ~/.config/mpv
 command ln -s -f $PWD/mpv.conf ~/.config/mpv/mpv.conf
 command ln -s -f $PWD/mpv_input.conf ~/.config/mpv/input.conf
+if test -f ~/.config/fish/config_local.fish
+    command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish
+end
 
 git config --global core.quotepath false
 git config --global core.autocrlf input
