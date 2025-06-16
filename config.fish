@@ -35,6 +35,9 @@ end
 if command -qs thefuck
     thefuck --alias | source
 end
+if command -qs claude
+    alias cl "claude $argv"
+end
 
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
