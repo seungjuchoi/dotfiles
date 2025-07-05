@@ -126,7 +126,12 @@ Import-Module posh-git
 
 # zoxide 초기화
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (zoxide init powershell | Out-String) })
+    try {
+        Invoke-Expression (& { (zoxide init powershell | Out-String) })
+    } catch {
+        Write-Host "zoxide 초기화 실패: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "수동으로 다음 명령어를 실행하세요: Invoke-Expression (& { (zoxide init powershell | Out-String) })" -ForegroundColor Yellow
+    }
 }
 
 # starship 프롬프트 초기화
