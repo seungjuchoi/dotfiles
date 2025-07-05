@@ -161,6 +161,11 @@ if (Get-Command bat -ErrorAction SilentlyContinue) {
     Set-Alias -Name cat -Value bat
 }
 
+# lazygit 별칭 (lg)
+if (Get-Command lazygit -ErrorAction SilentlyContinue) {
+    Set-Alias -Name lg -Value lazygit
+}
+
 # 편리한 함수들
 function .. { Set-Location .. }
 function ... { Set-Location ../.. }
