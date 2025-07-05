@@ -18,7 +18,6 @@ Write-Host "필수 모듈을 설치합니다..." -ForegroundColor Yellow
 $modules = @(
     "PSReadLine",
     "Terminal-Icons",
-    "z",
     "PSFzf",
     "posh-git"
 )
@@ -120,17 +119,25 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
 # 모듈 import
 Import-Module Terminal-Icons
-Import-Module z
 Import-Module PSFzf
 Import-Module posh-git
 
-# zoxide 초기화
+# zoxide 초기화 (PowerShell z 모듈과 충돌 방지)
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     try {
+        # PowerShell z 모듈 제거 (zoxide와 충돌 방지)
+        Remove-Module z -Force -ErrorAction SilentlyContinue
+        Remove-Item Function:\z -ErrorAction SilentlyContinue
+        
+        # zoxide 초기화
         Invoke-Expression (& { (zoxide init powershell | Out-String) })
+        
+        Write-Host "zoxide 초기화 완료" -ForegroundColor Green
     } catch {
         Write-Host "zoxide 초기화 실패: $($_.Exception.Message)" -ForegroundColor Red
-        Write-Host "수동으로 다음 명령어를 실행하세요: Invoke-Expression (& { (zoxide init powershell | Out-String) })" -ForegroundColor Yellow
+        Write-Host "수동으로 다음 명령어를 실행하세요:" -ForegroundColor Yellow
+        Write-Host "Remove-Module z -Force -ErrorAction SilentlyContinue" -ForegroundColor White
+        Write-Host "Invoke-Expression (& { (zoxide init powershell | Out-String) })" -ForegroundColor White
     }
 }
 
