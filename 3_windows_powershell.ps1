@@ -129,15 +129,15 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
         Remove-Module z -Force -ErrorAction SilentlyContinue
         Remove-Item Function:\z -ErrorAction SilentlyContinue
         
-        # zoxide 초기화
-        Invoke-Expression (& { (zoxide init powershell | Out-String) })
+        # zoxide 초기화 (올바른 방법)
+        Invoke-Expression (& { (zoxide init powershell --cmd z | Out-String) })
         
         Write-Host "zoxide 초기화 완료" -ForegroundColor Green
     } catch {
         Write-Host "zoxide 초기화 실패: $($_.Exception.Message)" -ForegroundColor Red
         Write-Host "수동으로 다음 명령어를 실행하세요:" -ForegroundColor Yellow
         Write-Host "Remove-Module z -Force -ErrorAction SilentlyContinue" -ForegroundColor White
-        Write-Host "Invoke-Expression (& { (zoxide init powershell | Out-String) })" -ForegroundColor White
+        Write-Host "Invoke-Expression (& { (zoxide init powershell --cmd z | Out-String) })" -ForegroundColor White
     }
 }
 
