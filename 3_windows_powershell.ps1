@@ -122,25 +122,6 @@ Import-Module Terminal-Icons
 Import-Module PSFzf
 Import-Module posh-git
 
-# zoxide 초기화 (PowerShell z 모듈과 충돌 방지)
-if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    try {
-        # PowerShell z 모듈 제거 (zoxide와 충돌 방지)
-        Remove-Module z -Force -ErrorAction SilentlyContinue
-        Remove-Item Function:\z -ErrorAction SilentlyContinue
-        
-        # zoxide 초기화 (올바른 방법)
-        Invoke-Expression (& { (zoxide init powershell --cmd z | Out-String) })
-        
-        Write-Host "zoxide 초기화 완료" -ForegroundColor Green
-    } catch {
-        Write-Host "zoxide 초기화 실패: $($_.Exception.Message)" -ForegroundColor Red
-        Write-Host "수동으로 다음 명령어를 실행하세요:" -ForegroundColor Yellow
-        Write-Host "Remove-Module z -Force -ErrorAction SilentlyContinue" -ForegroundColor White
-        Write-Host "Invoke-Expression (& { (zoxide init powershell --cmd z | Out-String) })" -ForegroundColor White
-    }
-}
-
 # starship 프롬프트 초기화
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     Invoke-Expression (&starship init powershell)
@@ -178,53 +159,10 @@ if (Get-Command lazygit -ErrorAction SilentlyContinue) {
     Set-Alias -Name lg -Value lazygit
 }
 
-# 편리한 함수들
-function .. { Set-Location .. }
-function ... { Set-Location ../.. }
-function .... { Set-Location ../../.. }
 
-function mkcd($dir) {
-    New-Item -ItemType Directory -Path $dir -Force
-    Set-Location $dir
-}
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
-function Get-PublicIP {
-    (Invoke-WebRequest -Uri "https://api.ipify.org" -UseBasicParsing).Content
-}
 
-function Get-Weather($city = "Seoul") {
-    (Invoke-WebRequest -Uri "https://wttr.in/$city" -UseBasicParsing).Content
-}
-
-function Start-Here {
-    explorer .
-}
-
-function Get-DirSize {
-    param([string]$Path = ".")
-    Get-ChildItem -Path $Path -Recurse -File | Measure-Object -Property Length -Sum | 
-    ForEach-Object { [math]::Round($_.Sum / 1MB, 2) }
-}
-
-# 시스템 정보
-function sysinfo {
-    Write-Host "시스템 정보:" -ForegroundColor Green
-    Write-Host "OS: $(Get-WmiObject -Class Win32_OperatingSystem | Select-Object -ExpandProperty Caption)"
-    Write-Host "버전: $(Get-WmiObject -Class Win32_OperatingSystem | Select-Object -ExpandProperty Version)"
-    Write-Host "아키텍처: $(Get-WmiObject -Class Win32_OperatingSystem | Select-Object -ExpandProperty OSArchitecture)"
-    Write-Host "메모리: $([math]::Round((Get-WmiObject -Class Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 2)) GB"
-    Write-Host "PowerShell: $($PSVersionTable.PSVersion)"
-}
-
-# 환영 메시지
-Write-Host "PowerShell 환경이 준비되었습니다! " -ForegroundColor Green -NoNewline
-Write-Host "🚀" -ForegroundColor Yellow
-Write-Host "사용 가능한 명령어:" -ForegroundColor Yellow
-Write-Host "  sysinfo  - 시스템 정보 표시"
-Write-Host "  mkcd     - 디렉토리 생성 후 이동"
-Write-Host "  ..       - 상위 디렉토리로 이동"
-Write-Host "  z <path> - 빠른 디렉토리 이동 (zoxide)"
-Write-Host ""
 '@
 
 # 프로필에 내용 덮어쓰기
