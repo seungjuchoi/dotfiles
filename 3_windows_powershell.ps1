@@ -235,82 +235,54 @@ Write-Host "Starship 프롬프트를 설정합니다..." -ForegroundColor Yellow
 $starshipConfig = @'
 # Starship 설정
 format = """
-[](#9A348E)\
-$username\
-[](bg:#DA627D fg:#9A348E)\
 $directory\
-[](fg:#DA627D bg:#FCA17D)\
 $git_branch\
 $git_status\
-[](fg:#FCA17D bg:#86BBD8)\
+$python\
 $nodejs\
 $rust\
 $golang\
-$php\
-$python\
-[](fg:#86BBD8 bg:#06969A)\
-$docker_context\
-[](fg:#06969A bg:#33658A)\
-$time\
-[ ](fg:#33658A)\
+$character\
 """
 
-[username]
-show_always = true
-style_user = "bg:#9A348E"
-style_root = "bg:#9A348E"
-format = '[  $user ]($style)'
-
 [directory]
-style = "bg:#DA627D"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+style = "bold cyan"
+format = "[$dirname]($style)"
+truncation_length = 0
+truncate_to_repo = false
 
 [git_branch]
-symbol = ""
-style = "bg:#FCA17D"
-format = '[ $symbol $branch ]($style)'
+symbol = " "
+style = "bold purple"
+format = '[$symbol$branch]($style)'
 
 [git_status]
-style = "bg:#FCA17D"
-format = '[$all_status$ahead_behind ]($style)'
-
-[nodejs]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[rust]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[golang]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[php]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+style = "bold red"
+format = '[$all_status$ahead_behind]($style)'
 
 [python]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = " "
+style = "bold green"
+format = '[$symbol$version($virtualenv)]($style)'
 
-[docker_context]
-symbol = ""
-style = "bg:#06969A"
-format = '[ $symbol $context ]($style)'
+[nodejs]
+symbol = " "
+style = "bold green"
+format = '[$symbol$version]($style)'
 
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:#33658A"
-format = '[ ♥ $time ]($style)'
+[rust]
+symbol = " "
+style = "bold orange"
+format = '[$symbol$version]($style)'
+
+[golang]
+symbol = " "
+style = "bold blue"
+format = '[$symbol$version]($style)'
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
 '@
 
 $starshipConfigPath = "$env:USERPROFILE\.config\starship.toml"
