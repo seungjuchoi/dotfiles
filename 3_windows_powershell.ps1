@@ -247,8 +247,8 @@ $character\
 
 [directory]
 style = "bold cyan"
-format = "[$dirname]($style)"
-truncation_length = 0
+format = "[$dirname]($style) "
+truncation_length = 1
 truncate_to_repo = false
 
 [git_branch]
