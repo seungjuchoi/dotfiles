@@ -67,7 +67,8 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
         "starship",
         "lazygit",
         "neovim",
-        "git"
+        "git",
+        "mingw"
     )
 
     foreach ($tool in $tools) {
@@ -93,6 +94,20 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
     Write-Host "   - fzf: https://github.com/junegunn/fzf/releases" -ForegroundColor White
 }
 
+# 5-1. uv 설치 (공식 스크립트 사용)
+Write-Host "uv 패키지 매니저를 설치합니다..." -ForegroundColor Yellow
+if (!(Get-Command uv -ErrorAction SilentlyContinue)) {
+    try {
+        Write-Host "설치 중: uv" -ForegroundColor Cyan
+        irm https://astral.sh/uv/install.ps1 | iex
+    }
+    catch {
+        Write-Host "  uv 설치 실패: $($_.Exception.Message)" -ForegroundColor Red
+    }
+} else {
+    Write-Host "  uv 이미 설치됨" -ForegroundColor Green
+}
+
 # 6. PowerShell 프로필 구성
 Write-Host "PowerShell 프로필을 구성합니다..." -ForegroundColor Yellow
 
@@ -104,6 +119,11 @@ $OutputEncoding = [System.Text.UTF8Encoding]::new()
 chcp 65001 > $null
 
 # PowerShell 프로필 설정
+
+# uv 자동 완성 설정
+if (Get-Command uv -ErrorAction SilentlyContinue) {
+    Invoke-Expression (&uv generate-completions --shell powershell | Out-String)
+}
 
 # PSReadLine 설정 (Emacs 키바인딩)
 Set-PSReadLineOption -EditMode Emacs
