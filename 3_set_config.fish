@@ -24,18 +24,7 @@ command ln -s -f $PWD/prx.fish ~/.config/fish/functions/prx.fish
 command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
-set yazi_plugins ~/.config/yazi/plugins
-command mkdir -p $yazi_plugins
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
-if not test -d $yazi_plugins/glow.yazi
-    command git clone https://github.com/Reledia/glow.yazi.git $yazi_plugins/glow.yazi
-end
-if not test -d $yazi_plugins/miller_csv.yazi
-    command git clone https://github.com/Reledia/miller.yazi.git $yazi_plugins/miller_csv.yazi
-end
-if not test -d $yazi_plugins/hexyl.yazi
-    command git clone https://github.com/Reledia/hexyl.yazi $yazi_plugins/hexyl.yazi
-end
 if test (uname) = "Linux"
     command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
 end

@@ -8,9 +8,10 @@ max_height      = 1600
 
 [plugin]
 prepend_previewers = [
-    { mime = "text/csv", run = "miller_csv"},
-    { name = "*.md", run = "glow" }
+    { name = "*.csv", run = 'piper -- bat -p --color=always "$1"'},
+    { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'},
+    { name = "*/", run  = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"'}
 ]
 append_previewers = [
-    { mime = "*", run = "hexyl"},
+    { name = "*", run = 'piper -- hexyl --border=none --terminal-width=$w "$1"'}
 ]

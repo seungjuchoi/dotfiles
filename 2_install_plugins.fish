@@ -1,10 +1,10 @@
 #!/usr/bin/env fish
-#tmux
+# tmux
 if not test -d ~/.tmux/plugins/tpm
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 end
 
-#fisher
+# fisher
 set -l packages \
         jorgebucaran/fisher \
         jorgebucaran/autopair.fish \
@@ -13,5 +13,8 @@ set -l packages \
 
 fisher install $packages
 
-#virtualfish
+# virtualfish
 vf addplugins compat_aliases projects environment auto_activation
+
+# yazi
+command ya pkg add yazi-rs/plugins:piper
