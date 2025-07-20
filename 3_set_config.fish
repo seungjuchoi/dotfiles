@@ -15,8 +15,6 @@ end
 for f in **/*.vim
     command ln -s -f $PWD/$f $xdg_path/$f
 end
-command mkdir -p ~/.config/alacritty
-command ln -s -f $PWD/alacritty.yml ~/.config/alacritty/alacritty.yml
 command ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command ln -s -f $PWD/pipi.fish ~/.config/fish/functions/pipi.fish
@@ -25,9 +23,6 @@ command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
-if test (uname) = "Linux"
-    command ln -s -f $PWD/lock_screen.fish ~/.lock_screen.fish
-end
 command ln -s -f $PWD/aerospace.toml ~/.aerospace.toml
 command mkdir -p ~/.config/kanata
 command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
