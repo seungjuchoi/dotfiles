@@ -17,4 +17,4 @@ fisher install $packages
 vf addplugins compat_aliases projects environment auto_activation
 
 # yazi
-command ya pkg add yazi-rs/plugins:piper
+command ya pack --add yazi-rs/plugins:piper
