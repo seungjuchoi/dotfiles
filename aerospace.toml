@@ -59,8 +59,8 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 8
-inner.vertical =   8
+inner.horizontal = 9
+inner.vertical =   9
 outer.left =       6
 outer.bottom =     6
 outer.top =        6
