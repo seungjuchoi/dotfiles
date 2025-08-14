@@ -14,7 +14,7 @@ end
 
 if test (uname) = "Linux"
         command sudo apt update; sudo apt upgrade
-        command sudo apt install git gcc curl python3-pip xsel i3lock -y
+        command sudo apt install git gcc curl python3-pip xsel i3lock xbindkeys xdotool -y
 end
 
 
