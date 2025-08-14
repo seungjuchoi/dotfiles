@@ -5,7 +5,7 @@
 (defsrc
   esc 1 2 3 4 5 6 7 8 9 0 - + bspc
   tab q t w
-  caps a s h j k l ret
+  caps a s h j k l ; / ret
   z x c v m
   met spc
 )
@@ -18,12 +18,13 @@
   laycaps (tap-hold-press 200 200 slck @gocaps)
   bspdel (fork bspc (unmod del) (ctl))
   laymeta (tap-hold-press 200 200 met @gometa)
+  ctrlslash (fork / esc (ctl))
 )
 
 (deflayer base
   @tld 1 2 3 4 5 6 7 8 9 0 - + @bspdel
   _ _ _ _
-  @laycaps _ _ @bsp _ _ _ _
+  @laycaps _ _ @bsp _ _ _ _ @ctrlslash _
   _ _ _ _ _
   @laymeta _
 )
@@ -35,7 +36,7 @@
 (deflayer caps
   bspc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
   _ _ _ _
-  _ _ @scr_odr left down up right _
+  _ _ @scr_odr left down up right _ @ctrlslash _
   _ _ _ @clipboard _
   _ _
 )
@@ -67,7 +68,7 @@
 (deflayer meta
   grv @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 _ _ _ @delfwd
   @atab _ @newtab @close
-  _ @all _ _ _ _ @focloc _
+  _ @all _ _ _ _ @focloc _ @ctrlslash _
   @undo @cut @cpy @paste @keym
   _ @keyspc
 )
