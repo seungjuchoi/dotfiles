@@ -36,7 +36,7 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs claude
-    alias cl "claude $argv"
+    alias cl "claude --dangerously-skip-permissions $argv"
 end
 
 if test (uname) = "Darwin"
