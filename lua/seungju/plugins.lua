@@ -348,7 +348,7 @@ require("lazy").setup({
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "claude",
+      provider = "azure",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -358,6 +358,17 @@ require("lazy").setup({
               temperature = 0.75,
               max_tokens = 20480,
             },
+        },
+        azure = {
+          endpoint = os.getenv("AZURE_OPENAI_ENDPOINT_GPT5_MINI"),
+          model = "gpt-5-mini",
+          deployment = "gpt-5-mini",
+          api_version = "2024-12-01-preview",
+          timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+            temperature = 1,
+            reasoning_effort = "medium",
+          },
         },
       },
     },
