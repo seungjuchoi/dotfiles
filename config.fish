@@ -39,6 +39,10 @@ if command -qs claude
     alias cl "claude --dangerously-skip-permissions $argv"
 end
 
+if command -qs gemini
+    alias ge "gemini -y $argv"
+end
+
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
     set -gx OBSIDIAN_PATH /Users/(whoami)/Library/Mobile\ Documents/iCloud~md~obsidian/Documents
