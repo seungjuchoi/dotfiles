@@ -38,9 +38,11 @@ end
 if command -qs claude
     alias cl "claude --dangerously-skip-permissions $argv"
 end
-
 if command -qs gemini
     alias ge "gemini -y $argv"
+end
+if command -qs crush
+    alias cr "crush -y $argv"
 end
 
 if test (uname) = "Darwin"
