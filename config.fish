@@ -44,6 +44,9 @@ end
 if command -qs crush
     alias cr "crush -y $argv"
 end
+if command -qs opencode
+    alias op "opencode $argv"
+end
 
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs

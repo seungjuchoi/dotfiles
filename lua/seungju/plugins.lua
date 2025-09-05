@@ -348,7 +348,7 @@ require("lazy").setup({
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "azure",
+      provider = "claude-code",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -368,6 +368,24 @@ require("lazy").setup({
           extra_request_body = {
             temperature = 1,
             reasoning_effort = "medium",
+          },
+        },
+      },
+      acp_providers = {
+        ["gemini-cli"] = {
+          command = "gemini",
+          args = { "--experimental-acp" },
+          env = {
+            NODE_NO_WARNINGS = "1",
+            GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+          },
+        },
+        ["claude-code"] = {
+          command = "npx",
+          args = { "acp-claude-code" },
+          env = {
+            NODE_NO_WARNINGS = "1",
+            ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
           },
         },
       },
