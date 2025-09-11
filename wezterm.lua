@@ -18,6 +18,12 @@ return {
       action = wezterm.action.DisableDefaultAssignment,
     },
     {
+      key = 'Enter',
+      mods = 'SHIFT',
+      action = wezterm.action{SendString="\x1b\r"},
+    },
+
+    {
       key = 'LeftArrow',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.DisableDefaultAssignment,
