@@ -37,6 +37,7 @@ if command -qs thefuck
 end
 if command -qs claude
     alias cl "claude --dangerously-skip-permissions $argv"
+    alias clp "claude --dangerously-skip-permissions -p $argv"
 end
 if command -qs gemini
     alias ge "gemini -y $argv"
