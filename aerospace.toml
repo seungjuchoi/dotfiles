@@ -229,7 +229,7 @@ b = ' balance-sizes'
 
 [[on-window-detected]]
     if.app-id = 'com.apple.MobileSMS'
-    run = ['layout floating', 'move-node-to-workspace 1']  # The callback itself
+    run = 'layout floating'
 [[on-window-detected]]
     if.app-id = 'com.apple.iCal'
     run = 'layout floating'
