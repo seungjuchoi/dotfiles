@@ -41,7 +41,7 @@ if command -qs claude
 end
 if command -qs gemini
     alias ge "gemini -y $argv"
-    alias gep "gemini -y $argv"
+    alias gep "gemini -y -p $argv"
 end
 if command -qs crush
     alias cr "crush -y $argv"
