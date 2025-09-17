@@ -40,8 +40,8 @@ if command -qs claude
     alias clp "claude --dangerously-skip-permissions -p $argv"
 end
 if command -qs gemini
-    alias ge "gemini -y $argv"
-    alias gep "gemini -y -p $argv"
+    alias ge "gemini -y -i $argv"
+    alias gep "gemini -y $argv"
 end
 if command -qs crush
     alias cr "crush -y $argv"
