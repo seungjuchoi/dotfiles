@@ -36,20 +36,20 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs claude
-    alias cl "claude --dangerously-skip-permissions $argv"
-    alias clp "claude --dangerously-skip-permissions -p $argv"
+    alias cl "claude --dangerously-skip-permissions"
+    alias clp "claude --dangerously-skip-permissions -p"
 end
 if command -qs gemini
-    alias ge "gemini -y -i $argv"
-    alias gep "gemini -y $argv"
+    alias ge "gemini -y -i"
+    alias gep "gemini -y"
 end
 if command -qs crush
-    alias cr "crush -y $argv"
-    alias crp "crush run $argv"
+    alias cr "crush -y"
+    alias crp "crush run"
 end
 if command -qs opencode
-    alias op "opencode $argv"
-    alias opp "opencode run $argv"
+    alias op "opencode"
+    alias opp "opencode run"
 end
 
 if test (uname) = "Darwin"
