@@ -231,6 +231,9 @@ b = ' balance-sizes'
     if.app-id = 'com.apple.MobileSMS'
     run = 'layout floating'
 [[on-window-detected]]
+    if.app-id = 'com.apple.reminders'
+    run = 'layout floating'
+[[on-window-detected]]
     if.app-id = 'com.apple.iCal'
     run = 'layout floating'
 [[on-window-detected]]
