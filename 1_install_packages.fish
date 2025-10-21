@@ -50,10 +50,9 @@ set -l packages \
         llvm \
         lua \
         luarocks \
-        mdcat \
         miller \
         ncdu \
-        neofetch \
+        fastfetch \
         nmap \
 
 brew install $packages
@@ -67,7 +66,7 @@ set -l packages \
         rust \
         starship \
         thefuck \
-        tldr \
+        tealdeer \
         tmux \
         unar \
         yazi \
