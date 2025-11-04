@@ -35,7 +35,7 @@ echo "$SSH_TUNNELS" | while IFS= read -r tunnel; do
 
   case "$TYPE" in
     L) # Local port forwarding
-      autossh -M "$MONITOR_PORT" -N -L "${LOCAL_PORT}:${DESTINATION_HOST}:${DESTINATION_PORT}" "${SSH_HOST}" &
+      autossh -M "$MONITOR_PORT" -N -L "0.0.0.0:${LOCAL_PORT}:${DESTINATION_HOST}:${DESTINATION_PORT}" "${SSH_HOST}" &
       echo ">> Local port forwarding Done"
       ;;
     R) # Remote port forwarding
@@ -43,7 +43,7 @@ echo "$SSH_TUNNELS" | while IFS= read -r tunnel; do
       echo ">> Remote port forwarding Done"
       ;;
     D) # Dynamic port forwarding (SOCKS)
-      autossh -M "$MONITOR_PORT" -N -D "${LOCAL_PORT}" "${SSH_HOST}" &
+      autossh -M "$MONITOR_PORT" -N -D "0.0.0.0:${LOCAL_PORT}" "${SSH_HOST}" &
       echo ">> Dynamic port forwarding Done"
       ;;
   esac

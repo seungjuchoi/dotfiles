@@ -6,11 +6,12 @@ services:
     restart: unless-stopped
     container_name: ssh-tunnels
     stop_grace_period: 1s
+    ports:
+      # - "3001:3001"
+      # - "29123:29123"
     environment:
       SSH_TUNNELS: |
         # Uncomment the below lines to use
         # L:3001:localhost:3001:remote-hostname # comment usage
         # D:29123:remote-hostname # SOCKS5 연결
     command: []
-    network_mode: "host"
-
