@@ -41,7 +41,7 @@ if command -qs claude
 end
 if command -qs gemini
     alias ge "gemini -y"
-    alias gep "gemini -y"
+    alias gep "gemini"
 end
 if command -qs crush
     alias cr "crush -y"
