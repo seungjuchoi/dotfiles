@@ -40,7 +40,7 @@ if command -qs claude
     alias clp "claude --dangerously-skip-permissions -p"
 end
 if command -qs gemini
-    alias ge "gemini -y -i"
+    alias ge "gemini -y"
     alias gep "gemini -y"
 end
 if command -qs crush
