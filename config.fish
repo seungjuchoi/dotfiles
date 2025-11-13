@@ -18,7 +18,7 @@ if command -qs eza
 end
 
 if command -qs yazi
-    alias yz "WEZTERM_EXECUTABLE=1 yazi"
+    alias yz "yazi"
 end
 if command -qs lazygit
     alias lg lazygit $argv
