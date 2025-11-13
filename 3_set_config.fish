@@ -29,6 +29,9 @@ command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
 command mkdir -p ~/.config/mpv
 command ln -s -f $PWD/mpv.conf ~/.config/mpv/mpv.conf
 command ln -s -f $PWD/mpv_input.conf ~/.config/mpv/input.conf
+command mkdir -p ~/.config/ghostty
+command ln -s -f $PWD/ghostty_config ~/.config/ghostty/config
+
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish
 end

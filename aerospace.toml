@@ -147,7 +147,7 @@ alt-q = 'close'
 # alt-t = 'workspace T'
 # alt-u = 'workspace U'
 # alt-v = 'workspace V'
-alt-w = 'exec-and-forget open -n -a /Applications/WezTerm.app'
+alt-w = 'exec-and-forget open -n -a /Applications/Ghostty.app'
 alt-x = 'exec-and-forget open -n -a /Applications/Firefox.app'
 alt-shift-x = 'enable off'
 # alt-y = 'workspace Y'
@@ -274,4 +274,7 @@ b = ' balance-sizes'
     run = 'layout floating'
 [[on-window-detected]]
     if.app-id = 'com.carriez.rustdesk'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = "com.mitchellh.ghostty"
     run = 'layout floating'
