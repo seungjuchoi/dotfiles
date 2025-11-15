@@ -62,3 +62,4 @@ window-padding-y = 10
 
 # Terminal
 term = xterm-256color
+keybind = shift+enter=text:\x1b\r
