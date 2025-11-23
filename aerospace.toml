@@ -278,3 +278,6 @@ b = ' balance-sizes'
 [[on-window-detected]]
     if.app-id = "com.mitchellh.ghostty"
     run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = "com.koreapolyschool.canbon"
+    run = 'layout floating'
