@@ -1,4 +1,5 @@
 (defcfg
+  danger-enable-cmd yes
   process-unmapped-keys yes
 )
 
@@ -13,7 +14,11 @@
 (defalias ;; base-layer
   gocaps (layer-while-held caps)
   gometa (layer-while-held meta)
-  tld (fork esc S-grv (sft rsft))
+  super_esc (fork
+    (multi esc (cmd fcitx5-remote -c))  ;; shift 없을 때: esc + fcitx off
+    S-grv                                ;; shift 있을 때: ~ (tilde)
+    (sft rsft)
+  )
   bsp (fork h (unmod bspc) (ctl))
   laycaps (tap-hold-press 200 200 slck @gocaps)
   bspdel (fork bspc (unmod del) (ctl))
@@ -22,7 +27,7 @@
 )
 
 (deflayer base
-  @tld 1 2 3 4 5 6 7 8 9 0 - + @bspdel
+  @super_esc 1 2 3 4 5 6 7 8 9 0 - + @bspdel
   _ _ _ _
   @laycaps _ _ @bsp _ _ _ _ @ctrlslash _
   _ _ _ _ _
