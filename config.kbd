@@ -8,7 +8,7 @@
   tab q t w
   caps a s h j k l ; / ret
   z x c v m
-  met spc
+  met spc left down up right
 )
 
 (defalias ;; base-layer
@@ -31,7 +31,7 @@
   _ _ _ _
   @laycaps _ _ @bsp _ _ _ _ @ctrlslash _
   _ _ _ _ _
-  @laymeta _
+  @laymeta _ _ _ _ _
 )
 (defalias ;; caps-layer
   clipboard (multi ctl sft alt 9)
@@ -43,7 +43,7 @@
   _ _ _ _
   _ _ @scr_odr left down up right _ @ctrlslash _
   _ _ _ @clipboard _
-  _ _
+  _ _ left down up right
 )
 
 (defalias ;; meta-layer
@@ -73,7 +73,7 @@
 (deflayer meta
   grv @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 _ _ _ @delfwd
   @atab _ @newtab @close
-  _ @all _ _ _ _ @focloc _ @ctrlslash _
+  _ @all _ _ _ _ _ _ @ctrlslash _
   @undo @cut @cpy @paste @keym
-  _ @keyspc
+  _ @keyspc home _ _ end
 )
