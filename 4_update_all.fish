@@ -7,5 +7,5 @@ if type -q tmux
     command ~/.tmux/plugins/tpm/bin/update_plugins all
 end
 if type -q ya
-    command ya pack --upgrade
+    command ya pkg upgrade
 end
