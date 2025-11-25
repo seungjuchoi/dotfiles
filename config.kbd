@@ -67,13 +67,13 @@
   n8 (multi ctl 8)
   n9 (multi ctl 9)
   delfwd (multi sft home del)
-  focloc (multi ctl l)
+  ctrl_l (multi ctl l)
 )
 
 (deflayer meta
   grv @n1 @n2 @n3 @n4 @n5 @n6 @n7 @n8 @n9 _ _ _ @delfwd
   @atab _ @newtab @close
-  _ @all _ _ _ _ _ _ @ctrlslash _
+  _ @all _ _ _ _ @ctrl_l _ @ctrlslash _
   @undo @cut @cpy @paste @keym
   _ @keyspc home _ _ end
 )
