@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-uv self update
 if type -q brew
     command brew update; brew upgrade
 end
