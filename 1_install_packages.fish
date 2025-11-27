@@ -60,7 +60,6 @@ set -l packages \
         noahgorstein/tap/jqp \
         npm \
         nvim \
-        pipx \
         poppler \
         ripgrep \
         rust \
@@ -77,12 +76,7 @@ brew install $packages
 brew update
 brew upgrade
 
-pipx install yt-dlp
+uv tool install yt-dlp
 
 #pm2
 npm install pm2 -g
-
-#virtualfish
-pip install virtualfish
-vf install
-exec fish -C vf
