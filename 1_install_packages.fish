@@ -17,7 +17,6 @@ if test (uname) = "Linux"
         command sudo apt install git gcc curl python3-pip xsel i3lock xbindkeys xdotool -y
 end
 
-
 ulimit -n 2048 # Prevent Error: Too many open files
 
 brew install gcc
@@ -63,6 +62,7 @@ set -l packages \
         poppler \
         ripgrep \
         rust \
+        uv \
         starship \
         thefuck \
         tealdeer \
