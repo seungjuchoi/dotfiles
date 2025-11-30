@@ -23,6 +23,9 @@ end
 if command -qs lazygit
     alias lg lazygit $argv
 end
+if command -qs lazydocker
+    alias lk lazydocker $argv
+end
 if command -qs convmv
     alias convmv "convmv -r -f utf8 -t utf8 --notest --nfc $argv"
 end
