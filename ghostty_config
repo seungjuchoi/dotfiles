@@ -70,3 +70,8 @@ keybind = ctrl+four=goto_tab:4
 keybind = ctrl+five=goto_tab:5
 keybind = ctrl+six=goto_tab:6
 keybind = ctrl+enter=text:\r
+
+
+macos-icon = official
+
+
