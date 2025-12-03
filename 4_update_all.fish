@@ -9,3 +9,6 @@ end
 if type -q ya
     command ya pkg upgrade
 end
+if type -q nvim
+    nvim --headless "+Lazy! sync" +qa
+end
