@@ -13,9 +13,6 @@ set -l packages \
 
 fisher install $packages
 
-# virtualfish
-vf addplugins compat_aliases projects environment auto_activation
-
 # yazi
 command ya pkg add yazi-rs/plugins:piper
 command ya pkg add KKV9/compress

@@ -7,14 +7,11 @@ if not type -q brew
         exit
 end
 fish_add_path ~/.local/bin
-
-switch (uname)
-        case Linux
-end
+fish_add_path (brew --prefix)/bin
 
 if test (uname) = "Linux"
         command sudo apt update; sudo apt upgrade
-        command sudo apt install git gcc curl python3-pip xsel i3lock xbindkeys xdotool -y
+        command sudo apt install git gcc curl xsel xbindkeys xdotool -y
 end
 
 ulimit -n 2048 # Prevent Error: Too many open files
