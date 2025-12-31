@@ -12,6 +12,7 @@ fish_add_path (brew --prefix)/bin
 if test (uname) = "Linux"
         command sudo apt update; sudo apt upgrade
         command sudo apt install git gcc curl xsel xbindkeys xdotool -y
+        command sudo apt install fonts-nanum fonts-noto-cjk -y
 end
 
 ulimit -n 2048 # Prevent Error: Too many open files
