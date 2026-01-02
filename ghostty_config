@@ -54,7 +54,7 @@ font-family = Monoplex KR Medium
 font-family = Hack Nerd Font
 
 # Appearance
-theme = tokyonight
+theme = TokyoNight
 shell-integration-features = no-cursor
 cursor-style = block
 window-padding-x = 10
