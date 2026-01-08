@@ -14,6 +14,7 @@ if test (uname) = "Linux"
         command sudo apt install -y git gcc curl xsel xbindkeys xdotool
         command sudo apt install -y fonts-nanum fonts-noto-cjk
         command sudo apt install -y fcitx5 fcitx5-hangul
+        command curl -fsSL https://bun.sh/install | bash
 end
 
 ulimit -n 2048 # Prevent Error: Too many open files
