@@ -79,6 +79,8 @@ brew upgrade
 uv tool install yt-dlp
 
 # npm prefix
-mkdir ~/.npm-global
+if not test -d ~/.npm-global
+    mkdir -p ~/.npm-global
+end
 npm config set prefix '~/.npm-global'
 fish_add_path ~/.npm-global/bin
