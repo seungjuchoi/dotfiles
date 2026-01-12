@@ -74,10 +74,12 @@ end
 if test -d /opt/homebrew/opt/opencv@3
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/opencv@3/lib"
    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/opencv@3/include"
+   set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/opencv@3/lib/pkgconfig" $PKG_CONFIG_PATH
 end
 if test -d /opt/homebrew/opt/curl
    set -gx LDFLAGS $LDFLAGS "-L/opt/homebrew/opt/curl/lib"
    set -gx CPPFLAGS $CPPFLAGS "-I/opt/homebrew/opt/curl/include"
+   set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/curl/lib/pkgconfig" $PKG_CONFIG_PATH
 end
 
 if type -q brew
