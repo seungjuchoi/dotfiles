@@ -78,5 +78,7 @@ brew upgrade
 
 uv tool install yt-dlp
 
-#pm2
-npm install pm2 -g
+# npm prefix
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+fish_add_path ~/.npm-global/bin
