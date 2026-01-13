@@ -1,4 +1,5 @@
 set fish_greeting ""
+set -gx COLORTERM truecolor
 set -gx MANPAGER "less -I"
 set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish # place first cuz linuxbrew
 if test -f $LOCAL_FISH_CONF
