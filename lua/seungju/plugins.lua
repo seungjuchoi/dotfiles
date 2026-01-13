@@ -348,7 +348,8 @@ require("lazy").setup({
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "azure",
+      -- provider = "azure",
+      provider = "gemini-cli",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -401,7 +402,6 @@ require("lazy").setup({
       "stevearc/dressing.nvim", -- for input provider dressing
       "folke/snacks.nvim", -- for input provider snacks
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
