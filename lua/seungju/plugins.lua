@@ -352,15 +352,6 @@ require("lazy").setup({
       -- provider = "gemini-cli",
       provider = "gemini",
       providers = {
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-sonnet-4-20250514",
-          timeout = 30000, -- Timeout in milliseconds
-            extra_request_body = {
-              temperature = 0.75,
-              max_tokens = 20480,
-            },
-        },
         azure = {
           endpoint = os.getenv("AZURE_OPENAI_ENDPOINT_GPT5_MINI"),
           model = "gpt-5-mini",
@@ -374,6 +365,11 @@ require("lazy").setup({
         },
         gemini = {
           model = "gemini-3-pro-preview",
+          extra_request_body = {
+            generationConfig = {
+              temperature = 1,
+            },
+          },
         },
       },
       acp_providers = {
@@ -383,14 +379,6 @@ require("lazy").setup({
           env = {
             NODE_NO_WARNINGS = "1",
             GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
-          },
-        },
-        ["claude-code"] = {
-          command = "npx",
-          args = { "acp-claude-code" },
-          env = {
-            NODE_NO_WARNINGS = "1",
-            ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
           },
         },
       },
