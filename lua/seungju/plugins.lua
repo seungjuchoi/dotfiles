@@ -349,7 +349,8 @@ require("lazy").setup({
       instructions_file = "avante.md",
       -- for example
       -- provider = "azure",
-      provider = "gemini-cli",
+      -- provider = "gemini-cli",
+      provider = "gemini",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -370,6 +371,9 @@ require("lazy").setup({
             temperature = 1,
             reasoning_effort = "medium",
           },
+        },
+        gemini = {
+          model = "gemini-3-pro-preview",
         },
       },
       acp_providers = {
