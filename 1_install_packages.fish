@@ -34,6 +34,7 @@ set -l packages \
         git \
         glow \
         gnu-sed \
+        glab \
         go \
         gpg \
 
