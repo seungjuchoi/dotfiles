@@ -55,6 +55,9 @@ if command -qs opencode
     alias op "opencode"
     alias opp "opencode run"
 end
+if command -qs codex
+    alias co "codex --full-auto"
+end
 
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
