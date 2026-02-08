@@ -14,6 +14,8 @@ if test (uname) = "Linux"
         command sudo apt install -y git gcc curl xsel xbindkeys xdotool
         command sudo apt install -y fonts-nanum fonts-noto-cjk
         command sudo apt install -y fcitx5 fcitx5-hangul
+        command sudo apt install -y luarocks
+        command sudo luarocks install luacheck
         command curl -fsSL https://bun.sh/install | bash
 end
 
