@@ -58,6 +58,9 @@ end
 if command -qs codex
     alias co "codex --full-auto"
 end
+if command -qs pi
+    alias pix "pi -p"
+end
 
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
