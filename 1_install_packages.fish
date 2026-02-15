@@ -64,6 +64,7 @@ set -l packages \
         nvim \
         poppler \
         ripgrep \
+        rlwrap \
         rust \
         uv \
         starship \
