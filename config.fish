@@ -42,6 +42,8 @@ end
 if command -qs claude
     alias cl "claude --dangerously-skip-permissions"
     alias clp "claude --dangerously-skip-permissions -p"
+    alias rcl "rlwrap claude --dangerously-skip-permissions"
+    alias rclp "rlwrap claude --dangerously-skip-permissions -p"
 end
 if command -qs gemini
     alias ge "gemini -y"
