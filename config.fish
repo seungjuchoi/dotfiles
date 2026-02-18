@@ -58,7 +58,7 @@ if command -qs opencode
     alias opp "opencode run"
 end
 if command -qs codex
-    alias co "codex --full-auto"
+    alias co "codex --dangerously-bypass-approvals-and-sandbox"
 end
 if command -qs pi
     alias pix "pi -p"
