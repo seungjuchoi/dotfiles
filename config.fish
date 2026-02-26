@@ -66,6 +66,9 @@ end
 if command -qs pi
     alias pix "pi -p"
 end
+if command -qs openclaw
+    alias oc "openclaw tui"
+end
 
 if test (uname) = "Darwin"
     set -gx ICLOUD_PATH /Users/(whoami)/Library/Mobile\ Documents/com~apple~CloudDocs
