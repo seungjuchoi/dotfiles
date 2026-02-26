@@ -1,5 +1,8 @@
 set fish_greeting ""
 set -gx COLORTERM truecolor
+set -gx LANG en_US.UTF-8
+set -gx LC_CTYPE en_US.UTF-8
+set -gx LC_ALL en_US.UTF-8
 set -gx MANPAGER "less -I"
 set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish # place first cuz linuxbrew
 if test -f $LOCAL_FISH_CONF
