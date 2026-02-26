@@ -101,6 +101,7 @@ if type -q brew
     eval "$(brew shellenv)"
 end
 
+set -g fzf_fd_opts --exclude "Library/Mobile Documents"
 fzf_configure_bindings --variables=\e\cv
 
 # python
