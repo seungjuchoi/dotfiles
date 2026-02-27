@@ -8,6 +8,7 @@ max_height      = 1600
 
 [plugin]
 prepend_previewers = [
+    { mime = "image/svg+xml", run = "svg" },
     { name = "*.csv", run = 'piper -- bat -p --color=always "$1"'},
     { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'},
     { name = "*.tar.gz", run  = 'piper -- tar tf "$1"'},
