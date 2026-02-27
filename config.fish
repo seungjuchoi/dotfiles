@@ -62,6 +62,7 @@ if command -qs opencode
 end
 if command -qs codex
     alias co "codex --dangerously-bypass-approvals-and-sandbox"
+    alias cop "codex exec --dangerously-bypass-approvals-and-sandbox"
 end
 if command -qs pi
     alias pix "pi -p"
