@@ -1,4 +1,5 @@
 plugin/packer_compiled.lua
 **/.jukit/
 tools/ssh-tunnels/.ssh
+tools/ssh-tunnels/docker-compose.override.yml
 config_local.fish
