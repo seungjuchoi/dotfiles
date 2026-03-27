@@ -43,7 +43,15 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs claude
-    alias cl "claude --dangerously-skip-permissions"
+    if test -n "$_CL_PROXY_PORT"
+        function cl
+            prxh $_CL_PROXY_PORT
+            claude --dangerously-skip-permissions $argv
+            prxh off
+        end
+    else
+        alias cl "claude --dangerously-skip-permissions"
+    end
     alias clp "claude --dangerously-skip-permissions -p"
     alias rcl "rlwrap claude --dangerously-skip-permissions"
     alias rclp "rlwrap claude --dangerously-skip-permissions -p"
