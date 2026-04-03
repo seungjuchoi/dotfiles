@@ -1,4 +1,6 @@
 (defcfg
+  ;; Security note: enables shell command execution from keybindings.
+  ;; Required for fcitx5-remote integration. Only add trusted commands.
   danger-enable-cmd yes
   process-unmapped-keys yes
 )
