@@ -1,44 +1,121 @@
-local parser_install_dir = vim.fn.stdpath('data') .. '/site'
-local ts_configs = require('nvim-treesitter.configs')
 local has_textobjects, ts_textobjects = pcall(require, 'nvim-treesitter-textobjects')
-
-if has_textobjects and not ts_configs.get_module('textobjects.select') then
-  ts_textobjects.init()
-end
-
-if not vim.o.runtimepath:find(parser_install_dir, 1, true) then
-  vim.opt.runtimepath:append(parser_install_dir)
-end
-
-ts_configs.setup {
-  parser_install_dir = parser_install_dir,
-  ensure_installed = {
-    'fish', 'html', 'yaml', 'markdown', 'markdown_inline',
-    'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim', 'json',
-    'gitignore', 'dockerfile',
-  },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  textobjects = has_textobjects and {
-    select = {
-      enable = true,
-      lookahead = true,
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-    },
-    swap = {
-      enable = true,
-    },
-  } or {},
+local parser_install_dir = vim.fn.stdpath('data') .. '/site'
+local treesitter_languages = {
+  'fish', 'html', 'yaml', 'markdown', 'markdown_inline',
+  'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim', 'json',
+  'gitignore', 'dockerfile',
 }
+
+local function setup_legacy_treesitter()
+  local ok_ts_configs, ts_configs = pcall(require, 'nvim-treesitter.configs')
+  if not ok_ts_configs then
+    return false
+  end
+
+  if not vim.o.runtimepath:find(parser_install_dir, 1, true) then
+    vim.opt.runtimepath:append(parser_install_dir)
+  end
+
+  ts_configs.setup {
+    parser_install_dir = parser_install_dir,
+    ensure_installed = treesitter_languages,
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+    textobjects = has_textobjects and {
+      select = {
+        enable = true,
+        lookahead = true,
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+      },
+      swap = {
+        enable = true,
+      },
+    } or {},
+  }
+
+  return true
+end
+
+local function setup_new_treesitter()
+  local ok_ts, ts = pcall(require, 'nvim-treesitter')
+  if not ok_ts then
+    return false
+  end
+
+  ts.setup({
+    install_dir = parser_install_dir,
+  })
+
+  pcall(function()
+    local installed = ts.get_installed('parsers')
+    local missing = {}
+    for _, lang in ipairs(treesitter_languages) do
+      if not vim.tbl_contains(installed, lang) then
+        table.insert(missing, lang)
+      end
+    end
+    if #missing > 0 then
+      ts.install(missing, { summary = false })
+    end
+  end)
+
+  local function enable_for_buffer(buf)
+    if not vim.api.nvim_buf_is_valid(buf) then return end
+    if not vim.api.nvim_buf_is_loaded(buf) then return end
+    if vim.bo[buf].buftype ~= '' then return end
+    if vim.bo[buf].filetype == '' then return end
+
+    if pcall(vim.treesitter.start, buf) then
+      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end
+
+  local ts_group = vim.api.nvim_create_augroup('SeungjuTreesitter', { clear = true })
+  vim.api.nvim_create_autocmd('FileType', {
+    group = ts_group,
+    pattern = '*',
+    callback = function(args)
+      enable_for_buffer(args.buf)
+    end,
+  })
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    enable_for_buffer(buf)
+  end
+
+  if has_textobjects and ts_textobjects.setup then
+    ts_textobjects.setup({
+      select = {
+        lookahead = true,
+      },
+      move = {
+        set_jumps = true,
+      },
+    })
+  end
+
+  return true
+end
+
+if not (setup_legacy_treesitter() or setup_new_treesitter()) then
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'VeryLazy',
+    once = true,
+    callback = function()
+      vim.cmd('runtime plugin/nvim-treesitter.lua')
+    end,
+  })
+  return
+end
 
 -- Incremental selection (treesitter node-based, stack-based like original)
 do
