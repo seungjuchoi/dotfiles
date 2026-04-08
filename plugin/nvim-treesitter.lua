@@ -1,28 +1,44 @@
--- nvim-treesitter setup (main branch, Neovim 0.12+)
-require('nvim-treesitter').setup {
-  install_dir = vim.fn.stdpath('data') .. '/site',
+local parser_install_dir = vim.fn.stdpath('data') .. '/site'
+local ts_configs = require('nvim-treesitter.configs')
+local has_textobjects, ts_textobjects = pcall(require, 'nvim-treesitter-textobjects')
+
+if has_textobjects and not ts_configs.get_module('textobjects.select') then
+  ts_textobjects.init()
+end
+
+if not vim.o.runtimepath:find(parser_install_dir, 1, true) then
+  vim.opt.runtimepath:append(parser_install_dir)
+end
+
+ts_configs.setup {
+  parser_install_dir = parser_install_dir,
+  ensure_installed = {
+    'fish', 'html', 'yaml', 'markdown', 'markdown_inline',
+    'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim', 'json',
+    'gitignore', 'dockerfile',
+  },
+  sync_install = false,
+  auto_install = true,
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  textobjects = has_textobjects and {
+    select = {
+      enable = true,
+      lookahead = true,
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+    },
+    swap = {
+      enable = true,
+    },
+  } or {},
 }
-
--- Install parsers (async, no-op if already installed)
-require('nvim-treesitter').install {
-  'fish', 'html', 'yaml', 'markdown', 'markdown_inline',
-  'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim', 'json',
-  'gitignore', 'dockerfile',
-}
-
--- Highlighting: enable treesitter highlight for all supported filetypes
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function()
-    pcall(vim.treesitter.start)
-  end,
-})
-
--- Indentation (experimental)
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function()
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
 
 -- Incremental selection (treesitter node-based, stack-based like original)
 do
@@ -175,18 +191,7 @@ do
   end, { silent = true, desc = 'Shrink treesitter selection' })
 end
 
--- nvim-treesitter-textobjects setup (main branch)
-local ok, ts_textobjects = pcall(require, 'nvim-treesitter-textobjects')
-if ok then
-  ts_textobjects.setup {
-    select = {
-      lookahead = true,
-    },
-    move = {
-      set_jumps = true,
-    },
-  }
-
+if has_textobjects then
   -- Select keymaps
   vim.keymap.set({ 'x', 'o' }, 'aa', function()
     require('nvim-treesitter-textobjects.select').select_textobject('@parameter.outer', 'textobjects')
