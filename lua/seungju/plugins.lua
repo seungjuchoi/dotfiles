@@ -212,7 +212,6 @@ require("lazy").setup({
     "stevearc/dressing.nvim",
     opts = {},
   },
-  "RRethy/vim-illuminate",
   "farmergreg/vim-lastplace",
   {
     "stevearc/conform.nvim",
