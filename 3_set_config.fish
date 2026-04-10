@@ -23,6 +23,7 @@ command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
+command ln -s -f $PWD/yazi_keymap.toml ~/.config/yazi/keymap.toml
 command ln -s -f $PWD/aerospace.toml ~/.aerospace.toml
 command mkdir -p ~/.config/kanata
 command ln -s -f $PWD/config.kbd ~/.config/kanata/config.kbd
