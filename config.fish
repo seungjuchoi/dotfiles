@@ -69,7 +69,15 @@ if command -qs opencode
     alias opp "opencode run"
 end
 if command -qs codex
-    alias co "codex --dangerously-bypass-approvals-and-sandbox"
+    if test -n "$_CL_PROXY_PORT"
+        function co
+            prxh $_CL_PROXY_PORT
+            codex --dangerously-bypass-approvals-and-sandbox $argv
+            prxh off
+        end
+    else
+        alias co "codex --dangerously-bypass-approvals-and-sandbox"
+    end
     alias cop "codex exec --dangerously-bypass-approvals-and-sandbox"
 end
 if command -qs pi
