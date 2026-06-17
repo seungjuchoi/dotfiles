@@ -45,12 +45,20 @@ end
 if command -qs claude
     if test -n "$_CL_PROXY_PORT"
         function cl
+            if test "$PWD" = "$HOME"; and type -q z
+                z tz
+            end
             prxh $_CL_PROXY_PORT
             claude --dangerously-skip-permissions $argv
             prxh off
         end
     else
-        alias cl "claude --dangerously-skip-permissions"
+        function cl
+            if test "$PWD" = "$HOME"; and type -q z
+                z tz
+            end
+            claude --dangerously-skip-permissions $argv
+        end
     end
     alias clp "claude --dangerously-skip-permissions -p"
     alias rcl "rlwrap claude --dangerously-skip-permissions"
