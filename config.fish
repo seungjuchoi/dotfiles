@@ -72,6 +72,10 @@ if command -qs crush
     alias cr "crush -y"
     alias crp "crush run"
 end
+if command -qs kiro-cli
+    alias kr "kiro-cli chat --trust-all-tools"
+    alias krp "kiro-cli chat --trust-all-tools --no-interactive"
+end
 if command -qs opencode
     alias op "opencode"
     alias opp "opencode run"
@@ -242,3 +246,5 @@ function ta
 end
 
 alias tx 'tmux detach'
+
+string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)
