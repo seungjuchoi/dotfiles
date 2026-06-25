@@ -64,6 +64,15 @@ if command -qs claude
     alias rcl "rlwrap claude --dangerously-skip-permissions"
     alias rclp "rlwrap claude --dangerously-skip-permissions -p"
 end
+if command -qs agy
+    function ag
+        if test "$PWD" = "$HOME"; and type -q z
+            z tz
+        end
+        agy --dangerously-skip-permissions $argv
+    end
+    alias agp "agy --dangerously-skip-permissions -p"
+end
 if command -qs gemini
     alias ge "gemini -y"
     alias gep "gemini"
@@ -248,3 +257,7 @@ end
 alias tx 'tmux detach'
 
 string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/Users/timer/.local/bin" $PATH
