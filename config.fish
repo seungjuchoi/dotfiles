@@ -52,6 +52,11 @@ if command -qs claude
             claude --dangerously-skip-permissions $argv
             prxh off
         end
+        function clp
+            prxh $_CL_PROXY_PORT
+            claude --dangerously-skip-permissions -p $argv
+            prxh off
+        end
     else
         function cl
             if test "$PWD" = "$HOME"; and type -q z
@@ -59,10 +64,10 @@ if command -qs claude
             end
             claude --dangerously-skip-permissions $argv
         end
+        function clp
+            claude --dangerously-skip-permissions -p $argv
+        end
     end
-    alias clp "claude --dangerously-skip-permissions -p"
-    alias rcl "rlwrap claude --dangerously-skip-permissions"
-    alias rclp "rlwrap claude --dangerously-skip-permissions -p"
 end
 if command -qs agy
     function ag
