@@ -261,7 +261,9 @@ end
 
 alias tx 'tmux detach'
 
-string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)
+if test "$TERM_PROGRAM" = "kiro"; and command -q kiro
+    . (kiro --locate-shell-integration-path fish)
+end
 
 
 # Added by Antigravity CLI installer
