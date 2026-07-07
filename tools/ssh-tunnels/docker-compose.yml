@@ -7,7 +7,7 @@ services:
     container_name: ssh-tunnels
     stop_grace_period: 1s
     ports: []
-    # Add local-only ports in docker-compose.override.yml
+    # Add host-specific ports/tunnels in docker-compose.override.yml
     environment:
       SSH_TUNNELS: |
         # Uncomment the below lines to use
