@@ -107,7 +107,20 @@ if command -qs codex
     alias cop "codex exec --dangerously-bypass-approvals-and-sandbox"
 end
 if command -qs pi
-    alias pix "pi -p"
+    if test -n "$_CL_PROXY_PORT"
+        function pi
+            prxh $_CL_PROXY_PORT
+            command pi $argv
+            prxh off
+        end
+        function pix
+            prxh $_CL_PROXY_PORT
+            command pi -p $argv
+            prxh off
+        end
+    else
+        alias pix "pi -p"
+    end
 end
 if command -qs openclaw
     alias oc "openclaw tui"
