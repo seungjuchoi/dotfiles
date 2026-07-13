@@ -101,10 +101,15 @@ if command -qs codex
             codex --dangerously-bypass-approvals-and-sandbox $argv
             prxh off
         end
+        function cop
+            prxh $_CL_PROXY_PORT
+            codex exec --dangerously-bypass-approvals-and-sandbox $argv
+            prxh off
+        end
     else
         alias co "codex --dangerously-bypass-approvals-and-sandbox"
+        alias cop "codex exec --dangerously-bypass-approvals-and-sandbox"
     end
-    alias cop "codex exec --dangerously-bypass-approvals-and-sandbox"
 end
 if command -qs pi
     if test -n "$_CL_PROXY_PORT"
