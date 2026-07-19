@@ -77,4 +77,10 @@ keybind = cmd+shift+j=goto_split:down
 keybind = cmd+shift+k=goto_split:up
 keybind = cmd+shift+l=goto_split:right
 
+# Split resize (cmd + ctrl + hjkl) — arrow 기본값 대체
+keybind = cmd+ctrl+h=resize_split:left,10
+keybind = cmd+ctrl+j=resize_split:down,10
+keybind = cmd+ctrl+k=resize_split:up,10
+keybind = cmd+ctrl+l=resize_split:right,10
+
 macos-icon = official
