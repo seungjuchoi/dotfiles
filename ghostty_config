@@ -71,7 +71,10 @@ keybind = ctrl+five=goto_tab:5
 keybind = ctrl+six=goto_tab:6
 keybind = ctrl+enter=text:\r
 
+# Split navigation (cmd + shift + hjkl)
+keybind = cmd+shift+h=goto_split:left
+keybind = cmd+shift+j=goto_split:down
+keybind = cmd+shift+k=goto_split:up
+keybind = cmd+shift+l=goto_split:right
 
 macos-icon = official
-
-
