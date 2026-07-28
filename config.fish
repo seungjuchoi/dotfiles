@@ -87,8 +87,8 @@ if command -qs crush
     alias crp "crush run"
 end
 if command -qs kiro-cli
-    alias kr "kiro-cli chat --trust-all-tools"
-    alias krp "kiro-cli chat --trust-all-tools --no-interactive"
+    alias kr "kiro-cli chat --trust-all-tools --v3"
+    alias krp "kiro-cli chat --trust-all-tools --v3 --no-interactive"
 end
 if command -qs opencode
     alias op "opencode"
