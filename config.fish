@@ -286,3 +286,12 @@ end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/Users/timer/.local/bin" $PATH
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
+
+if command -qs grok
+    alias gk "grok --always-approve"
+    alias gkp "grok --always-approve -p"
+end
