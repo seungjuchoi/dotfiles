@@ -18,3 +18,7 @@ end
 if type -q nvim
     nvim --headless "+Lazy! sync" +qa
 end
+
+if type -q herdr
+    herdr update
+end

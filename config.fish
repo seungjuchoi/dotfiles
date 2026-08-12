@@ -295,3 +295,6 @@ if command -qs grok
     alias gk "grok --always-approve"
     alias gkp "grok --always-approve -p"
 end
+if command -qs herdr
+    alias hr herdr
+end
