@@ -69,15 +69,6 @@ if command -qs claude
         end
     end
 end
-if command -qs agy
-    function ag
-        if test "$PWD" = "$HOME"; and type -q z
-            z tz
-        end
-        agy --dangerously-skip-permissions $argv
-    end
-    alias agp "agy --dangerously-skip-permissions -p"
-end
 if command -qs gemini
     alias ge "gemini -y"
     alias gep "gemini"
@@ -285,9 +276,6 @@ if test "$TERM_PROGRAM" = "kiro"; and command -q kiro
     . (kiro --locate-shell-integration-path fish)
 end
 
-
-# Added by Antigravity CLI installer
-set -gx PATH "/Users/timer/.local/bin" $PATH
 
 # >>> grok installer >>>
 fish_add_path $HOME/.grok/bin

@@ -19,6 +19,7 @@ command ln -s -f $PWD/starship.toml ~/.config/starship.toml
 command ln -s -f $PWD/config.fish ~/.config/fish/config.fish
 command ln -s -f $PWD/prx.fish ~/.config/fish/functions/prx.fish
 command ln -s -f $PWD/prxh.fish ~/.config/fish/functions/prxh.fish
+command ln -s -f $PWD/ag.fish ~/.config/fish/functions/ag.fish
 command ln -s -f $PWD/tmux.conf ~/.tmux.conf
 command mkdir -p ~/.tmux
 command ln -s -f $PWD/tmux_renumber_sessions.sh ~/.tmux/renumber-sessions.sh
