@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # tmuxcc 업데이트: origin(내 포크) pull + upstream(원저자) merge 후 재빌드·설치
+# 소스 클론은 ~/.local/src/tmuxcc (개발 워크스페이스와 분리). TMUXCC_REPO 로 덮어쓸 수 있음.
 set -uo pipefail
 
 # popup/launchd 등 최소 환경에서도 cargo·git을 찾도록 PATH 보정
-export PATH="$HOME/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
-REPO="${TMUXCC_REPO:-$HOME/Documents/Code/tz/tmuxcc}"
+REPO="${TMUXCC_REPO:-$HOME/.local/src/tmuxcc}"
+ORIGIN_URL="${TMUXCC_ORIGIN:-https://github.com/seungjuchoi/tmuxcc.git}"
+UPSTREAM_URL="${TMUXCC_UPSTREAM:-https://github.com/nyanko3141592/tmuxcc.git}"
 UPSTREAM_BRANCH="upstream/master"
 PAUSE=0
 [ "${1:-}" = "--pause" ] && PAUSE=1   # tmux popup에서 결과를 읽을 수 있게 대기
@@ -23,8 +26,21 @@ die() { printf '\n\033[31m✗ %s\033[0m\n' "$*" >&2; pause_exit 1; }
 info() { printf '\033[36m› %s\033[0m\n' "$*"; }
 ok() { printf '\033[32m✓ %s\033[0m\n' "$*"; }
 
-[ -d "$REPO/.git" ] || die "저장소를 찾을 수 없음: $REPO"
+if [ -d "$REPO/.git" ]; then
+  :
+elif [ -e "$REPO" ]; then
+  die "경로가 있지만 git 저장소가 아님: $REPO"
+else
+  info "저장소가 없어 clone: $ORIGIN_URL → $REPO"
+  mkdir -p "$(dirname "$REPO")"
+  git clone "$ORIGIN_URL" "$REPO" || die "clone 실패: $ORIGIN_URL"
+fi
 cd "$REPO" || die "cd 실패: $REPO"
+
+if ! git remote get-url upstream >/dev/null 2>&1; then
+  git remote add upstream "$UPSTREAM_URL" || die "upstream remote 추가 실패"
+  info "upstream 추가: $UPSTREAM_URL"
+fi
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 BEFORE=$(git rev-parse HEAD)
@@ -67,13 +83,23 @@ fi
 AFTER=$(git rev-parse HEAD)
 INSTALLED=$(command -v tmuxcc || true)
 
+link_bin() {
+  mkdir -p "$HOME/.local/bin"
+  BIN=$(command -v tmuxcc || true)
+  if [ -n "$BIN" ] && [ "$BIN" != "$HOME/.local/bin/tmuxcc" ]; then
+    ln -sfn "$BIN" "$HOME/.local/bin/tmuxcc"
+  fi
+}
+
 if [ "$BEFORE" = "$AFTER" ] && [ -n "$INSTALLED" ] && [ -z "${TMUXCC_FORCE:-}" ]; then
+  link_bin
   ok "이미 최신 ($(git log -1 --format=%h\ %s))  — 재빌드 생략 (강제: TMUXCC_FORCE=1)"
   pause_exit 0
 fi
 
 info "빌드·설치 중 (cargo install --path .)"
 cargo install --path . --quiet || die "빌드 실패"
+link_bin
 
 ok "설치 완료: $(tmuxcc --version 2>/dev/null || echo tmuxcc) — $(git log -1 --format=%h\ %s)"
 if [ -n "${TMUX:-}" ] && pgrep -qx tmuxcc; then

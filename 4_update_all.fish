@@ -22,3 +22,10 @@ end
 if type -q herdr
     herdr update
 end
+
+if test -x ~/.local/bin/tmuxcc-update
+    ~/.local/bin/tmuxcc-update
+else if type -q cargo
+    set -l script_dir (status dirname)
+    bash $script_dir/tmuxcc_update.sh
+end

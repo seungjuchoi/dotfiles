@@ -82,6 +82,15 @@ brew upgrade
 
 uv tool install yt-dlp
 
+# tmuxcc — 포크를 ~/.local/src/tmuxcc 에 clone 후 cargo install
+set -l script_dir (status dirname)
+fish_add_path ~/.cargo/bin
+if type -q cargo
+    bash $script_dir/tmuxcc_update.sh
+else
+    echo "skip tmuxcc: cargo not found"
+end
+
 # npm prefix
 if not test -d ~/.npm-global
     mkdir -p ~/.npm-global

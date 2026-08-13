@@ -161,6 +161,8 @@ end
 if type -q brew
     eval "$(brew shellenv)"
 end
+fish_add_path ~/.cargo/bin
+fish_add_path ~/.local/bin
 
 set -g fzf_fd_opts --exclude "Library/Mobile Documents"
 fzf_configure_bindings --variables=\e\cv
