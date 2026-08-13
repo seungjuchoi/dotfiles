@@ -79,11 +79,16 @@ function ag --description "add-agent: tmux main 세션에 window를 추가해 ag
     # 새 window 에서 실행할 fish 명령 만들기.
     # fish -i -C: config.fish 를 읽은 뒤(=cl/co 같은 함수가 정의된 상태) 명령을 실행하고,
     # agent 가 종료돼도 window 는 프롬프트가 남은 채 살아있다.
+    #
+    # PROCESS_LAUNCHED_BY_Q: kiro-cli(구 fig) 쉘 통합이 설치된 머신에서는
+    # conf.d/00_fig_pre.fish 가 interactive fish 시작 직후 kiro-cli-term 으로
+    # exec 해버려서 -C 로 넘긴 명령이 통째로 사라진다(창만 뜨고 agent 는 안 뜸).
+    # 이 변수를 주면 해당 window 에서만 통합 실행을 건너뛴다.
     set -l inner (string join " " -- $agent $agent_flags)
     if test (count $prompt_words) -gt 0
         set inner "$inner "(string escape -- (string join " " -- $prompt_words))
     end
-    set -l shcmd "fish -i -C '"(string replace -a "'" "'\\''" -- $inner)"'"
+    set -l shcmd "PROCESS_LAUNCHED_BY_Q=1 fish -i -C '"(string replace -a "'" "'\\''" -- $inner)"'"
 
     # ── 세션 확보 + window 생성 ─────────────────────────────────────────
     # window 이름은 지정하지 않는다 → tmux 의 automatic-rename
