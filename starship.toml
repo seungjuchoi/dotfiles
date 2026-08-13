@@ -15,6 +15,11 @@ disabled = true
 [nodejs]
 disabled = true
 
+# Kiro CLI's fish integration (fig_precmd) spawns a background job on every
+# prompt, so the job count is permanently off by one and always renders "✦".
+[jobs]
+disabled = true
+
 [env_var.DISPLAY]
 format = "[🖥️]($env_value) "
 
