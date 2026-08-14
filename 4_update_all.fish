@@ -29,3 +29,12 @@ else if type -q cargo
     set -l script_dir (status dirname)
     bash $script_dir/tmuxcc_update.sh
 end
+
+if test -x ~/.local/bin/kiro-gateway-update
+    ~/.local/bin/kiro-gateway-update
+else
+    set -l script_dir (status dirname)
+    if test -f $script_dir/kiro_gateway_update.fish
+        fish $script_dir/kiro_gateway_update.fish
+    end
+end

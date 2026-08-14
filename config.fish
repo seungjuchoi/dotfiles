@@ -68,6 +68,151 @@ if command -qs claude
             claude --dangerously-skip-permissions -p $argv
         end
     end
+
+    function _ck_gateway_health
+        set -l body (curl -sf --max-time 0.3 http://127.0.0.1:$argv[1]/health 2>/dev/null)
+        or return 1
+        string match -qr '"status"\s*:\s*"healthy"' -- $body
+    end
+
+    function _ck_port_busy
+        lsof -nP -iTCP:$argv[1] -sTCP:LISTEN >/dev/null 2>&1
+    end
+
+    function _ck_pick_port
+        set -l dir $HOME/.local/share/kiro-gateway
+        set -l preferred 8000
+        if test -n "$CK_PORT"
+            set preferred $CK_PORT
+        else if test -f $dir/port
+            set preferred (string trim < $dir/port)
+        end
+
+        if string match -qr '^[0-9]+$' -- $preferred
+            if _ck_gateway_health $preferred
+                echo $preferred
+                return 0
+            end
+        else
+            set preferred 8000
+        end
+
+        for p in (seq 8000 8019)
+            if _ck_gateway_health $p
+                echo $p
+                return 0
+            end
+        end
+
+        if not _ck_port_busy $preferred
+            echo $preferred
+            return 0
+        end
+
+        for p in (seq 8000 8019)
+            if not _ck_port_busy $p
+                echo $p
+                return 0
+            end
+        end
+
+        echo "no free port in 8000-8019 (set CK_PORT to override)" >&2
+        return 1
+    end
+
+    function _ck_ensure_gateway
+        set -l dir $HOME/.local/share/kiro-gateway
+        set -l port (_ck_pick_port)
+        or return $status
+
+        if _ck_gateway_health $port
+            echo $port >$dir/port
+            echo $port
+            return 0
+        end
+
+        if not test -x $dir/.venv/bin/python
+            echo "kiro-gateway missing; installing..." >&2
+            set -l installer
+            if type -q kiro-gateway-update
+                set installer kiro-gateway-update
+            else
+                set -l df (dirname (realpath (status filename)))
+                if test -f $df/kiro_gateway_update.fish
+                    set installer fish $df/kiro_gateway_update.fish
+                end
+            end
+            if test -z "$installer"
+                echo "kiro-gateway-update not found; run kiro_gateway_update.fish from dotfiles" >&2
+                return 1
+            end
+            $installer
+            or return $status
+            if not test -x $dir/.venv/bin/python
+                echo "kiro-gateway install finished but $dir/.venv/bin/python is missing" >&2
+                return 1
+            end
+        end
+
+        set -l log $dir/gateway.log
+        set -l db "$HOME/Library/Application Support/kiro-cli/data.sqlite3"
+        set -l env_args
+        set -a env_args PROXY_API_KEY=kiro-local-proxy-key
+        set -a env_args SERVER_HOST=127.0.0.1
+        set -a env_args SERVER_PORT=$port
+        if test -f $db
+            set -a env_args "KIRO_CLI_DB_FILE=$db"
+        else if test -f $HOME/.aws/sso/cache/kiro-auth-token.json
+            set -a env_args "KIRO_CREDS_FILE=$HOME/.aws/sso/cache/kiro-auth-token.json"
+        end
+        if test -n "$_CL_PROXY_PORT"
+            set -a env_args "VPN_PROXY_URL=http://127.0.0.1:$_CL_PROXY_PORT"
+        end
+        echo "Starting kiro-gateway on :$port..." >&2
+        env $env_args $dir/.venv/bin/python $dir/main.py --host 127.0.0.1 --port $port >$log 2>&1 &
+        disown
+        for i in (seq 1 40)
+            if _ck_gateway_health $port
+                echo $port >$dir/port
+                echo $port
+                return 0
+            end
+            sleep 0.25
+        end
+        echo "kiro-gateway failed to start on :$port; see $log" >&2
+        return 1
+    end
+
+    function _ck_run_claude
+        set -l port (_ck_ensure_gateway)
+        or return $status
+        set -lx ANTHROPIC_BASE_URL http://127.0.0.1:$port
+        set -lx ANTHROPIC_API_KEY kiro-local-proxy-key
+        set -lx ANTHROPIC_AUTH_TOKEN kiro-local-proxy-key
+        set -lx ANTHROPIC_MODEL claude-opus-5
+        set -lx ANTHROPIC_DEFAULT_SONNET_MODEL claude-sonnet-5
+        set -lx ANTHROPIC_DEFAULT_OPUS_MODEL claude-opus-5
+        set -lx ANTHROPIC_DEFAULT_HAIKU_MODEL claude-haiku-4.5
+        set -lx CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY 1
+        if test -n "$_CL_PROXY_PORT"
+            prxh $_CL_PROXY_PORT
+            claude --dangerously-skip-permissions $argv
+            prxh off
+        else
+            claude --dangerously-skip-permissions $argv
+        end
+    end
+
+    function ck
+        if test "$PWD" = "$HOME"; and type -q z
+            z tz
+        end
+        _ck_run_claude $argv
+    end
+
+    function ckp
+        _ck_run_claude -p $argv
+    end
 end
 if command -qs gemini
     alias ge "gemini -y"
