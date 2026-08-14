@@ -160,6 +160,10 @@ if command -qs claude
         set -a env_args PROXY_API_KEY=kiro-local-proxy-key
         set -a env_args SERVER_HOST=127.0.0.1
         set -a env_args SERVER_PORT=$port
+        # The gateway defaults these to relative paths, so they land in whatever
+        # directory `ck` was invoked from. Pin them next to the gateway itself.
+        set -a env_args "ACCOUNTS_CONFIG_FILE=$dir/credentials.json"
+        set -a env_args "ACCOUNTS_STATE_FILE=$dir/state.json"
         if test -f $db
             set -a env_args "KIRO_CLI_DB_FILE=$db"
         else if test -f $HOME/.aws/sso/cache/kiro-auth-token.json
