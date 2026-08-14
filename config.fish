@@ -79,6 +79,40 @@ if command -qs claude
         lsof -nP -iTCP:$argv[1] -sTCP:LISTEN >/dev/null 2>&1
     end
 
+    # Proxy the gateway should use for upstream Kiro/SSO calls.
+    # "direct" = no proxy. Kept as an explicit token so it can be persisted
+    # and compared against an already-running gateway.
+    function _ck_proxy_state
+        if test -n "$_CL_PROXY_PORT"
+            echo http://127.0.0.1:$_CL_PROXY_PORT
+        else
+            echo direct
+        end
+    end
+
+    function _ck_gateway_pid
+        set -l main $HOME/.local/share/kiro-gateway/main.py
+        for pid in (lsof -nP -iTCP:$argv[1] -sTCP:LISTEN -t 2>/dev/null)
+            if string match -q "*$main*" -- (ps -o command= -p $pid 2>/dev/null)
+                echo $pid
+            end
+        end
+    end
+
+    function _ck_stop_gateway
+        set -l pids (_ck_gateway_pid $argv[1])
+        test (count $pids) -gt 0; or return 0
+        kill $pids 2>/dev/null
+        for i in (seq 1 20)
+            if not _ck_gateway_health $argv[1]
+                return 0
+            end
+            sleep 0.25
+        end
+        _ck_gateway_health $argv[1]; and return 1
+        return 0
+    end
+
     function _ck_pick_port
         set -l dir $HOME/.local/share/kiro-gateway
         set -l preferred 8000
@@ -122,13 +156,25 @@ if command -qs claude
 
     function _ck_ensure_gateway
         set -l dir $HOME/.local/share/kiro-gateway
+        set -l want (_ck_proxy_state)
         set -l port (_ck_pick_port)
         or return $status
 
         if _ck_gateway_health $port
-            echo $port >$dir/port
-            echo $port
-            return 0
+            set -l have
+            if test -f $dir/proxy
+                set have (string trim < $dir/proxy)
+            end
+            if test "$have" = "$want"
+                echo $port >$dir/port
+                echo $port
+                return 0
+            end
+            echo "kiro-gateway proxy mismatch (running: '$have', want: '$want'); restarting..." >&2
+            if not _ck_stop_gateway $port
+                echo "could not stop kiro-gateway on :$port; kill it manually" >&2
+                return 1
+            end
         end
 
         if not test -x $dir/.venv/bin/python
@@ -169,15 +215,21 @@ if command -qs claude
         else if test -f $HOME/.aws/sso/cache/kiro-auth-token.json
             set -a env_args "KIRO_CREDS_FILE=$HOME/.aws/sso/cache/kiro-auth-token.json"
         end
-        if test -n "$_CL_PROXY_PORT"
-            set -a env_args "VPN_PROXY_URL=http://127.0.0.1:$_CL_PROXY_PORT"
+        if test "$want" = direct
+            # Explicit empty value overrides a stale VPN_PROXY_URL in $dir/.env
+            set -a env_args "VPN_PROXY_URL="
+        else
+            set -a env_args "VPN_PROXY_URL=$want"
         end
         echo "Starting kiro-gateway on :$port..." >&2
+        pushd $dir
         env $env_args $dir/.venv/bin/python $dir/main.py --host 127.0.0.1 --port $port >$log 2>&1 &
         disown
+        popd
         for i in (seq 1 40)
             if _ck_gateway_health $port
                 echo $port >$dir/port
+                echo $want >$dir/proxy
                 echo $port
                 return 0
             end
