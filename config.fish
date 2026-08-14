@@ -90,6 +90,17 @@ if command -qs claude
         end
     end
 
+    # Fingerprint of the gateway's Python sources (newest mtime).
+    # Python loads modules at start, so patching files on disk — which
+    # kiro-gateway-update does on every run — has no effect on a process
+    # that is already running. Recording this at start lets us notice a
+    # gateway that is serving stale code and restart it.
+    function _ck_code_stamp
+        set -l dir $HOME/.local/share/kiro-gateway
+        find $dir -name '*.py' -not -path '*/.venv/*' -exec stat -f '%m' {} + 2>/dev/null |
+            sort -n | tail -1
+    end
+
     function _ck_gateway_pid
         set -l main $HOME/.local/share/kiro-gateway/main.py
         for pid in (lsof -nP -iTCP:$argv[1] -sTCP:LISTEN -t 2>/dev/null)
@@ -157,6 +168,7 @@ if command -qs claude
     function _ck_ensure_gateway
         set -l dir $HOME/.local/share/kiro-gateway
         set -l want (_ck_proxy_state)
+        set -l stamp (_ck_code_stamp)
         set -l port (_ck_pick_port)
         or return $status
 
@@ -165,12 +177,26 @@ if command -qs claude
             if test -f $dir/proxy
                 set have (string trim < $dir/proxy)
             end
-            if test "$have" = "$want"
+            set -l have_stamp
+            if test -f $dir/code
+                set have_stamp (string trim < $dir/code)
+            end
+
+            set -l why
+            if test "$have" != "$want"
+                set why "proxy mismatch (running: '$have', want: '$want')"
+            else if test -n "$stamp" -a "$have_stamp" != "$stamp"
+                # Missing $dir/code means it predates this check, so treat it
+                # as stale too — that gateway may well be serving old code.
+                set why "code changed since it started"
+            end
+
+            if test -z "$why"
                 echo $port >$dir/port
                 echo $port
                 return 0
             end
-            echo "kiro-gateway proxy mismatch (running: '$have', want: '$want'); restarting..." >&2
+            echo "kiro-gateway $why; restarting..." >&2
             if not _ck_stop_gateway $port
                 echo "could not stop kiro-gateway on :$port; kill it manually" >&2
                 return 1
@@ -198,6 +224,9 @@ if command -qs claude
                 echo "kiro-gateway install finished but $dir/.venv/bin/python is missing" >&2
                 return 1
             end
+            # The installer rewrites sources and re-applies local.patch, so the
+            # stamp taken above is already out of date.
+            set stamp (_ck_code_stamp)
         end
 
         set -l log $dir/gateway.log
@@ -230,6 +259,7 @@ if command -qs claude
             if _ck_gateway_health $port
                 echo $port >$dir/port
                 echo $want >$dir/proxy
+                echo $stamp >$dir/code
                 echo $port
                 return 0
             end
