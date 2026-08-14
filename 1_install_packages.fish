@@ -91,13 +91,6 @@ else
     echo "skip tmuxcc: cargo not found"
 end
 
-# kiro-gateway — Claude Code → Kiro proxy used by `ck`
-if type -q git
-    fish $script_dir/kiro_gateway_update.fish
-else
-    echo "skip kiro-gateway: git not found"
-end
-
 # npm prefix
 if not test -d ~/.npm-global
     mkdir -p ~/.npm-global

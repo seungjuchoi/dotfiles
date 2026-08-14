@@ -3,7 +3,3 @@ plugin/packer_compiled.lua
 tools/ssh-tunnels/.ssh
 tools/ssh-tunnels/docker-compose.override.yml
 config_local.fish
-
-# kiro-gateway runtime artifacts (in case it is ever run with this dir as CWD)
-credentials.json
-state.json
