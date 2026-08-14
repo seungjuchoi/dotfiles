@@ -1,5 +1,5 @@
 function ag --description "add-agent: tmux main 세션에 window를 추가해 agent를 실행하고 그 창으로 이동"
-    argparse -s h/help d/dir= s/session= n/no-switch -- $argv
+    argparse -s h/help d/dir= s/session= n/no-switch k/keep -- $argv
     or return 1
 
     set -l default_agent cl
@@ -14,11 +14,13 @@ function ag --description "add-agent: tmux main 세션에 window를 추가해 ag
         echo ""
         echo "  tmux '$session' 세션(없으면 생성)에 새 window를 만들어 agent를 띄우고"
         echo "  그 창으로 focus를 옮긴다. tmux 밖에서 실행하면 세션에 attach 한다."
+        echo "  tmux 안에서 실행했다면 ag 를 입력한 pane 은 focus 이동 후 정리한다."
         echo ""
         echo "옵션:"
         echo "  -d, --dir DIR     작업 디렉터리 지정 (기본: 현재 폴더, \$HOME이면 z tz)"
         echo "  -s, --session S   대상 tmux 세션 (기본: main)"
-        echo "  -n, --no-switch   window만 만들고 이동하지 않음"
+        echo "  -n, --no-switch   window만 만들고 이동하지 않음 (호출 pane 유지)"
+        echo "  -k, --keep        호출 pane 을 지우지 않음"
         echo "  -h, --help        도움말"
         echo ""
         echo "예시:"
@@ -109,6 +111,14 @@ function ag --description "add-agent: tmux main 세션에 window를 추가해 ag
         # 붙어있는 client 가 없는(detached) 세션에서 호출된 경우 대비
         tmux switch-client -t $target 2>/dev/null
         or tmux select-window -t $target
+
+        # ag 를 입력한 pane 은 더 쓸 일이 없으므로 정리한다.
+        # kill-pane 이 이 함수를 실행 중인 fish 를 SIGHUP 으로 끝내므로
+        # 반드시 focus 이동 뒤 마지막 줄이어야 한다.
+        # tmux 밖(=터미널 최상위 셸)에서는 절대 하지 않는다.
+        if not set -q _flag_keep
+            tmux kill-pane -t $TMUX_PANE
+        end
     else
         tmux select-window -t $target
         tmux attach-session -t "=$session"
