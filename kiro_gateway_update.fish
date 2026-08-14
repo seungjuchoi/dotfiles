@@ -4,7 +4,10 @@
 
 set -g REPO $HOME/.local/share/kiro-gateway
 set -g ORIGIN_URL https://github.com/jwadow/kiro-gateway.git
-set -g SCRIPT_DIR (dirname (status --current-filename))
+
+# Resolve symlinks: this script is usually invoked via ~/.local/bin/kiro-gateway-update,
+# which is a symlink into the dotfiles repo where local.patch lives.
+set -g SCRIPT_DIR (dirname (realpath (status --current-filename)))
 set -g PATCH $SCRIPT_DIR/tools/kiro-gateway/local.patch
 
 function info
@@ -61,6 +64,8 @@ if test -f $PATCH
     else
         echo "⚠ local patch did not apply cleanly; continuing with upstream" >&2
     end
+else
+    echo "⚠ local patch not found at $PATCH; continuing with upstream" >&2
 end
 
 set -l py (find_python)
