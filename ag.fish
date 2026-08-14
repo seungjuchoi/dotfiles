@@ -40,7 +40,7 @@ function ag --description "add-agent: tmux main 세션에 window를 추가해 ag
     end
 
     # ── agent / 프롬프트 분리 ────────────────────────────────────────────
-    set -l agents cl clp co cop ge gep cr crp kr krp op opp pi pix gk gkp oc \
+    set -l agents cl clp ck ckp co cop ge gep cr crp kr krp op opp pi pix gk gkp oc \
         claude codex gemini crush opencode grok kiro-cli openclaw
     set -q ag_agents; and set -a agents $ag_agents
 
