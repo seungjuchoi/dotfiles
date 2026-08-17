@@ -265,10 +265,25 @@ function gifer --description 'Convert MP4 to high-quality GIF with customizable 
 end
 
 function ta
-  if test -z "$TMUX"
-    tmux attach || tmux new-session $argv
-  else
+  if test -n "$TMUX"
     echo "Already inside a tmux session"
+    return 1
+  end
+  # 붙을 세션이 있으면 그대로 붙는다 (가장 최근 세션).
+  tmux attach
+  and return
+
+  # 여기 도달 = 서버가 없거나 붙을 세션이 없음.
+  # 예전에는 `tmux new-session $argv` 였는데 -s 가 없어서 익명 세션(0,1,2…)이
+  # 생겼다. 서버가 죽으면 붙어있던 클라이언트들의 attach 가 "server exited
+  # unexpectedly" 로 동시에 실패하면서 전부 이 경로를 타고, 이름 없는 세션이
+  # 우수수 생겨 원래 세션 이름·경로가 통째로 사라진다 (2026-08-15 사고).
+  # -A: 그 레이스에서 다른 클라이언트가 main 을 이미 만들었으면 새로 만드는 대신
+  #     붙는다. 없으면 "duplicate session: main" 으로 실패해 빈손이 된다.
+  if test (count $argv) -gt 0
+    tmux new-session $argv
+  else
+    tmux new-session -A -s main
   end
 end
 
