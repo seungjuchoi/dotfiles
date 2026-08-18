@@ -3,9 +3,7 @@
 set scripts \
     1_install_packages.fish \
     2_install_plugins.fish \
-    3_set_config.fish \
-    4_update_all.fish \
-    5_apply_claude.fish
+    3_set_config.fish
 
 set script_dir (status dirname)
 
