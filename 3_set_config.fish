@@ -39,22 +39,6 @@ command ln -s -f $PWD/mpv_input.conf ~/.config/mpv/input.conf
 command mkdir -p ~/.config/ghostty
 command ln -s -f $PWD/ghostty_config ~/.config/ghostty/config
 
-# herdr — AI agent terminal workspace manager
-command mkdir -p ~/.config/herdr
-command ln -s -f $PWD/herdr.toml ~/.config/herdr/config.toml
-if type -q herdr
-    command mkdir -p ~/.config/fish/completions
-    herdr completion fish >~/.config/fish/completions/herdr.fish
-    # 에이전트 훅 설치 (이미 설치된 에이전트만)
-    for target in claude codex grok pi opencode
-        if type -q $target
-            herdr integration install $target >/dev/null 2>&1
-        end
-    end
-    # 실행 중이면 설정 즉시 반영
-    herdr server reload-config >/dev/null 2>&1
-end
-
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish
 end

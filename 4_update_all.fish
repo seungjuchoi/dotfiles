@@ -19,10 +19,6 @@ if type -q nvim
     nvim --headless "+Lazy! sync" +qa
 end
 
-if type -q herdr
-    herdr update
-end
-
 if test -x ~/.local/bin/tmuxcc-update
     ~/.local/bin/tmuxcc-update
 else if type -q cargo
