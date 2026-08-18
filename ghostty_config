@@ -63,12 +63,21 @@ window-padding-y = 10
 # Terminal
 term = xterm-256color
 keybind = shift+enter=text:\x1b\r
-keybind = ctrl+one=goto_tab:1
-keybind = ctrl+two=goto_tab:2
-keybind = ctrl+three=goto_tab:3
-keybind = ctrl+four=goto_tab:4
-keybind = ctrl+five=goto_tab:5
-keybind = ctrl+six=goto_tab:6
+# Ctrl+숫자 — Ghostty 탭 전환 대신 CSI u 로 그대로 흘려보낸다.
+# 레거시 인코딩에서는 Ctrl+2/3/6 이 각각 NUL/ESC/C-^ 로 뭉뚱그려져 tmux 가
+# 숫자를 구분하지 못하므로, tmux 가 C-1..C-9 로 인식하도록 CSI u 를 직접 보낸다
+# (tmux 는 안쪽 앱에 다시 레거시 코드로 변환해 주므로 nvim 의 C-^ 등은 그대로).
+# tmux 쪽 prefix + Ctrl+숫자 window 이동 바인딩과 짝을 이룬다.
+keybind = ctrl+zero=text:\x1b[48;5u
+keybind = ctrl+one=text:\x1b[49;5u
+keybind = ctrl+two=text:\x1b[50;5u
+keybind = ctrl+three=text:\x1b[51;5u
+keybind = ctrl+four=text:\x1b[52;5u
+keybind = ctrl+five=text:\x1b[53;5u
+keybind = ctrl+six=text:\x1b[54;5u
+keybind = ctrl+seven=text:\x1b[55;5u
+keybind = ctrl+eight=text:\x1b[56;5u
+keybind = ctrl+nine=text:\x1b[57;5u
 keybind = ctrl+enter=text:\r
 
 # Split navigation (cmd + shift + hjkl)
