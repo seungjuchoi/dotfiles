@@ -52,4 +52,6 @@ git config --global difftool.nvimdiff.cmd 'nvim -d "$LOCAL" "$REMOTE"'
 tmux new-session -d -s init_config
 tmux source ~/.tmux.conf
 tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
+# tmux.conf 의 @plugin 선언에서 빠진 플러그인 디렉터리를 지운다 (tpm 자신은 제외).
+tmux run-shell '~/.tmux/plugins/tpm/bindings/clean_plugins'
 tmux kill-session -t init_config
