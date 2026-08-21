@@ -1,8 +1,30 @@
 diff --git a/kiro/config.py b/kiro/config.py
-index e0f3a52..4ce8eb8 100644
+index e0f3a52..41eb75f 100644
 --- a/kiro/config.py
 +++ b/kiro/config.py
-@@ -275,13 +275,19 @@ HIDDEN_FROM_LIST: List[str] = ["auto"]
+@@ -219,6 +219,21 @@ BASE_RETRY_DELAY: float = 1.0
+ HIDDEN_MODELS: Dict[str, str] = {
+     # Claude 3.7 Sonnet - legacy model, maps to "auto" on new runtime endpoint
+     # "claude-3.7-sonnet": "auto",
++    # Claude Code's gateway model discovery only lists ids containing
++    # "claude"/"anthropic", so expose non-Claude Kiro models under a
++    # claude- prefix to make them selectable from /model. These live here
++    # rather than in MODEL_ALIASES because the request converters only
++    # consult HIDDEN_MODELS when mapping to the Kiro model id.
++    # Claude Code's gateway model discovery only lists ids containing
++    # "claude"/"anthropic", so expose non-Claude Kiro models under a
++    # claude- prefix to make them selectable from /model.
++    "claude-gpt-5.6-sol": "gpt-5.6-sol",
++    "claude-gpt-5.6-terra": "gpt-5.6-terra",
++    "claude-gpt-5.6-luna": "gpt-5.6-luna",
++    "claude-deepseek-3.2": "deepseek-3.2",
++    "claude-glm-5": "glm-5",
++    "claude-minimax-m2.5": "minimax-m2.5",
++    "claude-qwen3-coder-next": "qwen3-coder-next",
+ }
+ 
+ # ==================================================================================================
+@@ -275,13 +290,19 @@ HIDDEN_FROM_LIST: List[str] = ["auto"]
  # - Update gateway regularly to get the latest model list
  FALLBACK_MODELS: List[Dict[str, str]] = [
      {"modelId": "auto"},
