@@ -223,7 +223,7 @@ function _vf_install_essentials --on-event virtualenv_did_create
     pip install pynvim ipython matplotlib
 end
 
-function gifer --description 'Convert MP4 to high-quality GIF with customizable fps and scale'
+function ggifer --description 'Convert MP4 to high-quality GIF with customizable fps and scale'
     # Default values
     set -l fps 24
     set -l scale 1080
@@ -243,25 +243,35 @@ function gifer --description 'Convert MP4 to high-quality GIF with customizable 
 
     # Check if input file is provided
     if test (count $argv) -lt 1
-        echo "Usage: gifer [options] input.mp4 [output.gif]"
+        echo "Usage: ggifer [options] input.mp4 [output.gif]"
+        echo "       ggifer [options] input1.mp4 input2.mp4 ..."
         echo "Options:"
         echo "  -f/--fps=NUMBER    Set frames per second (default: 24)"
         echo "  -s/--scale=NUMBER  Set width in pixels (default: 720)"
         return 1
     end
 
-    set -l input $argv[1]
-    set -l output
-
-    # If output filename is not provided, use input filename with .gif extension
-    if test (count $argv) -lt 2
-        set output (string replace -r '\.mp4$' '.gif' $input)
-    else
-        set output $argv[2]
+    # Two args with a .gif second arg = explicit output name; otherwise every arg is an input
+    if test (count $argv) -eq 2; and string match -qr '\.gif$' $argv[2]
+        set -l input $argv[1]
+        set -l output $argv[2]
+        echo "Converting $input to $output with fps=$fps and scale=$scale..."
+        ffmpeg -i $input -vf "fps=$fps,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" $output
+        return $status
     end
 
-    echo "Converting $input to $output with fps=$fps and scale=$scale..."
-    ffmpeg -i $input -vf "fps=$fps,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" $output
+    set -l failed 0
+    for input in $argv
+        set -l output (string replace -r '\.[^.]+$' '.gif' $input)
+        echo "Converting $input to $output with fps=$fps and scale=$scale..."
+        ffmpeg -i $input -vf "fps=$fps,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" $output
+        or set failed (math $failed + 1)
+    end
+
+    if test $failed -gt 0
+        echo "$failed file(s) failed to convert"
+        return 1
+    end
 end
 
 function ta
