@@ -27,6 +27,7 @@ command ln -s -f $PWD/tmux_assistant_restore_once.sh ~/.tmux/assistant-restore-o
 command mkdir -p ~/.local/bin
 command ln -s -f $PWD/tmuxcc_update.sh ~/.local/bin/tmuxcc-update
 command ln -s -f $PWD/tmuxcc_launch.sh ~/.local/bin/tmuxcc-launch
+command ln -s -f $PWD/kiro_gateway_update.fish ~/.local/bin/kiro-gateway-update
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
 command ln -s -f $PWD/clang-format ~/.clang-format
 command ln -s -f $PWD/yazi.toml ~/.config/yazi/yazi.toml
