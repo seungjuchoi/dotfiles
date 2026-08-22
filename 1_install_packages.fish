@@ -10,11 +10,11 @@ fish_add_path ~/.local/bin
 fish_add_path (brew --prefix)/bin
 
 if test (uname) = "Linux"
-        command sudo apt update; sudo apt upgrade
+        command sudo apt update; sudo apt upgrade -y
         command sudo apt install -y git gcc curl xsel xbindkeys xdotool
         command sudo apt install -y fonts-nanum fonts-noto-cjk
         command sudo apt install -y fcitx5 fcitx5-hangul
-        command sudo apt install -y luarocks
+        command sudo apt install -y luarocks python3-venv
         command sudo luarocks install luacheck
         command curl -fsSL https://bun.sh/install | bash
 end
@@ -22,6 +22,8 @@ end
 ulimit -n 2048 # Prevent Error: Too many open files
 
 brew install gcc
+# third-party taps must be trusted before install (Homebrew >= 4.6)
+brew tap noahgorstein/tap; and brew trust noahgorstein/tap
 set -l packages \
         bat \
         btop \
@@ -71,6 +73,7 @@ set -l packages \
         thefuck \
         tealdeer \
         tmux \
+        tree-sitter-cli \
         unar \
         yazi \
         yq \
@@ -104,3 +107,5 @@ if not test -d ~/.npm-global
 end
 npm config set prefix '~/.npm-global'
 fish_add_path ~/.npm-global/bin
+# fish_add_path returns 1 when the path is already present; do not let that be the script status
+exit 0

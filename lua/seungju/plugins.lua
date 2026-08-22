@@ -20,7 +20,7 @@ require("lazy").setup({
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
       "folke/neodev.nvim",
-      "saghen/blink.cmp"
+      { "saghen/blink.cmp", dependencies = { "saghen/blink.lib" } }
     },
   },
   {
