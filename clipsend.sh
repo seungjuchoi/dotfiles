@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# clipsend — 로컬 클립보드(이미지 → 파일 → 텍스트 순)를 ssh 원격 호스트의 클립보드로 보낸다.
+# clipsend — 로컬 클립보드(파일 → 이미지 → 텍스트 순)를 ssh 원격 호스트의 클립보드로 보낸다.
 #
 #   clipsend HOST            HOST(ssh config 이름)로 전송하고 HOST를 기억
 #   clipsend                 마지막으로 보낸 HOST로 전송 (기록 없으면 오류)
@@ -53,6 +53,11 @@ clip_paths() {  # 클립보드의 파일 경로 목록(줄 단위) — 없으면
   esac
 }
 
+is_image_file() {  # 확장자로 이미지 파일 판별
+  [ -f "$1" ] || return 1
+  case "$(printf '%s' "${1##*.}" | tr '[:upper:]' '[:lower:]')" in png|jpg|jpeg|gif|webp|heic|tiff|tif|bmp) return 0 ;; *) return 1 ;; esac
+}
+
 pack_files() {  # $1.. = 경로들 → PAYLOAD/KIND/META
   local p names=() dirs=()
   for p in "$@"; do [ -e "$p" ] || die "not found: $p"; names+=("$(basename "$p")"); dirs+=("$(dirname "$p")"); done
@@ -72,30 +77,41 @@ capture_local() {
   local paths
   case "$(uname -s)" in
     Darwin)
-      if command -v pngpaste >/dev/null 2>&1; then
+      # Finder 복사는 파일 아이콘을 PNG 로도 싣기 때문에 파일 URL 을 이미지보다 먼저 본다
+      if paths="$(clip_paths)" && [ -n "$paths" ]; then
+        local arr=(); while IFS= read -r p; do arr+=("$p"); done <<< "$paths"
+        if [ ${#arr[@]} -eq 1 ] && is_image_file "${arr[0]}"; then
+          # 이미지 파일 하나면 그림으로 보낸다 (원격 Claude Code 에서 Ctrl+V)
+          sips -s format png "${arr[0]}" --out "$PAYLOAD" >/dev/null 2>&1 && KIND=png
+        fi
+        [ -n "$KIND" ] || pack_files "${arr[@]}"
+      elif command -v pngpaste >/dev/null 2>&1; then
         pngpaste "$PAYLOAD" 2>/dev/null && KIND=png
       else
         osascript -e 'set png_data to (the clipboard as «class PNGf»)' \
                   -e "set fp to open for access POSIX file \"$PAYLOAD\" with write permission" \
                   -e 'write png_data to fp' -e 'close access fp' >/dev/null 2>&1 && KIND=png
       fi
-      if [ -z "$KIND" ] && paths="$(clip_paths)" && [ -n "$paths" ]; then
-        local arr=(); while IFS= read -r p; do arr+=("$p"); done <<< "$paths"; pack_files "${arr[@]}"
-      fi
       if [ -z "$KIND" ]; then
         pbpaste > "$PAYLOAD" 2>/dev/null && [ -s "$PAYLOAD" ] && KIND=text
       fi
       ;;
     Linux)
-      # Claude Code 와 같은 순서: xclip → wl-paste (xclip 셰임이 있으면 그것도 통한다)
-      if xclip -selection clipboard -t TARGETS -o 2>/dev/null | grep -q '^image/png' \
+      # 파일 URL 먼저, 그 다음 이미지는 Claude Code 와 같은 순서: xclip → wl-paste (xclip 셰임도 통한다)
+      if paths="$(clip_paths)" && [ -n "$paths" ] && [ -e "$(printf '%s\n' "$paths" | head -1)" ]; then
+        local arr=(); while IFS= read -r p; do arr+=("$p"); done <<< "$paths"
+        if [ ${#arr[@]} -eq 1 ] && [ -f "${arr[0]}" ] && [[ "${arr[0],,}" == *.png ]]; then
+          cp "${arr[0]}" "$PAYLOAD"; KIND=png
+        elif [ ${#arr[@]} -eq 1 ] && is_image_file "${arr[0]}" && command -v magick >/dev/null 2>&1; then
+          magick "${arr[0]}" png:"$PAYLOAD" 2>/dev/null && KIND=png
+        fi
+        [ -n "$KIND" ] || pack_files "${arr[@]}"
+      elif xclip -selection clipboard -t TARGETS -o 2>/dev/null | grep -q '^image/png' \
          && xclip -selection clipboard -t image/png -o > "$PAYLOAD" 2>/dev/null && [ -s "$PAYLOAD" ]; then
         KIND=png
       elif command -v wl-paste >/dev/null 2>&1 && wl-paste -l 2>/dev/null | grep -q '^image/png' \
          && wl-paste --type image/png > "$PAYLOAD" 2>/dev/null && [ -s "$PAYLOAD" ]; then
         KIND=png
-      elif paths="$(clip_paths)" && [ -n "$paths" ] && [ -e "$(printf '%s\n' "$paths" | head -1)" ]; then
-        local arr=(); while IFS= read -r p; do arr+=("$p"); done <<< "$paths"; pack_files "${arr[@]}"
       elif xclip -selection clipboard -t text/plain -o > "$PAYLOAD" 2>/dev/null && [ -s "$PAYLOAD" ]; then
         KIND=text
       elif command -v wl-paste >/dev/null 2>&1 && wl-paste --no-newline > "$PAYLOAD" 2>/dev/null && [ -s "$PAYLOAD" ]; then
