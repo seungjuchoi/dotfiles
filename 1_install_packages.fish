@@ -43,6 +43,10 @@ set -l packages \
         gpg \
 
 brew install $packages
+# clipsend.sh 가 macOS 클립보드 이미지를 읽을 때 사용 (macOS 전용 formula)
+if test (uname) = "Darwin"
+	brew install pngpaste
+end
 set -l packages \
         hexyl \
         httpie \
