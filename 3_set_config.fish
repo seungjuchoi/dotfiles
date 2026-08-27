@@ -29,6 +29,7 @@ command ln -s -f $PWD/tmuxcc_update.sh ~/.local/bin/tmuxcc-update
 command ln -s -f $PWD/tmuxcc_launch.sh ~/.local/bin/tmuxcc-launch
 command ln -s -f $PWD/kiro_gateway_update.fish ~/.local/bin/kiro-gateway-update
 command ln -s -f $PWD/clipsend.sh ~/.local/bin/clipsend
+command ln -s -f $PWD/ta.sh ~/.local/bin/ta
 command mkdir -p ~/.config/fish/completions
 command ln -s -f $PWD/clipsend_completion.fish ~/.config/fish/completions/clipsend.fish
 command ln -s -f $PWD/wezterm.lua ~/.config/wezterm/wezterm.lua
