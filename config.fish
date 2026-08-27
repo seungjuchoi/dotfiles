@@ -43,18 +43,25 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs claude
+    # Enterprise (company) accounts disallow bypassPermissions; skip the flag there.
+    function _claude_perm_flags
+        if jq -e '.oauthAccount.organizationType == "claude_enterprise"' ~/.claude.json >/dev/null 2>&1
+            return
+        end
+        echo --dangerously-skip-permissions
+    end
     if test -n "$_CL_PROXY_PORT"
         function cl
             if test "$PWD" = "$HOME"; and type -q z
                 z tz
             end
             prxh $_CL_PROXY_PORT
-            claude --dangerously-skip-permissions $argv
+            claude (_claude_perm_flags) $argv
             prxh off
         end
         function clp
             prxh $_CL_PROXY_PORT
-            claude --dangerously-skip-permissions -p $argv
+            claude (_claude_perm_flags) -p $argv
             prxh off
         end
     else
@@ -62,10 +69,10 @@ if command -qs claude
             if test "$PWD" = "$HOME"; and type -q z
                 z tz
             end
-            claude --dangerously-skip-permissions $argv
+            claude (_claude_perm_flags) $argv
         end
         function clp
-            claude --dangerously-skip-permissions -p $argv
+            claude (_claude_perm_flags) -p $argv
         end
     end
 
