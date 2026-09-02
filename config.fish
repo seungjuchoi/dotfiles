@@ -517,7 +517,14 @@ function ta
     echo "Already inside a tmux session"
     return 1
   end
-  # 붙을 세션이 있으면 그대로 붙는다 (가장 최근 세션).
+  # detach 직전에 보던 세션이 기록돼 있으면 거기로 붙는다 (~/.tmux.conf 의
+  # client-attached/client-session-changed 훅이 기록). 없거나 이미 죽은 세션이면
+  # `tmux attach` 기본 동작(activity 가 가장 최근인 세션)으로 떨어진다.
+  set -l last (cat ~/.tmux/last-session 2>/dev/null)
+  if test -n "$last"; and tmux has-session -t "=$last" 2>/dev/null
+    tmux attach -t "=$last"
+    and return
+  end
   tmux attach
   and return
 
