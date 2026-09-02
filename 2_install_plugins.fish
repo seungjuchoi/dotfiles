@@ -16,4 +16,5 @@ fisher install $packages
 # yazi
 command ya pkg add yazi-rs/plugins:piper
 command ya pkg add KKV9/compress
+command ya pkg add yazi-rs/plugins:smart-enter
 
