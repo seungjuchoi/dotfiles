@@ -535,6 +535,25 @@ function ta
   end
 end
 
+# ta + prefix+f + cl: main 세션에 현재 디렉터리로 새 창을 만들고 거기서 cl 을 띄운 뒤 붙는다.
+# 인자는 cl 로 그대로 넘어간다 (taa -c → cl -c).
+# send-keys 는 tmux 가 pty 에 버퍼링해 두므로 셸이 뜨기 전에 보내도 셸이 읽는다.
+function taa
+  if test -n "$TMUX"
+    echo "Already inside a tmux session"
+    return 1
+  end
+  set -l win
+  if tmux has-session -t '=main' 2>/dev/null
+    set win (tmux new-window -P -F '#{window_id}' -t '=main:' -c $PWD)
+  else
+    set win (tmux new-session -d -P -F '#{window_id}' -s main -c $PWD)
+  end
+  or return
+  tmux send-keys -t $win (string join -- ' ' cl (string escape -- $argv)) Enter
+  tmux attach -t '=main'
+end
+
 alias tx 'tmux detach'
 alias av 'aven tui'
 
