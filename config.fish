@@ -537,20 +537,23 @@ end
 
 # ta + prefix+f + cl: main 세션에 현재 디렉터리로 새 창을 만들고 거기서 cl 을 띄운 뒤 붙는다.
 # 인자는 cl 로 그대로 넘어간다 (taa -c → cl -c).
-# send-keys 는 tmux 가 pty 에 버퍼링해 두므로 셸이 뜨기 전에 보내도 셸이 읽는다.
+# 명령은 send-keys 나 `fish -C` 가 아니라 환경변수 TAA_CMD 로 넘긴다 (config.fish 맨 끝 참고).
+# 새 pane 의 fish 는 conf.d 의 kiro-cli 훅이 kiro-cli-term 으로 exec 하고 그 안에서
+# fish 를 다시 띄운다. 그래서 send-keys 로 먼저 보낸 입력은 raw 모드 전환 때 버려져
+# "cl" 만 에코되고 실행은 안 되며, `fish -C` 는 바깥 fish 에서 소비돼 안쪽엔 안 닿는다.
+# 환경변수는 exec 체인을 그대로 타므로 어느 fish 가 최종 셸이 되든 정확히 한 번 실행된다.
 function taa
   if test -n "$TMUX"
     echo "Already inside a tmux session"
     return 1
   end
-  set -l win
+  set -l cmd (string join -- ' ' cl (string escape -- $argv))
   if tmux has-session -t '=main' 2>/dev/null
-    set win (tmux new-window -P -F '#{window_id}' -t '=main:' -c $PWD)
+    tmux new-window -t '=main:' -c $PWD -e TAA_CMD=$cmd
   else
-    set win (tmux new-session -d -P -F '#{window_id}' -s main -c $PWD)
+    tmux new-session -d -s main -c $PWD -e TAA_CMD=$cmd
   end
   or return
-  tmux send-keys -t $win (string join -- ' ' cl (string escape -- $argv)) Enter
   tmux attach -t '=main'
 end
 
@@ -569,4 +572,12 @@ fish_add_path $HOME/.grok/bin
 if command -qs grok
     alias gk "grok --always-approve"
     alias gkp "grok --always-approve -p"
+end
+
+# taa 가 tmux -e 로 넘긴 명령 (위 taa 참고). 프롬프트가 뜨기 직전에 여기서 실행한다.
+# 한 번만 실행되고 claude 등 자식에게 새지 않도록 실행 전에 지운다.
+if status is-interactive; and set -q TAA_CMD
+    set -l _taa_cmd $TAA_CMD
+    set -e TAA_CMD
+    eval $_taa_cmd
 end
