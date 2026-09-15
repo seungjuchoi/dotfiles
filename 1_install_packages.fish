@@ -77,7 +77,6 @@ set -l packages \
         thefuck \
         tealdeer \
         tmux \
-        tmux-fingers \
         tree-sitter-cli \
         unar \
         yazi \
