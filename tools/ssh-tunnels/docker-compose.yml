@@ -6,8 +6,13 @@ services:
     restart: unless-stopped
     container_name: ssh-tunnels
     stop_grace_period: 1s
+    volumes:
+      # SSH 키는 리포 밖에 두고 read-only 로 마운트한다.
+      # 다른 경로를 쓰려면 SSH_TUNNELS_SSH_DIR 환경변수로 덮어쓴다.
+      - ${SSH_TUNNELS_SSH_DIR:-~/.config/ssh-tunnels/ssh}:/ssh-src:ro
     ports: []
-    # Add host-specific ports/tunnels in docker-compose.override.yml
+    # Add host-specific ports/tunnels in docker-compose.override.yml.
+    # 포트는 반드시 "127.0.0.1:PORT:PORT" 형태로 적어 LAN 노출을 막는다.
     environment:
       SSH_TUNNELS: |
         # Uncomment the below lines to use
