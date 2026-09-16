@@ -170,10 +170,10 @@ fzf_configure_bindings --variables=\e\cv
 # python
 set -gx PYTHONBREAKPOINT "ipdb.set_trace"
 
-if test -z "$VIRTUAL_ENV"; and begin; type -q python || type -q ipython || type -q ipython3; end
-    set_color yellow
-    echo "⚠️  Warning: Global Python executables detected outside of virtual environment"
-    set_color normal
+if status is-interactive; and test -z "$VIRTUAL_ENV"; and begin; type -q python || type -q ipython || type -q ipython3; end
+    set_color yellow >&2
+    echo "⚠️  Warning: Global Python executables detected outside of virtual environment" >&2
+    set_color normal >&2
 end
 
 
