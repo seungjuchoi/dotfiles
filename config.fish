@@ -328,6 +328,8 @@ function taa
     tmux new-window -t '=main:' -c $PWD -e TAA_CMD=$cmd
   else
     tmux new-session -d -s main -c $PWD -e TAA_CMD=$cmd
+    # new-session -e 는 세션 환경에 남아 이후 새 window 마다 cl 이 뜨므로 바로 지운다.
+    and tmux set-environment -t '=main' -u TAA_CMD
   end
   or return
   tmux attach -t '=main'
