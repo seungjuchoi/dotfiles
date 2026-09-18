@@ -311,7 +311,9 @@ function ta
   end
 end
 
-# ta + prefix+f + cl: main 세션에 현재 디렉터리로 새 창을 만들고 거기서 cl 을 띄운 뒤 붙는다.
+# ta + prefix+f + cl: main 세션에 새 창을 만들고 거기서 cl 을 띄운 뒤 붙는다.
+# 작업 디렉터리는 zoxide 의 tz(범용 작업 폴더) — 일반 질문·작업은 한 폴더에서 해야
+# Claude 프로젝트 메모리가 거기에 쌓인다. tz 를 못 찾으면 기존처럼 $PWD 로 폴백.
 # 인자는 cl 로 그대로 넘어간다 (taa -c → cl -c).
 # 명령은 send-keys 나 `fish -C` 가 아니라 환경변수 TAA_CMD 로 넘긴다 (config.fish 맨 끝 참고).
 # 새 pane 의 fish 는 conf.d 의 kiro-cli 훅이 kiro-cli-term 으로 exec 하고 그 안에서
@@ -324,10 +326,14 @@ function taa
     return 1
   end
   set -l cmd (string join -- ' ' cl (string escape -- $argv))
+  set -l dir (zoxide query tz 2>/dev/null)
+  if test -z "$dir"; or not test -d "$dir"
+    set dir $PWD
+  end
   if tmux has-session -t '=main' 2>/dev/null
-    tmux new-window -t '=main:' -c $PWD -e TAA_CMD=$cmd
+    tmux new-window -t '=main:' -c $dir -e TAA_CMD=$cmd
   else
-    tmux new-session -d -s main -c $PWD -e TAA_CMD=$cmd
+    tmux new-session -d -s main -c $dir -e TAA_CMD=$cmd
     # new-session -e 는 세션 환경에 남아 이후 새 window 마다 cl 이 뜨므로 바로 지운다.
     and tmux set-environment -t '=main' -u TAA_CMD
   end

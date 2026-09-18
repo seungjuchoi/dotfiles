@@ -6,9 +6,14 @@
 # pane 의 셸에서 돌면서 그 pane 을 kill 했기 때문에, 자기 자신을 SIGHUP 으로 끝내거나
 # 세션 마지막 pane 일 때 세션까지 연쇄 소멸시키는 문제가 있었다.
 #
-# 인자: 새 창의 작업 디렉터리 (보통 호출한 pane 의 경로).
+# 작업 디렉터리: zoxide 의 tz(범용 작업 폴더)를 우선 사용한다 — 일반 질문·작업은
+# 한 폴더에서 해야 Claude 프로젝트 메모리가 거기에 쌓인다. zoxide 가 없거나 tz 를
+# 못 찾으면 기존처럼 인자(호출한 pane 의 경로)로 폴백한다. tmux 서버는 homebrew
+# PATH 없이 뜰 수 있어 PATH 를 보강한다. (프로젝트 폴더에서 열고 싶으면 prefix+c.)
 set -e
-dir=${1:-$HOME}
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+dir=$(zoxide query tz 2>/dev/null) || dir=
+[ -d "$dir" ] || dir=${1:-$HOME}
 [ -d "$dir" ] || dir=$HOME
 
 if tmux has-session -t '=main' 2>/dev/null; then
