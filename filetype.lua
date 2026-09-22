@@ -17,4 +17,3 @@ vim.cmd("autocmd FileType vim imap <buffer> <F2> <esc>:update<CR>:!source %<CR>"
 vim.cmd("autocmd FileType fish map <buffer> <F2> :update<CR>:!source %<CR>")
 vim.cmd("autocmd FileType fish imap <buffer> <F2> <esc>:update<CR>:!source %<CR>")
 vim.cmd("autocmd WinEnter * if &buftype == 'terminal' | setlocal nonumber norelativenumber | endif")
-vim.cmd("autocmd FileType Avante nnoremap <buffer> <Esc> <Nop>")
