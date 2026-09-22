@@ -102,7 +102,7 @@ cargo install --path . --quiet || die "빌드 실패"
 link_bin
 
 ok "설치 완료: $(tmuxcc --version 2>/dev/null || echo tmuxcc) — $(git log -1 --format=%h\ %s)"
-if [ -n "${TMUX:-}" ] && pgrep -qx tmuxcc; then
+if [ -n "${TMUX:-}" ] && pgrep -x tmuxcc >/dev/null 2>&1; then
   printf '\033[33m! 실행 중인 tmuxcc는 재시작해야 새 버전이 적용됩니다.\033[0m\n'
 fi
 pause_exit 0
