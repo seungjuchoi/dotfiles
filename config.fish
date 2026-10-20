@@ -43,9 +43,10 @@ if command -qs thefuck
     thefuck --alias | source
 end
 if command -qs claude
-    # Enterprise (company) accounts disallow bypassPermissions; skip the flag there.
+    # Enterprise (company) accounts disallow bypassPermissions; use auto mode there.
     function _claude_perm_flags
         if jq -e '.oauthAccount.organizationType == "claude_enterprise"' ~/.claude.json >/dev/null 2>&1
+            printf '%s\n' --permission-mode auto
             return
         end
         echo --dangerously-skip-permissions
