@@ -52,6 +52,12 @@ fi
 log "복원 시작"
 bash "$PLUGIN_SCRIPT"
 status=$?
+# Kiro CLI 는 플러그인이 지원하지 않아 별도 스크립트로 재개한다 (tmux_kiro_sessions.sh).
+# 같은 락 안에서 돌려야 중복 복원 방지가 Kiro 에도 적용된다.
+KIRO_SCRIPT="$HOME/.tmux/kiro-sessions.sh"
+if [ -f "$KIRO_SCRIPT" ]; then
+	bash "$KIRO_SCRIPT" restore || log "kiro 복원 실패 (exit $?)"
+fi
 log "복원 종료 (exit $status)"
 
 # 락은 바로 풀지 않고 LOCK_HOLD 초 뒤에 해제한다.

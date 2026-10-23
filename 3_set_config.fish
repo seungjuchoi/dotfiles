@@ -24,6 +24,7 @@ command mkdir -p ~/.tmux
 command ln -s -f $PWD/tmux_renumber_sessions.sh ~/.tmux/renumber-sessions.sh
 command ln -s -f $PWD/tmux_agent_window.sh ~/.tmux/agent-window.sh
 command ln -s -f $PWD/tmux_assistant_restore_once.sh ~/.tmux/assistant-restore-once.sh
+command ln -s -f $PWD/tmux_kiro_sessions.sh ~/.tmux/kiro-sessions.sh
 command mkdir -p ~/.local/bin
 command ln -s -f $PWD/tmuxcc_update.sh ~/.local/bin/tmuxcc-update
 command ln -s -f $PWD/tmuxcc_launch.sh ~/.local/bin/tmuxcc-launch
