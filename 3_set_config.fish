@@ -45,6 +45,8 @@ command ln -s -f $PWD/mpv.conf ~/.config/mpv/mpv.conf
 command ln -s -f $PWD/mpv_input.conf ~/.config/mpv/input.conf
 command mkdir -p ~/.config/ghostty
 command ln -s -f $PWD/ghostty_config ~/.config/ghostty/config
+command mkdir -p ~/.config/herdr
+command ln -s -f $PWD/herdr_config.toml ~/.config/herdr/config.toml
 
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish

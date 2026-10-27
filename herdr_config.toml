@@ -1,0 +1,36 @@
+onboarding = false
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+t"
+# 한글 입력 상태에선 ctrl+t가 ctrl+ㅅ으로 들어온다
+extra_prefixes = ["ctrl+ㅅ"]
+
+# prefix 뒤 알파벳 키를 ctrl을 누른 채로도 동작하게 (기존 바인딩 유지 + ctrl 버전 추가)
+# 세 번째 항목은 한글 입력 상태의 같은 물리 키(두벌식 자모)
+settings          = ["prefix+s", "prefix+ctrl+s", "prefix+ㄴ"]
+workspace_picker  = ["prefix+w", "prefix+ctrl+w", "prefix+ㅈ"]
+goto              = ["prefix+g", "prefix+ctrl+g", "prefix+ㅎ"]
+detach            = ["prefix+q", "prefix+ctrl+q", "prefix+ㅂ"]
+open_notification_target = ["prefix+o", "prefix+ctrl+o", "prefix+ㅐ"]
+new_tab           = ["prefix+c", "prefix+ctrl+c", "prefix+ㅊ"]
+previous_tab      = ["prefix+p", "prefix+ctrl+p", "prefix+ㅔ"]
+next_tab          = ["prefix+n", "prefix+ctrl+n", "prefix+ㅜ"]
+edit_scrollback   = ["prefix+e", "prefix+ctrl+e", "prefix+ㄷ"]
+focus_pane_left   = ["prefix+h", "prefix+ctrl+h", "prefix+ㅗ", "prefix+backspace"]  # 한글일 때 ctrl+h는 backspace로 옴
+focus_pane_down   = ["prefix+j", "prefix+ctrl+j", "prefix+ㅓ"]
+focus_pane_up     = ["prefix+k", "prefix+ctrl+k", "prefix+ㅏ"]
+focus_pane_right  = ["prefix+l", "prefix+ctrl+l", "prefix+ㅣ"]
+split_vertical    = ["prefix+v", "prefix+ctrl+v", "prefix+ㅍ"]
+split_horizontal  = ["prefix+minus", "prefix+ctrl+minus"]
+close_pane        = ["prefix+x", "prefix+ctrl+x", "prefix+ㅌ"]
+zoom              = ["prefix+z", "prefix+ctrl+z", "prefix+ㅋ"]
+resize_mode       = ["prefix+r", "prefix+ctrl+r", "prefix+ㄱ"]
+toggle_sidebar    = ["prefix+b", "prefix+ctrl+b", "prefix+ㅠ"]
+
+[experimental]
+# prefix 모드 동안 입력 소스를 영문으로 잠깐 바꿨다가 끝나면 복원
+switch_ascii_input_source_in_prefix = true
