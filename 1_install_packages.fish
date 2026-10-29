@@ -74,7 +74,6 @@ set -l packages \
         rust \
         uv \
         starship \
-        thefuck \
         tealdeer \
         tmux \
         tree-sitter-cli \

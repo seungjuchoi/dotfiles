@@ -39,9 +39,6 @@ end
 if command -qs zoxide
     zoxide init fish | source
 end
-if command -qs thefuck
-    thefuck --alias | source
-end
 if command -qs claude
     # Enterprise (company) accounts disallow bypassPermissions; use auto mode there.
     function _claude_perm_flags
