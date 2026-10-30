@@ -53,6 +53,8 @@ command mkdir -p ~/.config/ghostty
 command ln -s -f $PWD/ghostty_config ~/.config/ghostty/config
 command mkdir -p ~/.config/herdr
 command ln -s -f $PWD/herdr_config.toml ~/.config/herdr/config.toml
+command ln -s -f $PWD/herdr_main_tab.sh ~/.config/herdr/main-tab.sh
+command ln -s -f $PWD/herdr_file_picker.sh ~/.config/herdr/file-picker.sh
 
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish
