@@ -2,6 +2,10 @@
 # tmux.conf 의 prefix+f 바인딩에서 호출 — main 세션에 window 를 하나 만들고 그 창으로
 # 이동한다. agent(cl/co 등)는 열린 창에서 직접 실행한다.
 #
+# --ai 를 주면(prefix+i) 창을 연 뒤 MAIN_AI_CMD(기본 cl)를 입력해 바로 agent 로 들어간다.
+# MAIN_AI_CMD 는 config_local.fish 에서 `set -gx MAIN_AI_CMD kr` 처럼 바꾼다. tmux 서버
+# 환경엔 없을 수 있어 fish 에 물어본다(fish -c 도 config.fish→config_local.fish 를 읽는다).
+#
 # tmux 서버가 실행 주체라 호출한 pane 은 건드리지 않는다. 이전의 ag 함수는 호출한
 # pane 의 셸에서 돌면서 그 pane 을 kill 했기 때문에, 자기 자신을 SIGHUP 으로 끝내거나
 # 세션 마지막 pane 일 때 세션까지 연쇄 소멸시키는 문제가 있었다.
@@ -12,14 +16,26 @@
 # PATH 없이 뜰 수 있어 PATH 를 보강한다. (프로젝트 폴더에서 열고 싶으면 prefix+c.)
 set -e
 PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+ai=
+if [ "$1" = --ai ]; then
+    ai=${MAIN_AI_CMD:-$(fish -c 'echo $MAIN_AI_CMD' 2>/dev/null || true)}
+    ai=${ai:-cl}
+    shift
+fi
 dir=$(zoxide query tz 2>/dev/null) || dir=
 [ -d "$dir" ] || dir=${1:-$HOME}
 [ -d "$dir" ] || dir=$HOME
 
 if tmux has-session -t '=main' 2>/dev/null; then
-    tmux new-window -t '=main:' -c "$dir"
+    pane=$(tmux new-window -t '=main:' -c "$dir" -P -F '#{pane_id}')
 else
-    tmux new-session -d -s main -c "$dir"
+    pane=$(tmux new-session -d -s main -c "$dir" -P -F '#{pane_id}')
+fi
+
+# 셸 프롬프트가 뜨기 전에 보내도 tty 입력 버퍼에 쌓였다가 그대로 실행된다.
+if [ -n "$ai" ]; then
+    tmux send-keys -t "$pane" -l "$ai"
+    tmux send-keys -t "$pane" Enter
 fi
 
 # new-window 가 main 의 현재 창을 방금 만든 창으로 바꿔 두므로, 세션만 잡으면 된다.
