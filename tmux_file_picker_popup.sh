@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # tmux-file-picker(raine) 래퍼 — prefix+e 팝업에서 호출한다.
 #
-# tmux-file-picker 본체는 이 저장소에 없다. 최초 1회만 설치:
+# tmux-file-picker 본체는 이 저장소에 없다. 3_set_config.fish 가 없을 때 받아 두며, 수동 설치는:
 #   curl -fsSLo ~/.local/bin/tmux-file-picker \
 #     https://raw.githubusercontent.com/raine/tmux-file-picker/main/tmux-file-picker
 #   chmod +x ~/.local/bin/tmux-file-picker

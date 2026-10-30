@@ -29,6 +29,12 @@ command mkdir -p ~/.local/bin
 command ln -s -f $PWD/tmuxcc_update.sh ~/.local/bin/tmuxcc-update
 command ln -s -f $PWD/tmuxcc_launch.sh ~/.local/bin/tmuxcc-launch
 command ln -s -f $PWD/tmux_file_picker_popup.sh ~/.local/bin/tmux-file-picker-popup
+# prefix+e 팝업이 부르는 tmux-file-picker(raine) 본체. 저장소에 없으므로 없을 때만 받는다.
+if not test -x ~/.local/bin/tmux-file-picker
+    command curl -fsSLo ~/.local/bin/tmux-file-picker \
+        https://raw.githubusercontent.com/raine/tmux-file-picker/main/tmux-file-picker
+    and command chmod +x ~/.local/bin/tmux-file-picker
+end
 command ln -s -f $PWD/clipsend.sh ~/.local/bin/clipsend
 command ln -s -f $PWD/ta.sh ~/.local/bin/ta
 command mkdir -p ~/.config/fish/completions
