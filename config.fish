@@ -341,6 +341,7 @@ end
 
 alias tx 'tmux detach'
 alias av 'aven tui'
+alias hr 'herdr'
 
 if test "$TERM_PROGRAM" = "kiro"; and command -q kiro
     . (kiro --locate-shell-integration-path fish)
