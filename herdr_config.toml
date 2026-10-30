@@ -1,5 +1,9 @@
 onboarding = false
 
+[ui]
+# prefix+c 로 새 탭을 만들 때 이름을 묻지 않고 바로 만든다
+prompt_new_tab_name = false
+
 [theme]
 name = "tokyo-night"
 auto_switch = false
