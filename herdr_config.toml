@@ -4,6 +4,10 @@ onboarding = false
 # prefix+c 로 새 탭을 만들 때 이름을 묻지 않고 바로 만든다
 prompt_new_tab_name = false
 
+# 사이드바 claude 행에 터미널 제목(세션 제목)을 함께 보여준다
+[ui.sidebar.agents.rows_by_agent]
+claude = [["state_icon", "terminal_title_stripped"], ["machine", "workspace", "tab"]]
+
 [theme]
 name = "tokyo-night"
 auto_switch = false
