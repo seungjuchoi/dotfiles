@@ -16,7 +16,8 @@ extra_prefixes = ["ctrl+ㅅ"]
 # prefix 뒤 알파벳 키를 ctrl을 누른 채로도 동작하게 (기존 바인딩 유지 + ctrl 버전 추가)
 # 세 번째 항목은 한글 입력 상태의 같은 물리 키(두벌식 자모)
 settings          = ["prefix+s", "prefix+ctrl+s", "prefix+ㄴ"]
-workspace_picker  = ["prefix+w", "prefix+ctrl+w", "prefix+ㅈ"]
+# , 는 tmux 의 choose-tree(C-,) 손버릇. 한글 입력 상태에서도 그대로 , 가 온다
+workspace_picker  = ["prefix+w", "prefix+ctrl+w", "prefix+ㅈ", "prefix+,"]
 goto              = ["prefix+g", "prefix+ctrl+g", "prefix+ㅎ"]
 detach            = ["prefix+q", "prefix+ctrl+q", "prefix+ㅂ"]
 # o 는 tmux 처럼 AI 탭에 쓰고, 알림 대상 열기는 i 로 옮겼다 (ctrl+i 는 Tab 과 겹쳐 뺌)
