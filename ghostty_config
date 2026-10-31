@@ -79,6 +79,8 @@ keybind = ctrl+seven=text:\x1b[55;5u
 keybind = ctrl+eight=text:\x1b[56;5u
 keybind = ctrl+nine=text:\x1b[57;5u
 keybind = ctrl+enter=text:\r
+# ctrl+[ 는 원래 Esc(0x1b)로 나가서 herdr prefix+ctrl+[ 가 안 먹는다 → CSI u로 구분해 보낸다
+keybind = ctrl+bracket_left=text:\x1b[91;5u
 
 # Split navigation (cmd + shift + hjkl)
 keybind = cmd+shift+h=goto_split:left

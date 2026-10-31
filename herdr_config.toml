@@ -27,10 +27,14 @@ detach            = ["prefix+q", "prefix+ctrl+q", "prefix+ㅂ"]
 # o 는 tmux 처럼 AI 탭에 쓰고, 알림 대상 열기는 i 로 옮겼다 (ctrl+i 는 Tab 과 겹쳐 뺌)
 open_notification_target = ["prefix+i", "prefix+ㅑ"]
 new_tab           = ["prefix+c", "prefix+ctrl+c", "prefix+ㅊ"]
-previous_tab      = ["prefix+p", "prefix+ctrl+p", "prefix+ㅔ"]
-next_tab          = ["prefix+n", "prefix+ctrl+n", "prefix+ㅜ"]
-# e 는 파일 피커에 쓰고, 스크롤백 편집은 tmux copy-mode 자리인 [ 로 옮겼다
-edit_scrollback   = ["prefix+["]
+# n/p 는 탭이 아니라 사이드바 agents 목록을 위아래로 이동한다
+previous_agent    = ["prefix+p", "prefix+ctrl+p", "prefix+ㅔ"]
+next_agent        = ["prefix+n", "prefix+ctrl+n", "prefix+ㅜ"]
+# 탭 이동은 [ / ] (스크롤백 편집은 안 써서 키를 뺐다)
+# ctrl 을 쥔 채 누르면 ctrl+] 는 ctrl+5(0x1d) 로 온다. ctrl+[ 는 Ghostty keybind 로 CSI u 를 보내게 했다
+previous_tab      = ["prefix+[", "prefix+ctrl+["]
+next_tab          = ["prefix+]", "prefix+ctrl+]", "prefix+ctrl+5"]
+edit_scrollback   = []
 focus_pane_left   = ["prefix+h", "prefix+ctrl+h", "prefix+ㅗ", "prefix+backspace"]  # 한글일 때 ctrl+h는 backspace로 옴
 focus_pane_down   = ["prefix+j", "prefix+ctrl+j", "prefix+ㅓ"]
 focus_pane_up     = ["prefix+k", "prefix+ctrl+k", "prefix+ㅏ"]
