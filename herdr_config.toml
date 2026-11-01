@@ -169,3 +169,6 @@ command = 'cd "${HERDR_ACTIVE_PANE_CWD:-.}" && PATH=/opt/homebrew/bin:$PATH && e
 description = "yazi"
 width = "90%"
 height = "85%"
+
+[ui.toast]
+delivery = "herdr"
