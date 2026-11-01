@@ -5,8 +5,11 @@ onboarding = false
 prompt_new_tab_name = false
 
 # 사이드바 claude 행에 터미널 제목(세션 제목)을 함께 보여준다
+status_indicators = "symbols"
 [ui.sidebar.agents.rows_by_agent]
 claude = [["state_icon", "terminal_title_stripped"], ["machine", "workspace", "tab"]]
+# kiro 는 터미널 제목에 세션 제목을 안 쓴다. timer.kiro-title 플러그인이 $title 토큰으로 보내준다
+kiro = [["state_icon", "$title"], ["machine", "workspace", "tab"]]
 
 [theme]
 name = "tokyo-night"
