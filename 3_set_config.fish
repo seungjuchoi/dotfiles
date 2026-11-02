@@ -61,6 +61,24 @@ if type -q herdr
         command herdr plugin link (dirname $p) >/dev/null
         or echo "herdr plugin link failed: "(dirname $p)
     end
+    # GitHub 플러그인. herdr-pluck: prefix+\ 힌트 복사 (tmux-fingers 대응)
+    # 포크(seungjuchoi) 브랜치를 쓴다: SSH 로 들어간 헤드리스 Linux 에서 OSC 52 로 복사하도록 고친 것.
+    # 포크엔 릴리스 바이너리가 없어 소스 빌드(cargo)로 설치한다. 업스트림이 설치돼 있으면 바꿔 끼운다.
+    set pluck_src seungjuchoi/herdr-pluck
+    set pluck_ref osc52-clipboard-fallback
+    set pluck_line (command herdr plugin list 2>/dev/null | string match '*rmarganti.herdr-pluck*')
+    if test -n "$pluck_line"; and not string match -q "*github:$pluck_src@*" -- $pluck_line
+        command herdr plugin uninstall rmarganti.herdr-pluck >/dev/null
+    end
+    if not command herdr plugin list 2>/dev/null | string match -q "*github:$pluck_src@*"
+        env HERDR_PLUCK_BUILD_FROM_SOURCE=1 herdr plugin install $pluck_src --ref $pluck_ref --yes >/dev/null
+        or echo "herdr plugin install failed: $pluck_src@$pluck_ref"
+    end
+    set pluck_cfg (command herdr plugin config-dir rmarganti.herdr-pluck 2>/dev/null)
+    if test -n "$pluck_cfg"
+        command mkdir -p $pluck_cfg
+        command ln -s -f $PWD/herdr_pluck.toml $pluck_cfg/config.toml
+    end
 end
 
 if test -f ~/.config/fish/config_local.fish

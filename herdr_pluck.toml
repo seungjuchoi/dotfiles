@@ -1,0 +1,42 @@
+# herdr-pluck(rmarganti/herdr-pluck) 사용자 패턴. 3_set_config.fish 가
+# ~/.config/herdr/plugins/config/rmarganti.herdr-pluck/config.toml 로 링크한다.
+#
+# 낮은 priority 가 이긴다. 내장: url=10 git=15 k8s=18 path=20 uuid=30 sha=40 hex=45 ipv4=50 number=60
+#
+# 내장 패턴의 \w·\b 는 유니코드라 한글도 단어 문자로 본다. 그래서
+#   ~/.config/foo.toml에     → 경로에 '에' 까지 붙고
+#   a6c88bcfb605에          → 경계가 없어 해시가 아예 안 잡힌다.
+# 아래는 (?-u:…) 로 ASCII 만 보게 한 같은 패턴을 내장보다 1 낮은 priority 로 둔 것이다.
+# 사용자 패턴은 끝 구두점 정리를 안 해주므로 마지막 글자가 . , ; : ! ? 가 되지 않게 정규식으로 막았다.
+
+[[patterns]]
+name = "url-ascii"
+regex = "(?-u:(?i:https?://|git@|git://|ssh://|ftp://|file://)[A-Za-z0-9\\-._~:/?#\\[\\]@!$&*+,;=%]*[A-Za-z0-9\\-_~/#\\[\\]@$&*+=%])"
+priority = 9
+
+[[patterns]]
+name = "path-ascii"
+regex = "(?-u:(?:[.\\w~$@-]+)?(?:/[.\\w@-]*[\\w@-])+/?)"
+priority = 19
+
+# sess_0ad63a89-14a1-4a56-b973-a6c88bcfb605 처럼 "접두어_UUID" 를 통째로.
+# ('_' 도 단어 문자라 내장 uuid 의 앞 \b 가 성립하지 않아 끝 조각만 잡히던 문제)
+[[patterns]]
+name = "prefixed-uuid"
+regex = "(?-u:\\b[A-Za-z][A-Za-z0-9]*_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b)"
+priority = 25
+
+[[patterns]]
+name = "uuid-ascii"
+regex = "(?-u:\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\b)"
+priority = 29
+
+[[patterns]]
+name = "git-sha-ascii"
+regex = "(?-u:\\b[0-9a-fA-F]{7,40}\\b)"
+priority = 39
+
+[[patterns]]
+name = "hex-ascii"
+regex = "(?-u:\\b0x[0-9a-fA-F]+\\b)"
+priority = 44
