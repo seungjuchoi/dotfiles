@@ -1,0 +1,12 @@
+# aven TUI 커스텀 명령. 3_set_config.fish 가 ~/.config/aven/config.yaml 의 tui.commands 에 넣는다.
+# config.yaml 은 sync auth_token 이 있어 통째로 저장소에 두지 않는다.
+# z (한글 입력 상태는 ㅋ) — 선택한 task 로 herdr agent 탭을 열고 프롬프트만 채운다 (Enter 안 침)
+- name: herdr-agent
+  aliases: [agent]
+  description: 선택한 task로 herdr agent 탭 열기 (프롬프트만 채움)
+  program: ~/.config/aven/commands/herdr-agent
+  keys: [z, ㅋ]
+  target: focused
+  execution: wait
+  timeout_seconds: 90
+  on_success: stay

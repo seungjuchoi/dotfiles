@@ -81,6 +81,18 @@ if type -q herdr
     end
 end
 
+# aven TUI 커스텀 명령. config.yaml 엔 sync auth_token 이 있어 링크하지 않고 tui.commands 만 바꿔 넣는다.
+if type -q aven
+    command mkdir -p ~/.config/aven/commands
+    command ln -s -f $PWD/aven_herdr_agent.sh ~/.config/aven/commands/herdr-agent
+    set aven_cfg ~/.config/aven/config.yaml
+    if not test -f $aven_cfg
+        command yq -n '.tui.commands = load("'$PWD/aven_tui_commands.yaml'")' >$aven_cfg
+    else if test (command yq -o=json -I0 '.tui.commands' $aven_cfg) != (command yq -o=json -I0 '.' $PWD/aven_tui_commands.yaml)
+        command yq -i '.tui.commands = load("'$PWD/aven_tui_commands.yaml'")' $aven_cfg
+    end
+end
+
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish
 end
