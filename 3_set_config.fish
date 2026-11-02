@@ -74,8 +74,11 @@ git config --global diff.tool nvimdiff
 git config --global difftool.nvimdiff.cmd 'nvim -d "$LOCAL" "$REMOTE"'
 
 tmux new-session -d -s init_config
-tmux source ~/.tmux.conf
-tmux run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'
+# tpm 의 bin/ 은 명령줄용이라 tmux.conf 를 다시 읽지 않는다.
+# bindings/ 는 키바인딩용이라 앞뒤로 한 번씩 다시 읽어서, reload 한 번(약 2.5초)이 네 번 더 붙는다.
+~/.tmux/plugins/tpm/bin/install_plugins
 # tmux.conf 의 @plugin 선언에서 빠진 플러그인 디렉터리를 지운다 (tpm 자신은 제외).
-tmux run-shell '~/.tmux/plugins/tpm/bindings/clean_plugins'
+~/.tmux/plugins/tpm/bin/clean_plugins
+# 새로 받은 플러그인을 실행 중인 서버에 올린다. reload 는 이 한 번뿐이다.
+tmux source ~/.tmux.conf
 tmux kill-session -t init_config
