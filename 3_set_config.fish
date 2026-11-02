@@ -55,6 +55,13 @@ command mkdir -p ~/.config/herdr
 command ln -s -f $PWD/herdr_config.toml ~/.config/herdr/config.toml
 command ln -s -f $PWD/herdr_main_tab.sh ~/.config/herdr/main-tab.sh
 command ln -s -f $PWD/herdr_file_picker.sh ~/.config/herdr/file-picker.sh
+# 로컬 herdr 플러그인. link 는 경로를 기록하므로 다시 실행해도 같은 결과다.
+if type -q herdr
+    for p in $PWD/herdr_plugins/*/herdr-plugin.toml
+        command herdr plugin link (dirname $p) >/dev/null
+        or echo "herdr plugin link failed: "(dirname $p)
+    end
+end
 
 if test -f ~/.config/fish/config_local.fish
     command ln -s -f ~/.config/fish/config_local.fish $PWD/config_local.fish

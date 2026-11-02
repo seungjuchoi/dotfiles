@@ -1,0 +1,21 @@
+id = "timer.kiro-title"
+name = "Kiro session title"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Show Kiro CLI session titles (from ~/.kiro/sessions) as Herdr pane titles"
+platforms = ["macos", "linux"]
+
+# Apply titles to Kiro panes that are already open when the server starts.
+[[startup]]
+command = ["bash", "kiro-title.sh", "all"]
+
+# Kiro generates the title after a turn, so re-check whenever its state changes.
+[[events]]
+on = "pane.agent_status_changed"
+command = ["bash", "kiro-title.sh", "event"]
+
+[[actions]]
+id = "sync"
+title = "Sync Kiro session titles"
+contexts = ["workspace"]
+command = ["bash", "kiro-title.sh", "all"]
