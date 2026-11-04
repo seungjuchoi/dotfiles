@@ -1,5 +1,5 @@
-# herdr-pluck(rmarganti/herdr-pluck) 사용자 패턴. 3_set_config.fish 가
-# ~/.config/herdr/plugins/config/rmarganti.herdr-pluck/config.toml 로 링크한다.
+# herdr-pluck(seungjuchoi/herdr-pluck) 사용자 패턴. 3_set_config.fish 가
+# ~/.config/herdr/plugins/config/seungjuchoi.herdr-pluck/config.toml 로 링크한다.
 #
 # 낮은 priority 가 이긴다. 내장: url=10 git=15 k8s=18 path=20 uuid=30 sha=40 hex=45 ipv4=50 number=60
 #

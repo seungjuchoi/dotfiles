@@ -170,30 +170,30 @@ description = "yazi"
 width = "90%"
 height = "85%"
 
-# \ — tmux-fingers 처럼 화면의 URL·경로·SHA 등에 힌트 글자를 띄우고, 그 글자를 치면 복사 (rmarganti/herdr-pluck)
+# \ — tmux-fingers 처럼 화면의 URL·경로·SHA 등에 힌트 글자를 띄우고, 그 글자를 치면 복사 (seungjuchoi/herdr-pluck)
 # ctrl 을 쥔 채 누르면 ctrl+\ 는 ctrl+4(0x1c) 로 올 수 있어 둘 다 넣었다. 한글 입력 상태에선 ₩ 로 온다
 [[keys.command]]
 key = "prefix+backslash"
 type = "plugin_action"
-command = "rmarganti.herdr-pluck.pluck"
+command = "seungjuchoi.herdr-pluck.pluck"
 description = "pluck visible token"
 
 [[keys.command]]
 key = "prefix+ctrl+backslash"
 type = "plugin_action"
-command = "rmarganti.herdr-pluck.pluck"
+command = "seungjuchoi.herdr-pluck.pluck"
 description = "pluck visible token"
 
 [[keys.command]]
 key = "prefix+ctrl+4"
 type = "plugin_action"
-command = "rmarganti.herdr-pluck.pluck"
+command = "seungjuchoi.herdr-pluck.pluck"
 description = "pluck visible token"
 
 [[keys.command]]
 key = "prefix+₩"
 type = "plugin_action"
-command = "rmarganti.herdr-pluck.pluck"
+command = "seungjuchoi.herdr-pluck.pluck"
 description = "pluck visible token"
 
 [ui.toast]
