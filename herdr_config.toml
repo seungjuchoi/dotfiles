@@ -38,12 +38,14 @@ next_agent        = ["prefix+n", "prefix+ctrl+n", "prefix+ㅜ"]
 previous_tab      = ["prefix+[", "prefix+ctrl+["]
 next_tab          = ["prefix+]", "prefix+ctrl+]", "prefix+ctrl+5"]
 edit_scrollback   = []
+# 키보드로 스크롤백 보기 (j/k·pgup/pgdn·/ 검색·q 종료)
+copy_mode         = ["prefix+space", "prefix+ctrl+space"]
 focus_pane_left   = ["prefix+h", "prefix+ctrl+h", "prefix+ㅗ", "prefix+backspace"]  # 한글일 때 ctrl+h는 backspace로 옴
 focus_pane_down   = ["prefix+j", "prefix+ctrl+j", "prefix+ㅓ"]
 focus_pane_up     = ["prefix+k", "prefix+ctrl+k", "prefix+ㅏ"]
 focus_pane_right  = ["prefix+l", "prefix+ctrl+l", "prefix+ㅣ"]
 split_vertical    = ["prefix+v", "prefix+ctrl+v", "prefix+ㅍ"]
-split_horizontal  = ["prefix+minus", "prefix+ctrl+minus"]
+split_horizontal  = ["prefix+minus", "prefix+ctrl+minus", "prefix+\""]  # " 는 tmux 습관
 close_pane        = ["prefix+x", "prefix+ctrl+x", "prefix+ㅌ"]
 zoom              = ["prefix+z", "prefix+ctrl+z", "prefix+ㅋ"]
 resize_mode       = ["prefix+r", "prefix+ctrl+r", "prefix+ㄱ"]
