@@ -85,8 +85,21 @@ end
 if command -qs kiro-cli
     # TUI 는 --trust-all-tools 를 직접 소비한다. --no-interactive 는 ACP 로
     # 플래그를 넘기는데, ACP v3 는 --trust-all-tools 를 거절한다.
-    alias kr "kiro-cli chat --trust-all-tools --v3"
-    alias krp "kiro-cli chat --trust-all-tools --no-interactive"
+    if test -n "$_CL_PROXY_PORT"
+        function kr --wraps 'kiro-cli chat'
+            prxh $_CL_PROXY_PORT
+            kiro-cli chat --trust-all-tools --v3 $argv
+            prxh off
+        end
+        function krp --wraps 'kiro-cli chat'
+            prxh $_CL_PROXY_PORT
+            kiro-cli chat --trust-all-tools --no-interactive $argv
+            prxh off
+        end
+    else
+        alias kr "kiro-cli chat --trust-all-tools --v3"
+        alias krp "kiro-cli chat --trust-all-tools --no-interactive"
+    end
 end
 if command -qs opencode
     alias op "opencode"
