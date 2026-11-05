@@ -39,8 +39,8 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 -- Toggleterm
 k.set('n', '<C-`>', ":ToggleTerm direction=horizontal<CR>")
 -- Diagnostic keymaps
-k.set('n', '[d', vim.diagnostic.goto_prev)
-k.set('n', ']d', vim.diagnostic.goto_next)
+k.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
+k.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
 k.set('n', '<leader>e', vim.diagnostic.open_float)
 k.set('n', '<leader>q', vim.diagnostic.setloclist)
 

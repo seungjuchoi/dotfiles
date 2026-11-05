@@ -17,3 +17,11 @@ vim.cmd("autocmd FileType vim imap <buffer> <F2> <esc>:update<CR>:!source %<CR>"
 vim.cmd("autocmd FileType fish map <buffer> <F2> :update<CR>:!source %<CR>")
 vim.cmd("autocmd FileType fish imap <buffer> <F2> <esc>:update<CR>:!source %<CR>")
 vim.cmd("autocmd WinEnter * if &buftype == 'terminal' | setlocal nonumber norelativenumber | endif")
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.conceallevel = 2
+  end,
+})

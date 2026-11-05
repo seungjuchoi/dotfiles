@@ -18,9 +18,37 @@ require("lazy").setup({
       {"mason-org/mason.nvim", opts = {}},
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-      "folke/neodev.nvim",
-      { "saghen/blink.cmp", dependencies = { "saghen/blink.lib" } }
+      { "j-hui/fidget.nvim", opts = {} },
+      "hrsh7th/cmp-nvim-lsp",
+    },
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    opts = {
+      completions = { lsp = { enabled = true } },
+      heading = { sign = false },
+      code = { sign = false, width = "block", left_pad = 1, right_pad = 1 },
+      checkbox = {
+        custom = {
+          todo = { raw = "[-]", rendered = "󰥔 ", highlight = "RenderMarkdownTodo" },
+          cancelled = { raw = "[~]", rendered = "󰰱 ", highlight = "RenderMarkdownError" },
+          forward = { raw = "[>]", rendered = " ", highlight = "RenderMarkdownInfo" },
+        },
+      },
+    },
+    keys = {
+      { "<leader>mr", "<cmd>RenderMarkdown toggle<cr>", ft = "markdown", desc = "Markdown: toggle render" },
     },
   },
   {
@@ -45,9 +73,12 @@ require("lazy").setup({
   "godlygeek/tabular",
   "nvim-tree/nvim-web-devicons",
   {
-    "rafi/awesome-vim-colorschemes",
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
     priority = 1000,
     config = function()
+      require("catppuccin").setup({ flavour = "mocha" })
       vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
@@ -76,12 +107,11 @@ require("lazy").setup({
     opts = {},
   },
   "ap/vim-css-color",
-  "ryanoasis/vim-devicons",
   {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<F8>", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
+    "hedyhli/outline.nvim",
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { { "<F8>", "<cmd>Outline<cr>", desc = "Symbols Outline" } },
+    opts = {},
   },
   { "mg979/vim-visual-multi", branch = "master" },
   "nvim-lua/plenary.nvim",
@@ -112,7 +142,6 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     dependencies = "nvim-lua/plenary.nvim",
   },
-  "BurntSushi/ripgrep",
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -174,14 +203,6 @@ require("lazy").setup({
   },
   {
     "folke/which-key.nvim",
-    config = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      require("which-key").setup({})
-    end,
-  },
-  {
-    "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
@@ -204,12 +225,6 @@ require("lazy").setup({
     end,
   },
   "lambdalisue/suda.vim",
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
   {
     "stevearc/dressing.nvim",
     opts = {},
@@ -282,11 +297,11 @@ require("lazy").setup({
   },
   {
     "stevearc/oil.nvim",
+    lazy = false,
     opts = {},
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = { { "-", "<cmd>Oil<cr>", desc = "Oil" } },
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
@@ -296,7 +311,7 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
     opts = {
-      theme = "catppuccin-latte",
+      theme = "auto",
     },
   },
   {
@@ -322,17 +337,6 @@ require("lazy").setup({
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
-  },
-  {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({
-      })
-    end
   },
   {
     "kdheepak/lazygit.nvim",

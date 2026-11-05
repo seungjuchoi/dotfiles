@@ -42,11 +42,9 @@ cmp.setup {
             mode = "symbol",
             maxwidth = 50,
             ellipsis_char = '...',
-            symbol_map = { Codeium = "", }
         })
   },
   sources = {
-    { name = 'codeium' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },

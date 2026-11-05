@@ -126,30 +126,19 @@ local servers = {
   },
 }
 
-require("neodev").setup({
-  library = {
-    plugins = { "nvim-dap-ui" },
-    types = true
-  },
-})
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+-- Neovim 0.11+ / mason-lspconfig v2: configure via vim.lsp.config,
+-- mason-lspconfig enables installed servers automatically.
+vim.lsp.config('*', { capabilities = capabilities })
+for server_name, settings in pairs(servers) do
+  if next(settings) ~= nil then
+    vim.lsp.config(server_name, { settings = settings })
+  end
+end
 
--- Ensure the servers above are installed
-local mason_lspconfig = require("mason-lspconfig")
-
-mason_lspconfig.setup({
+require("mason-lspconfig").setup({
   ensure_installed = vim.tbl_keys(servers),
-  handlers = {
-    function(server_name)
-      local server = servers[server_name] or {}
-      -- This handles overriding only values explicitly passed
-      -- by the server configuration above. Useful when disabling
-      -- certain features of an LSP (for example, turning off formatting for ts_ls)
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
-    end,
-  },
 })
 
 mason_tool_installer.setup({
