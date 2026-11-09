@@ -10,6 +10,9 @@ status_indicators = "symbols"
 claude = [["state_icon", "terminal_title_stripped"], ["machine", "workspace", "tab"]]
 # kiro 는 터미널 제목에 세션 제목을 안 쓴다. timer.kiro-title 플러그인이 $title 토큰으로 보내준다
 kiro = [["state_icon", "$title"], ["machine", "workspace", "tab"]]
+# pi 는 세션 이름을 스스로 짓지 않는다. ~/.pi/agent/extensions/herdr-title.ts(dotfiles pi_herdr_title.ts)가
+# 첫 프롬프트로 제목을 지어 $title 토큰으로 보내준다
+pi = [["state_icon", "$title"], ["machine", "workspace", "tab"]]
 
 [theme]
 name = "tokyo-night"

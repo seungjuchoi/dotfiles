@@ -55,6 +55,9 @@ command mkdir -p ~/.config/herdr
 command ln -s -f $PWD/herdr_config.toml ~/.config/herdr/config.toml
 command ln -s -f $PWD/herdr_main_tab.sh ~/.config/herdr/main-tab.sh
 command ln -s -f $PWD/herdr_file_picker.sh ~/.config/herdr/file-picker.sh
+# pi 세션 제목을 지어 herdr 사이드바($title)로 보내는 확장
+command mkdir -p ~/.pi/agent/extensions
+command ln -s -f $PWD/pi_herdr_title.ts ~/.pi/agent/extensions/herdr-title.ts
 # 로컬 herdr 플러그인. link 는 경로를 기록하므로 다시 실행해도 같은 결과다.
 if type -q herdr
     for p in $PWD/herdr_plugins/*/herdr-plugin.toml
