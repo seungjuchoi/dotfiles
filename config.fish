@@ -4,6 +4,8 @@ set -gx LANG en_US.UTF-8
 set -gx LC_CTYPE en_US.UTF-8
 set -gx LC_ALL en_US.UTF-8
 set -gx MANPAGER "less -I"
+# pi: 마우스 드래그 복사 시 OSC 52도 보냄 (herdr 원격 접속에서 클라이언트 클립보드로 복사)
+set -gx PI_CLIPBOARD_OSC52 1
 set LOCAL_FISH_CONF (dirname (status --current-filename))/config_local.fish # place first cuz linuxbrew
 if test -f $LOCAL_FISH_CONF
     source $LOCAL_FISH_CONF
