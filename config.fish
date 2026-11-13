@@ -180,6 +180,9 @@ fish_add_path ~/.local/bin
 set -g fzf_fd_opts --exclude "Library/Mobile Documents"
 fzf_configure_bindings --variables=\e\cv
 
+# Ghostty/WezTerm send shift+enter as \n (ctrl-j); fish executes unbound ctrl-j like enter, so insert a newline instead
+bind ctrl-j 'commandline -i \n'
+
 # python
 set -gx PYTHONBREAKPOINT "ipdb.set_trace"
 
