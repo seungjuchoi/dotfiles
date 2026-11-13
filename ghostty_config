@@ -62,7 +62,7 @@ window-padding-y = 10
 
 # Terminal
 term = xterm-256color
-keybind = shift+enter=text:\x1b\r
+keybind = shift+enter=text:\n
 # Ctrl+숫자 — Ghostty 탭 전환 대신 CSI u 로 그대로 흘려보낸다.
 # 레거시 인코딩에서는 Ctrl+2/3/6 이 각각 NUL/ESC/C-^ 로 뭉뚱그려져 tmux 가
 # 숫자를 구분하지 못하므로, tmux 가 C-1..C-9 로 인식하도록 CSI u 를 직접 보낸다

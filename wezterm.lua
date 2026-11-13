@@ -20,7 +20,7 @@ return {
     {
       key = 'Enter',
       mods = 'SHIFT',
-      action = wezterm.action{SendString="\x1b\r"},
+      action = wezterm.action{SendString="\n"},
     },
 
     {

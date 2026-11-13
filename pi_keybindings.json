@@ -9,9 +9,11 @@
   ],
   "tui.input.newLine": [
     "shift+enter",
-    "ctrl+j",
-    "alt+enter"
+    "ctrl+j"
   ],
   "app.model.cycleForward": [],
-  "app.message.followUp": "alt+s"
+  "app.message.followUp": [
+    "alt+enter",
+    "alt+s"
+  ]
 }
