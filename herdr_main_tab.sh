@@ -3,7 +3,8 @@
 # tmux_agent_window.sh(main 세션에 window)를 herdr 로 옮긴 것.
 #
 # --ai 를 주면(prefix+o) 탭을 연 뒤 MAIN_AI_CMD(기본 cl)를 입력해 바로 agent 로 들어간다.
-# MAIN_AI_CMD 는 config_local.fish 에서 바꾼다. herdr 서버 환경엔 없을 수 있어 fish 에 물어본다.
+# MAIN_AI_CMD 는 config_local.fish 에서 바꾼다. herdr 서버 환경 값은 서버를 띄운 시점에 굳어
+# 있으니 fish 에 먼저 물어본다(바꾸면 서버 재시작 없이 바로 반영). fish 가 없을 때만 환경 값을 쓴다.
 #
 # 작업 디렉터리: zoxide 의 tz 를 우선 — 일반 질문·작업은 한 폴더에서 해야 Claude 프로젝트
 # 메모리가 거기에 쌓인다. 못 찾으면 호출한 pane 의 경로로 폴백. (프로젝트 폴더에서 열려면 prefix+c.)
@@ -12,8 +13,8 @@ PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 H="${HERDR_BIN_PATH:-herdr}"
 ai=
 if [ "$1" = --ai ]; then
-    ai=${MAIN_AI_CMD:-$(fish -c 'echo $MAIN_AI_CMD' 2>/dev/null || true)}
-    ai=${ai:-cl}
+    ai=$(fish -c 'echo $MAIN_AI_CMD' 2>/dev/null || true)
+    ai=${ai:-${MAIN_AI_CMD:-cl}}
 fi
 dir=$(zoxide query tz 2>/dev/null) || dir=
 [ -d "$dir" ] || dir=${HERDR_ACTIVE_PANE_CWD:-$HOME}
