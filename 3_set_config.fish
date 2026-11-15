@@ -60,6 +60,8 @@ command mkdir -p ~/.pi/agent/extensions
 command ln -s -f $PWD/pi_herdr_title.ts ~/.pi/agent/extensions/herdr-title.ts
 # pi 시작 시 백그라운드로 pi update(본체만). 다음 실행부터 적용
 command ln -s -f $PWD/pi_auto_update.ts ~/.pi/agent/extensions/auto-update.ts
+# pi 빈 입력창에서 Ctrl+D 를 1.5초 안에 두 번 눌러야 종료(Claude Code 식)
+command ln -s -f $PWD/pi_ctrl_d_confirm.ts ~/.pi/agent/extensions/ctrl-d-confirm.ts
 # pi 키바인딩. alt+enter 는 followUp(Collie 가 pi 제출에 쓰는 키). 줄바꿈은 shift+enter(터미널이 \n 으로 보냄)·ctrl+j
 command ln -s -f $PWD/pi_keybindings.json ~/.pi/agent/keybindings.json
 # 로컬 herdr 플러그인. link 는 경로를 기록하므로 다시 실행해도 같은 결과다.
