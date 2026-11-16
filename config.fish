@@ -90,7 +90,7 @@ if command -qs kiro-cli
     if test -n "$_CL_PROXY_PORT"
         function kr --wraps 'kiro-cli chat'
             prxh $_CL_PROXY_PORT
-            kiro-cli chat --trust-all-tools --v3 $argv
+            kiro-cli chat --trust-all-tools --v2 $argv
             prxh off
         end
         function krp --wraps 'kiro-cli chat'
@@ -99,7 +99,7 @@ if command -qs kiro-cli
             prxh off
         end
     else
-        alias kr "kiro-cli chat --trust-all-tools --v3"
+        alias kr "kiro-cli chat --trust-all-tools --v2"
         alias krp "kiro-cli chat --trust-all-tools --no-interactive"
     end
 end

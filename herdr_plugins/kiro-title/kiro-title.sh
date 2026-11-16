@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Show Kiro CLI session titles as Herdr pane titles.
 #
-# Kiro CLI (v3 TUI) only writes "kiro: <cwd>" to the terminal title, but it
-# stores the generated session title on disk:
-#   ~/.kiro/sessions/<hash>/sess_<uuid>/.lock         {"pid": <tui pid>, ...}
-#   ~/.kiro/sessions/<hash>/sess_<uuid>/session.json  {"title": "...", ...}
-# The .lock pid is a process inside the pane, which ties a session to a pane.
+# Kiro CLI only writes "kiro: <cwd>" to the terminal title, but it stores the
+# session title on disk next to a lock file holding a pid:
+#   v2  ~/.kiro/sessions/cli/<uuid>.lock                {"pid": <acp pid>, ...}
+#       ~/.kiro/sessions/cli/<uuid>.json                {"title": "<first prompt>", ...}
+#   v3  ~/.kiro/sessions/<hash>/sess_<uuid>/.lock         {"pid": <tui pid>, ...}
+#       ~/.kiro/sessions/<hash>/sess_<uuid>/session.json  {"title": "...", ...}
+# The lock pid is a process inside the pane, which ties a session to a pane.
 #
 # The title is published three ways:
 #   --title          pane/agent views (prefix+g)
@@ -45,15 +47,20 @@ descendants() {
   done
 }
 
-# Title of the Kiro session whose .lock pid runs in the pane.
+# Title of the Kiro session whose lock pid runs in the pane.
 session_title() {
-  local pids lock pid title
+  local pids lock pid meta title
   pids=" $(pane_pids "$1" | tr '\n' ' ') "
-  for lock in "$SESSIONS_DIR"/*/sess_*/.lock; do
+  for lock in "$SESSIONS_DIR"/cli/*.lock "$SESSIONS_DIR"/*/sess_*/.lock; do
     [[ -f "$lock" ]] || continue
     pid=$(jq -r '.pid // empty' "$lock" 2>/dev/null)
     [[ -n "$pid" && "$pids" == *" $pid "* ]] || continue
-    title=$(jq -r '.title // empty' "$(dirname "$lock")/session.json" 2>/dev/null)
+    if [[ "$lock" == */.lock ]]; then
+      meta="$(dirname "$lock")/session.json"
+    else
+      meta="${lock%.lock}.json"
+    fi
+    title=$(jq -r '.title // empty' "$meta" 2>/dev/null)
     [[ -n "$title" && "$title" != "$UNTITLED" ]] && { echo "$title"; return 0; }
   done
   return 1

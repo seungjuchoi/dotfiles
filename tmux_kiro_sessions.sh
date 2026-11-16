@@ -5,9 +5,12 @@
 #   restore  post-restore 훅(assistant-restore-once.sh)에서 호출. 기록된 pane 에
 #            `kiro-cli chat ... --resume-id <id>` 를 타이핑해 대화를 다시 연다.
 #
-# pane ↔ 세션 매핑: Kiro(v3)는 열린 세션 폴더 ~/.kiro/sessions/<해시>/sess_<uuid>/.lock 에
-# TUI 프로세스 pid 를 적어 둔다. 그 pid 의 조상 중 pane_pid 가 있으면 그 pane 의 세션이다.
-# 세션을 닫으면 .lock 은 지워지므로, 열려 있는 세션만 저장된다.
+# pane ↔ 세션 매핑: Kiro 는 열린 세션의 락 파일에 pid 를 적어 둔다.
+#   v2  ~/.kiro/sessions/cli/<uuid>.lock          (메타: cli/<uuid>.json, .cwd)
+#   v3  ~/.kiro/sessions/<해시>/sess_<uuid>/.lock  (메타: 같은 폴더 session.json, .workspacePaths[0])
+# 그 pid 의 조상 중 pane_pid 가 있으면 그 pane 의 세션이다. 세션을 닫으면 락은 지워지므로,
+# 열려 있는 세션만 저장된다. v2 락은 pi 의 kiro-acp 세션(`kiro-cli acp`)도 남기므로
+# 최상위 kiro 명령이 `chat` 인 것만 저장한다.
 #
 # macOS 기본 /bin/bash(3.2)에서도 돌도록 연관 배열 없이 awk 로 프로세스 트리를 푼다.
 set -u
@@ -30,16 +33,33 @@ posix_quote() {
 	printf "'%s'" "$(printf '%s' "$1" | sed "s/'/'\\\\''/g")"
 }
 
-# "pid<TAB>session_id<TAB>session_dir" — 열린(.lock 있는) 세션 목록.
+# "pid<TAB>session_id<TAB>meta_json" — 열린(락 있는) 세션 목록. v2·v3 모두.
 list_locks() {
-	local lock dir pid
-	for lock in "$KIRO_SESSIONS_DIR"/*/sess_*/.lock; do
+	local lock dir pid sid meta
+	for lock in "$KIRO_SESSIONS_DIR"/cli/*.lock "$KIRO_SESSIONS_DIR"/*/sess_*/.lock; do
 		[ -f "$lock" ] || continue
 		pid=$(jq -r '.pid // empty' "$lock" 2>/dev/null) || continue
 		[ -n "$pid" ] || continue
-		dir=$(dirname "$lock")
-		printf '%s\t%s\t%s\n' "$pid" "$(basename "$dir")" "$dir"
+		case "$lock" in
+		*/.lock) dir=$(dirname "$lock"); sid=$(basename "$dir"); meta="$dir/session.json" ;;
+		*) sid=$(basename "$lock" .lock); meta="${lock%.lock}.json" ;;
+		esac
+		printf '%s\t%s\t%s\n' "$pid" "$sid" "$meta"
 	done
+}
+
+# 세션 ID 의 락 파일 경로. 디스크에 세션이 없으면 실패.
+session_lock() {
+	local sid="$1" dir
+	case "$sid" in
+	sess_*)
+		dir=$(ls -d "$KIRO_SESSIONS_DIR"/*/"$sid" 2>/dev/null | head -1)
+		[ -n "$dir" ] || return 1
+		printf '%s' "$dir/.lock" ;;
+	*)
+		[ -f "$KIRO_SESSIONS_DIR/cli/$sid.json" ] || return 1
+		printf '%s' "$KIRO_SESSIONS_DIR/cli/$sid.lock" ;;
+	esac
 }
 
 # kiro-cli 명령줄에서 재개용 인자만 남긴다.
@@ -83,7 +103,7 @@ do_save() {
 		tsv=""
 	else
 		# 입력 3종을 한 awk 에서 처리: ps 트리, 락, pane.
-		# 출력: pane<TAB>session_id<TAB>session_dir<TAB>pane_path<TAB>kiro 최상위 명령줄
+		# 출력: pane<TAB>session_id<TAB>meta_json<TAB>pane_path<TAB>kiro 최상위 명령줄
 		tsv=$(awk -F'\t' '
 			FNR == 1 { file++ }
 			file == 1 {
@@ -117,13 +137,19 @@ do_save() {
 		' <(ps -A -o pid=,ppid=,command=) <(printf '%s\n' "$locks") <(printf '%s\n' "$panes"))
 	fi
 
-	local tmp pane sid dir path top cwd args count=0
+	local tmp pane sid meta path top cwd args sub count=0
 	tmp=$(mktemp)
-	while IFS=$'\t' read -r pane sid dir path top; do
+	while IFS=$'\t' read -r pane sid meta path top; do
 		[ -n "$pane" ] || continue
-		cwd=$(jq -r '.workspacePaths[0] // empty' "$dir/session.json" 2>/dev/null)
-		[ -n "$cwd" ] || cwd="$path"
 		[ -n "$top" ] || top="kiro-cli chat"
+		# pi 의 `kiro-cli acp` 처럼 chat 이 아닌 kiro 프로세스는 복원 대상이 아니다.
+		sub=$(awk '{print $2}' <<<"$top")
+		if [ "$sub" != "chat" ]; then
+			log "skip $sid in $pane (not a chat session: $top)"
+			continue
+		fi
+		cwd=$(jq -r '.workspacePaths[0] // .cwd // empty' "$meta" 2>/dev/null)
+		[ -n "$cwd" ] || cwd="$path"
 		args=$(resume_args "$top")
 		jq -nc --arg pane "$pane" --arg sid "$sid" --arg cwd "$cwd" --arg args "$args" \
 			'{pane: $pane, session_id: $sid, cwd: $cwd, cli_args: $args}' >>"$tmp"
@@ -137,7 +163,7 @@ do_save() {
 
 # 세션이 이미 살아 있는 kiro 프로세스에 열려 있나 (다른 pane 에서 이미 재개됐거나 수동으로 연 경우).
 session_is_open() {
-	local lock="$1/.lock" pid cmd
+	local lock="$1" pid cmd
 	[ -f "$lock" ] || return 1
 	pid=$(jq -r '.pid // empty' "$lock" 2>/dev/null)
 	[ -n "$pid" ] || return 1
@@ -181,20 +207,29 @@ do_restore() {
 	fi
 	log "restoring $count kiro session(s)..."
 
-	local restored=0 entry pane sid cwd args tmux_session dir pane_cmd client_wait cmd
+	local restored=0 entry pane sid cwd args tmux_session lock engine pane_cmd client_wait cmd
 	while IFS= read -r entry; do
 		pane=$(jq -r '.pane' <<<"$entry")
 		sid=$(jq -r '.session_id' <<<"$entry")
 		cwd=$(jq -r '.cwd // empty' <<<"$entry")
 		args=$(jq -r '.cli_args // empty' <<<"$entry")
 
-		case "$sid" in sess_*) ;; *) log "bad session id '$sid' for $pane, skipping"; continue ;; esac
-		dir=$(ls -d "$KIRO_SESSIONS_DIR"/*/"$sid" 2>/dev/null | head -1)
-		if [ -z "$dir" ]; then
+		case "$sid" in
+		sess_*) engine=--v3 ;;
+		[0-9a-f]*-*-*-*-*) engine=--v2 ;;
+		*) log "bad session id '$sid' for $pane, skipping"; continue ;;
+		esac
+		if ! lock=$(session_lock "$sid"); then
 			log "session $sid not found on disk (deleted?), skipping $pane"
 			continue
 		fi
-		if session_is_open "$dir"; then
+		# 저장된 인자에 엔진 지정이 없으면 세션이 있는 쪽 엔진으로 연다.
+		# cli_args 는 토큰마다 작은따옴표로 감싸여 있다('--v2').
+		case "$args" in
+		*"'--v2'"* | *"'--v3'"* | *--agent-engine*) ;;
+		*) args="${args:+$args }$engine" ;;
+		esac
+		if session_is_open "$lock"; then
 			log "session $sid already open, skipping $pane"
 			continue
 		fi
