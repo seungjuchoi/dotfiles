@@ -12,6 +12,7 @@
     "ctrl+j"
   ],
   "app.model.cycleForward": [],
+  "app.thinking.toggle": [],
   "app.message.followUp": [
     "alt+enter",
     "alt+s"
