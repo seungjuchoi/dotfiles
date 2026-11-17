@@ -60,6 +60,26 @@ function cleanTitle(raw: string): string {
   return t;
 }
 
+// Some models think out loud before answering ("Korean request, so the title
+// should be Korean."), so take the <title> tag, or else the last line that
+// does not read like reasoning about the task.
+const REASONING = /\b(the title|title should|the request|request is|so the|i'll|i will|let me)\b/i;
+const HANGUL = /[\u3131-\u318e\uac00-\ud7a3]/;
+
+function extractTitle(raw: string, request: string): string {
+  const tagged = [...raw.matchAll(/<title>([\s\S]*?)<\/title>/gi)];
+  let t: string;
+  if (tagged.length) {
+    t = cleanTitle(tagged[tagged.length - 1][1]);
+  } else {
+    const lines = raw.split("\n").map((l) => l.trim()).filter((l) => l && !REASONING.test(l));
+    t = cleanTitle(lines[lines.length - 1] ?? "");
+  }
+  // A Korean request must get a Korean title; anything else is a bad answer.
+  if (HANGUL.test(request) && !HANGUL.test(t)) return "";
+  return t;
+}
+
 function fallbackTitle(text: string): string {
   return cleanTitle(text.replace(/\s+/g, " "));
 }
@@ -67,9 +87,9 @@ function fallbackTitle(text: string): string {
 const PROMPT = `Write a short title for a coding-agent session, based on the user's request below.
 Rules:
 - 2 to 6 words, at most ${MAX_TITLE} characters.
-- Use the same language as the request (Korean request -> Korean title).
+- Write it in the language of the request.
 - Name the task, not the user. No quotes, no trailing punctuation, no emoji.
-- Output only the title.
+- Reply with only <title>the title</title>, nothing before or after it.
 
 <request>
 {{TEXT}}
@@ -92,7 +112,7 @@ async function generateTitle(ctx, text: string): Promise<string | undefined> {
         .filter((c) => c.type === "text")
         .map((c) => c.text)
         .join("");
-      const title = cleanTitle(out);
+      const title = extractTitle(out, text);
       if (title) return title;
     } catch {
       // try the next model
