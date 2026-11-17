@@ -1,0 +1,4 @@
+os:
+  # 복사할 때 OSC52로 터미널 클립보드에 넣는다 (ssh·tmux 안에서도 동작).
+  # GNU base64는 76자마다 줄을 바꾸므로 tr로 줄바꿈을 지운다 (macOS는 기본이 한 줄).
+  copyToClipboardCmd: 'printf "\033]52;c;$(printf %s {{text}} | /usr/bin/base64 | tr -d "\n")\a" > /dev/tty'

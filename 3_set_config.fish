@@ -55,6 +55,13 @@ command mkdir -p ~/.config/herdr
 command ln -s -f $PWD/herdr_config.toml ~/.config/herdr/config.toml
 command ln -s -f $PWD/herdr_main_tab.sh ~/.config/herdr/main-tab.sh
 command ln -s -f $PWD/herdr_file_picker.sh ~/.config/herdr/file-picker.sh
+# lazygit 설정. 복사는 OSC52. macOS lazygit 은 XDG_CONFIG_HOME 이 없으면 ~/Library/Application Support 만 읽는다.
+command mkdir -p ~/.config/lazygit
+command ln -s -f $PWD/lazygit_config.yml ~/.config/lazygit/config.yml
+if test (uname) = Darwin
+    command mkdir -p ~/Library/Application\ Support/lazygit
+    command ln -s -f ~/.config/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+end
 # pi 세션 제목을 지어 herdr 사이드바($title)로 보내는 확장
 command mkdir -p ~/.pi/agent/extensions
 command ln -s -f $PWD/pi_herdr_title.ts ~/.pi/agent/extensions/herdr-title.ts
