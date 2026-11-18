@@ -41,6 +41,18 @@ if os.getenv("TMUX") then
     },
     cache_enabled = 1,
   }
+elseif os.getenv("SSH_TTY") then
+  -- ssh 세션: yank 를 OSC52 로 로컬 터미널 클립보드에 보낸다.
+  -- 붙여넣기는 터미널에 클립보드를 묻지 않고 nvim 레지스터에서 가져온다.
+  local osc52 = require('vim.ui.clipboard.osc52')
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
+  end
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy('*') },
+    paste = { ['+'] = paste, ['*'] = paste },
+  }
 end
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
