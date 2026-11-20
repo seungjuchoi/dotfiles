@@ -237,6 +237,9 @@ b = ' balance-sizes'
     if.app-id = 'com.apple.iCal'
     run = 'layout floating'
 [[on-window-detected]]
+    if.app-id = 'com.apple.AddressBook'
+    run = 'layout floating'
+[[on-window-detected]]
     if.app-name-regex-substring = 'PowerPoint'
     run = 'layout floating'
 [[on-window-detected]]
